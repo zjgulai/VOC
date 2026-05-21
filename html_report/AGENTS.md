@@ -39,6 +39,7 @@ wc -l VOC喂养电器E2E洞察报告_V5.html
 
 ## 报告内部结构（V5）
 
+- **导航栏**：单行44px sticky，`nav-title` 竖线分隔，`nav-link` 深色 opacity 0.7。与 `docs/` 首页导航完全对齐
 - **导航分组**：【前置洞察】（10章节）+ 【E2E执行】【用户深潜】【机会提炼】【上市落地】
 - **图表数量**：当前约80个 chart div，对应等量 safeInit 调用
 - **JS结构**：所有图表通过 `safeInit('chart-id', initFn)` 在 `initAllCharts()` 中统一初始化

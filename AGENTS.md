@@ -12,11 +12,23 @@ description: Momcozy喂养电器全链路E2E洞察项目工作目录。涵盖VOC
 
 Momcozy喂养电器品牌营销/产品洞察工作区。核心产出是多版本HTML洞察报告（ECharts可视化），数据基座为六源交叉验证（Amazon VOC 19,098条 + Meta社媒 + Meltwater 75,291条 + 经营数据 + 市场研究 + 竞品VOC）。
 
+## 网站
+
+**GitHub Pages**: https://zjgulai.github.io/VOC/  
+**仓库**: https://github.com/zjgulai/VOC.git
+
 ## 目录结构
 
 ```
 VOC/
-├── html_report/        # 主输出目录 - 所有HTML报告和叙事逻辑MD文件
+├── docs/               # GitHub Pages部署目录 - 多页面网站
+│   ├── index.html      # 报告库首页
+│   ├── strategy.html   # 策略与洞察
+│   ├── product.html    # 产品与定义
+│   ├── execution.html  # 落地与执行
+│   ├── methodology.html# 工作流方法论
+│   └── reports/        # 子页面报告（e2e-v5.html + stage1-7）
+├── html_report/        # 主报告输出 - V5.html等
 ├── data/
 │   ├── voc/            # Amazon VOC原始数据（xlsx/csv）
 │   └── vos/            # 社媒数据（FB/IG，xlsx/csv，按年份编号）
@@ -50,6 +62,15 @@ tooltip: {confine:true}
 1. 新增 `<div id="chart-xxx">` 对应新增 `function initXxxChart()`
 2. 在 `initAllCharts()` 中用 `safeInit('chart-xxx', initXxxChart)` 包裹调用
 3. 遵循 Fortune Red 色卡：`#D75B70`主 / `#F37969`辅 / `#D0B671`金 / `#82AE8E`绿 / `#C1CEDE`灰 / `#6A89AF`蓝
+
+### 导航栏规范
+全站统一单行导航栏，V5报告 + `docs/` 5页面对齐：
+```css
+.nav-bar { height: 44px; position: sticky; top: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 2px solid var(--fr-300); }
+.nav-title { font-size: 13px; border-right: 2px solid var(--fr-300); padding-right: 16px; }
+.nav-link { font-size: 12px; color: var(--fr-800); opacity: 0.7; }
+.nav-link:hover, .nav-link.active { background: rgba(215,91,112,0.12); color: var(--fr-600); opacity: 1; }
+```
 
 ### 报告内容规范
 - 每模块末尾必须有**【结论句】**，一句话回答核心问题
@@ -103,7 +124,9 @@ python3 script/merge_report.py
 
 ## 注意事项
 
-- **无 git 仓库** - 所有文件直接修改，无版本回滚，重要修改前先备份
+- **有 git 仓库** - 推送到 https://github.com/zjgulai/VOC.git，`docs/` 目录由 GitHub Pages 部署
+- **本地预览** - `python3 -m http.server 8765` 启动后访问 `http://localhost:8765/docs/`
+- **导航栏规范** - 单行44px + sticky定位 + brand竖线分隔，与V5主报告对齐（见下方CSS）
 - **大文件处理** - V5报告9680行，修改前用 `grep -n` 定位目标行，分块操作避免覆盖
 - **子session命名** - 大规模重构（8000+行）派发子session，任务描述需含完整修改清单+输出路径+自验证清单
 - **Sankey图禁用** - 节点名必须唯一且双向流导致空白，改用HTML/CSS卡片替代
