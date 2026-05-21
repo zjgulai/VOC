@@ -1,0 +1,80 @@
+{
+  "total_reviews": 19098,
+  "total_categories": 53,
+  "sterilizer_count": 6463,
+  "bottle_warmer_count": 286,
+  "avg_rating": 4.34,
+  "rating_distribution": {
+    "1": 976,
+    "2": 470,
+    "3": 454,
+    "4": 1497,
+    "5": 8307
+  },
+  "promoters": 7471,
+  "detractors": 2646,
+  "passives": 8981,
+  "nps_score": 25.3,
+  "momcozy_count": 1521,
+  "momcozy_avg_rating": 4.5,
+  "momcozy_nps": 81.7,
+  "top_negative_tags": {
+    "质保/维修/换新": 2088,
+    "延迟": 1543,
+    "配件破损/断裂": 924,
+    "Dr. Brown's": 374,
+    "支付/账单问题": 336,
+    "退款请求": 309,
+    "Philips Avent": 307,
+    "退货/换货": 289,
+    "产品价格": 280,
+    "Tommee Tippee": 267
+  },
+  "top_positive_tags": {
+    "总体正面": 2402,
+    "强烈推荐": 1105,
+    "易用性": 1105,
+    "性能满意": 580,
+    "一般反馈/感谢": 550,
+    "物超所值": 419,
+    "外观设计": 344,
+    "真实妈妈种草": 237,
+    "便携轻量": 221,
+    "舒适体验": 173
+  },
+  "night_use": 344,
+  "travel": 244,
+  "work": 45,
+  "personas": {
+    "community_driven": 6508,
+    "quality_explorer": 6432,
+    "systematic_planner": 2362,
+    "uncategorized": 2238,
+    "unclassified": 1355,
+    "value_driven": 203
+  },
+  "brand_mentions": {
+    "Dr. Brown's": 374,
+    "Philips Avent": 307,
+    "Tommee Tippee": 267,
+    "Medela": 34,
+    "Lansinoh": 22
+  },
+  "five_star_with_neg": 1229,
+  "five_star_total": 8307,
+  "five_star_neg_pct": 14.8,
+  "brand_comparison_count": 335,
+  "emotional_pain": {
+    "延迟相关": 1615,
+    "退款/退货": 555,
+    "支付问题": 336,
+    "物流问题": 288
+  },
+  "functional_pain": {
+    "配件破损": 924,
+    "功能失效": 191,
+    "过热/熔化": 141,
+    "无法开机": 122,
+    "烧焦": 112
+  }
+}

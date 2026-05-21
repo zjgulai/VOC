@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品机会挖掘与企划方案报告 - VOC分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        :root {
+            /* Fortune Red 色卡系统 */
+            --fr-50: #FCF6F7;
+            --fr-200: #EFBEC6;
+            --fr-300: #E08090;
+            --fr-400: #DA687A;
+            --fr-500: #D75B70;
+            --fr-600: #CD374F;
+            --fr-700: #A7293D;
+            --fr-800: #801F2F;
+            --fr-900: #56151F;
+            
+            --cb-500: #D04E59;
+            --cb-600: #C03340;
+            --cb-700: #992833;
+            --cb-800: #751F27;
+            
+            --mp-300: #F6DFE2;
+            --mp-400: #EEBFC5;
+            --mp-500: #EAAFB7;
+            
+            --ec-400: #F6F1D9;
+            --ec-500: #F2EBC8;
+            --ec-600: #E5D792;
+            
+            --co-500: #F37969;
+            --co-600: #EF4D38;
+            --co-700: #DB2811;
+            
+            --rg-500: #D0B671;
+            --rg-600: #C3A34D;
+            --rg-700: #A48536;
+            
+            --jg-500: #82AE8E;
+            --jg-600: #669C74;
+            --jg-700: #517D5D;
+            
+            --ce-100: #F8F9FB;
+            --ce-400: #CED8E5;
+            --ce-500: #C1CEDE;
+            --ce-600: #98ADC8;
+            --ce-700: #6A89AF;
+            --ce-900: #32465E;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--fr-50);
+            color: var(--fr-900);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 导航目录 */
+        .toc {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+            border: 1px solid var(--mp-300);
+        }
+        
+        .toc h2 {
+            color: var(--fr-800);
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--fr-200);
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .toc-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--fr-50);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--fr-800);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .toc-item:hover {
+            background: var(--mp-300);
+            border-color: var(--fr-400);
+            transform: translateX(5px);
+        }
+        
+        .toc-number {
+            width: 32px;
+            height: 32px;
+            background: var(--fr-500);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .toc-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        /* 报告头部 */
+        .report-header {
+            background: linear-gradient(135deg, var(--fr-800) 0%, var(--cb-700) 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .report-header h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .report-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* 模块卡片 */
+        .module {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+            border: 1px solid var(--mp-300);
+        }
+        
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--mp-300);
+        }
+        
+        .module-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--fr-500), var(--cb-600));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+        }
+        
+        .module-title {
+            color: var(--fr-800);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .module-subtitle {
+            color: var(--cb-700);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* 洞察卡片 */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .insight-card {
+            background: var(--fr-50);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--fr-500);
+        }
+        
+        .insight-card.highlight {
+            border-left-color: var(--rg-500);
+            background: linear-gradient(135deg, var(--ec-400) 0%, #FFFFFF 100%);
+        }
+        
+        .insight-card.warning {
+            border-left-color: var(--co-600);
+            background: linear-gradient(135deg, #FFF5F4 0%, #FFFFFF 100%);
+        }
+        
+        .insight-card.success {
+            border-left-color: var(--jg-500);
+            background: linear-gradient(135deg, #F0F7F2 0%, #FFFFFF 100%);
+        }
+        
+        .insight-title {
+            color: var(--fr-800);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .insight-content {
+            color: var(--ce-900);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .insight-metric {
+            display: inline-block;
+            background: var(--fr-500);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .insight-metric.success {
+            background: var(--jg-500);
+        }
+        
+        .insight-metric.warning {
+            background: var(--co-600);
+        }
+        
+        /* 图表容器 */
+        .chart-container {
+            margin: 25px 0;
+        }
+        
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .chart-box {
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--mp-300);
+        }
+        
+        .chart-title {
+            color: var(--cb-700);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+        
+        .chart.large {
+            height: 450px;
+        }
+        
+        .chart.wide {
+            height: 500px;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        .data-table th {
+            background: var(--fr-500);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--mp-300);
+        }
+        
+        .data-table tr:hover {
+            background: var(--fr-50);
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #FAFAFA;
+        }
+        
+        /* 机会卡片 */
+        .opportunity-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--fr-50) 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid var(--mp-300);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .opportunity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--fr-500);
+        }
+        
+        .opportunity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .opportunity-title {
+            color: var(--fr-800);
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .opportunity-badge {
+            background: var(--rg-500);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .opportunity-priority {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .priority-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .priority-label {
+            color: var(--ce-900);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .priority-value {
+            color: var(--fr-700);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        /* SWOT矩阵 */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .swot-item {
+            padding: 25px;
+            border-radius: 10px;
+            min-height: 150px;
+        }
+        
+        .swot-item.strengths {
+            background: linear-gradient(135deg, var(--jg-500) 0%, var(--jg-600) 100%);
+            color: white;
+        }
+        
+        .swot-item.weaknesses {
+            background: linear-gradient(135deg, var(--co-600) 0%, var(--co-700) 100%);
+            color: white;
+        }
+        
+        .swot-item.opportunities {
+            background: linear-gradient(135deg, var(--ce-600) 0%, var(--ce-700) 100%);
+            color: white;
+        }
+        
+        .swot-item.threats {
+            background: linear-gradient(135deg, var(--fr-600) 0%, var(--fr-700) 100%);
+            color: white;
+        }
+        
+        .swot-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .swot-content {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 甘特图样式 */
+        .timeline {
+            margin: 25px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: var(--fr-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: var(--fr-50);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--fr-400);
+        }
+        
+        .timeline-title {
+            color: var(--fr-800);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            color: var(--ce-900);
+            font-size: 14px;
+        }
+        
+        /* 产品定位图 */
+        .positioning-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .position-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid var(--mp-300);
+            transition: all 0.3s ease;
+        }
+        
+        .position-card:hover {
+            border-color: var(--fr-400);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(86,21,31,0.1);
+        }
+        
+        .position-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--fr-50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .position-name {
+            color: var(--fr-800);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .position-desc {
+            color: var(--ce-900);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        
+        /* 页脚 */
+        .report-footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--ce-900);
+            font-size: 14px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .report-header {
+                padding: 30px 20px;
+            }
+            
+            .report-header h1 {
+                font-size: 24px;
+            }
+            
+            .module {
+                padding: 20px;
+            }
+            
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart {
+                height: 350px;
+            }
+            
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .positioning-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 统计数字样式 */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--fr-500) 0%, var(--cb-600) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-card.secondary {
+            background: linear-gradient(135deg, var(--ce-600) 0%, var(--ce-700) 100%);
+        }
+        
+        .stat-card.success {
+            background: linear-gradient(135deg, var(--jg-500) 0%, var(--jg-600) 100%);
+        }
+        
+        .stat-card.warning {
+            background: linear-gradient(135deg, var(--co-600) 0%, var(--co-700) 100%);
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 报告头部 -->
+        <div class="report-header">
+            <h1>🔍 产品机会挖掘与企划方案报告</h1>
+            <p>基于VOC用户之声分析 · 19,098条评论数据洞察</p>
+        </div>
+        
+        <!-- 目录导航 -->
+        <nav class="toc">
+            <h2>📑 报告目录</h2>
+            <div class="toc-grid">
+                <a href="#module1" class="toc-item">
+                    <span class="toc-number">1</span>
+                    <span class="toc-text">产品机会点提炼</span>
+                </a>
+                <a href="#module2" class="toc-item">
+                    <span class="toc-number">2</span>
+                    <span class="toc-text">产品定义与定位</span>
+                </a>
+                <a href="#module3" class="toc-item">
+                    <span class="toc-number">3</span>
+                    <span class="toc-text">产品企划与设计方向</span>
+                </a>
+                <a href="#module4" class="toc-item">
+                    <span class="toc-number">4</span>
+                    <span class="toc-text">市场竞争分析与策略</span>
+                </a>
+                <a href="#module5" class="toc-item">
+                    <span class="toc-number">5</span>
+                    <span class="toc-text">商业价值评估与预测</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- 模块1：产品机会点提炼 -->
+        <section id="module1" class="module">
+            <div class="module-header">
+                <div class="module-icon">💡</div>
+                <div>
+                    <h2 class="module-title">模块1：产品机会点提炼</h2>
+                    <p class="module-subtitle">Product Opportunity Identification</p>
+                </div>
+            </div>
+            
+            <!-- 核心数据概览 -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">2,088</div>
+                    <div class="stat-label">质保/维修痛点提及</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-value">1,543</div>
+                    <div class="stat-label">延迟相关投诉</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-value">81.7%</div>
+                    <div class="stat-label">Momcozy NPS得分</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="stat-value">14.8%</div>
+                    <div class="stat-label">5星用户仍有痛点</div>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--fr-800); margin: 25px 0 15px;">🎯 五大核心机会点</h3>
+            
+            <!-- 机会点1 -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <h4 class="opportunity-title">机会1：延长质保与换新服务</h4>
+                    <span class="opportunity-badge">🔥 高优先级</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>用户痛点：</strong>"质保期内产品故障，却遭遇推诿、维修周期长、换新流程复杂"——质保相关投诉高达2,088次，是所有负面标签之首。</p>
+                    <p style="margin-top:10px;"><strong>场景触发：</strong>产品使用3-6个月后出现性能下降、按键失灵、加热异常等问题。</p>
+                    <p style="margin-top:10px;"><strong>期望方案：</strong>一键申请换新、48小时响应、延保至2年、主动故障预警服务。</p>
+                </div>
+                <div class="opportunity-priority">
+                    <div class="priority-item">
+                        <div class="priority-label">市场潜力</div>
+                        <div class="priority-value">92/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">实现难度</div>
+                        <div class="priority-value">45/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">差异化价值</div>
+                        <div class="priority-value">95/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 机会点2 -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <h4 class="opportunity-title">机会2：物流体验升级</h4>
+                    <span class="opportunity-badge">🔥 高优先级</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>用户痛点：</strong>"下单后等待时间长、物流信息不透明、错件漏件"——延迟相关投诉达1,543次，占总评论8.1%。</p>
+                    <p style="margin-top:10px;"><strong>场景触发：</strong>急需使用时产品未到、新手妈妈囤货焦虑、节日促销后物流爆仓。</p>
+                    <p style="margin-top:10px;"><strong>期望方案：</strong>精准时效承诺、智能库存预警、主动物流通知、灵活配送选项。</p>
+                </div>
+                <div class="opportunity-priority">
+                    <div class="priority-item">
+                        <div class="priority-label">市场潜力</div>
+                        <div class="priority-value">88/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">实现难度</div>
+                        <div class="priority-value">60/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">差异化价值</div>
+                        <div class="priority-value">82/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 机会点3 -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <h4 class="opportunity-title">机会3：静音与夜间使用优化</h4>
+                    <span class="opportunity-badge">⭐ 中优先级</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>用户痛点：</strong>"夜间消毒/温奶噪音大影响宝宝睡眠"、"工作场所使用尴尬"——夜间使用场景提及344次，工作场景45次。</p>
+                    <p style="margin-top:10px;"><strong>场景触发：</strong>宝宝夜醒需快速温奶、开放式办公区使用、多宝宝家庭同时使用。</p>
+                    <p style="margin-top:10px;"><strong>期望方案：</strong>超静音模式（<35dB）、夜间柔光指示、智能亮度调节、分区独立运行。</p>
+                </div>
+                <div class="opportunity-priority">
+                    <div class="priority-item">
+                        <div class="priority-label">市场潜力</div>
+                        <div class="priority-value">75/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">实现难度</div>
+                        <div class="priority-value">55/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">差异化价值</div>
+                        <div class="priority-value">78/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 机会点4 -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <h4 class="opportunity-title">机会4：旅行便携设计</h4>
+                    <span class="opportunity-badge">⭐ 中优先级</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>用户痛点：</strong>"外出携带不方便"、"酒店消毒条件有限"、"旅途中的食品安全担忧"——旅行场景提及244次。</p>
+                    <p style="margin-top:10px;"><strong>场景触发：</strong>回老家探亲、出差、节假日旅行、户外活动。</p>
+                    <p style="margin-top:10px;"><strong>期望方案：</strong>迷你便携尺寸、USB供电/车载适配、分体式轻量化、快速消毒模块。</p>
+                </div>
+                <div class="opportunity-priority">
+                    <div class="priority-item">
+                        <div class="priority-label">市场潜力</div>
+                        <div class="priority-value">70/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">实现难度</div>
+                        <div class="priority-value">50/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">差异化价值</div>
+                        <div class="priority-value">72/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 机会点5 -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <h4 class="opportunity-title">机会5：系统规划型用户专属服务</h4>
+                    <span class="opportunity-badge">📌 差异化</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>用户痛点：</strong>系统规划型用户满意度最低（51%负面反馈率），需要更专业的产品使用指导和多产品协同方案。</p>
+                    <p style="margin-top:10px;"><strong>场景触发：</strong>多宝宝家庭、二胎/三胎妈妈、需要批量消毒的场景。</p>
+                    <p style="margin-top:10px;"><strong>期望方案：</strong>产品套装方案、智能使用提醒、耗材订阅服务、专业客服通道。</p>
+                </div>
+                <div class="opportunity-priority">
+                    <div class="priority-item">
+                        <div class="priority-label">市场潜力</div>
+                        <div class="priority-value">65/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">实现难度</div>
+                        <div class="priority-value">35/100</div>
+                    </div>
+                    <div class="priority-item">
+                        <div class="priority-label">差异化价值</div>
+                        <div class="priority-value">85/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图表：机会评估矩阵 -->
+            <div class="chart-box" style="margin-top: 30px;">
+                <h4 class="chart-title">📊 机会评估矩阵（实现难度 vs 市场潜力）</h4>
+                <div id="chart-opportunity-matrix" class="chart large"></div>
+            </div>
+            
+            <!-- 图表：机会价值雷达图 -->
+            <div class="chart-row">
+                <div class="chart-box">
+                    <h4 class="chart-title">🎯 机会价值雷达图 - 质保服务升级</h4>
+                    <div id="chart-radar-warranty" class="chart"></div>
+                </div>
+                <div class="chart-box">
+                    <h4 class="chart-title">🎯 机会价值雷达图 - 静音夜间优化</h4>
+                    <div id="chart-radar-silent" class="chart"></div>
+                </div>
+            </div>
+            
+            <!-- 洞察总结 -->
+            <div class="insight-grid">
+                <div class="insight-card warning">
+                    <h5 class="insight-title">⚠️ 关键发现</h5>
+                    <p class="insight-content">
+                        质保/维修痛点是最大机会点（2,088次提及），远超其他痛点。妈妈们最关心的是"出了问题能快速解决"，而非产品本身功能。
+                    </p>
+                </div>
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">💡 战略建议</h5>
+                    <p class="insight-content">
+                        建议将"无忧质保"作为核心差异化卖点，承诺"有问题48小时换新"，配合主动售后提醒服务，形成服务壁垒。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块2：产品定义与定位 -->
+        <section id="module2" class="module">
+            <div class="module-header">
+                <div class="module-icon">🎯</div>
+                <div>
+                    <h2 class="module-title">模块2：产品定义与定位</h2>
+                    <p class="module-subtitle">Product Definition & Positioning</p>
+                </div>
+            </div>
+            
+            <!-- 产品定位矩阵 -->
+            <div class="chart-box">
+                <h4 class="chart-title">📈 感知定位图（功能导向 ←→ 体验导向 / 价格敏感 ←→ 品质敏感）</h4>
+                <div id="chart-positioning" class="chart wide"></div>
+            </div>
+            
+            <!-- 产品功能矩阵 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">📋 产品功能矩阵</h3>
+            <div class="chart-box">
+                <h4 class="chart-title">核心功能 · 增强功能 · 差异化功能</h4>
+                <div id="chart-function-matrix" class="chart large"></div>
+            </div>
+            
+            <!-- 目标用户画像 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">👥 目标用户画像</h3>
+            <div class="positioning-grid">
+                <div class="position-card">
+                    <div class="position-icon">🌟</div>
+                    <h4 class="position-name">品质探索者</h4>
+                    <p class="position-desc">占比32.3%，注重产品质量和性能，愿意为高品质付溢价</p>
+                    <div>
+                        <span class="insight-metric">高客单价</span>
+                        <span class="insight-metric success">高忠诚度</span>
+                    </div>
+                </div>
+                <div class="position-card">
+                    <div class="position-icon">💬</div>
+                    <h4 class="position-name">社区驱动型</h4>
+                    <p class="position-desc">占比33.4%，受KOL和真实用户评价影响大，社交传播力强</p>
+                    <div>
+                        <span class="insight-metric">口碑敏感</span>
+                        <span class="insight-metric success">传播力强</span>
+                    </div>
+                </div>
+                <div class="position-card">
+                    <div class="position-icon">📋</div>
+                    <h4 class="position-name">系统规划型</h4>
+                    <p class="position-desc">占比12.4%，需要整体解决方案，期待专业指导</p>
+                    <div>
+                        <span class="insight-metric warning">满意度低</span>
+                        <span class="insight-metric">待挖掘</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 洞察 -->
+            <div class="insight-grid">
+                <div class="insight-card success">
+                    <h5 class="insight-title">✅ 差异化定位建议</h5>
+                    <p class="insight-content">
+                        聚焦"体验导向+品质敏感"象限，打造"有温度的品质母婴品牌"形象，区别于价格竞争的传统品牌。
+                    </p>
+                </div>
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">💡 产品核心价值主张</h5>
+                    <p class="insight-content">
+                        "Momcozy不只是产品，是新手妈妈的全天候育儿助手"——强调服务（质保、售后）而非单纯功能。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块3：产品企划与设计方向 -->
+        <section id="module3" class="module">
+            <div class="module-header">
+                <div class="module-icon">🎨</div>
+                <div>
+                    <h2 class="module-title">模块3：产品企划与设计方向</h2>
+                    <p class="module-subtitle">Product Planning & Design Direction</p>
+                </div>
+            </div>
+            
+            <!-- 产品路线图 -->
+            <h3 style="color: var(--fr-800); margin: 25px 0 20px;">📅 产品企划路线图</h3>
+            <div class="chart-box">
+                <h4 class="chart-title">2024-2025 产品上市时间线</h4>
+                <div id="chart-roadmap" class="chart large"></div>
+            </div>
+            
+            <!-- 设计风格参考 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">🎨 设计风格方向</h3>
+            <div class="insight-grid">
+                <div class="insight-card success">
+                    <h5 class="insight-title">视觉风格：温馨治愈系</h5>
+                    <p class="insight-content">
+                        <strong>主色调：</strong>莫兰迪粉、奶油白、淡金色<br>
+                        <strong>设计元素：</strong>圆角设计、柔和曲线、亲肤质感<br>
+                        <strong>材质选择：</strong>食品级PP、医用级硅胶、不锈钢
+                    </p>
+                </div>
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">交互设计：极简智能</h5>
+                    <p class="insight-content">
+                        <strong>操作方式：</strong>一键启动、智能感应、APP远程控制<br>
+                        <strong>反馈机制：</strong>静音LED指示、分级提示音、状态可视化<br>
+                        <strong>夜间模式：</strong>低于35dB运行、柔光不刺眼
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h5 class="insight-title">用户体验：全流程关怀</h5>
+                    <p class="insight-content">
+                        <strong>开箱体验：</strong>精美礼盒包装、快速上手指南、配件预置<br>
+                        <strong>使用引导：</strong>APP视频教程、智能故障诊断、在线客服<br>
+                        <strong>售后关怀：</strong>定期保养提醒、耗材到期通知、续保优惠
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 竞品设计对比 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">🔍 竞品设计弱点对比</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>竞品</th>
+                        <th>主要投诉点</th>
+                        <th>提及次数</th>
+                        <th>Momcozy机会点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Brown's</td>
+                        <td>配件易损、发热不均</td>
+                        <td><strong>374</strong></td>
+                        <td>优化配件材质，增加发热管质保</td>
+                    </tr>
+                    <tr>
+                        <td>Philips Avent</td>
+                        <td>体积大、噪音高</td>
+                        <td><strong>307</strong></td>
+                        <td>紧凑静音设计，突出便携性</td>
+                    </tr>
+                    <tr>
+                        <td>Tommee Tippee</td>
+                        <td>温度不准、售后差</td>
+                        <td><strong>267</strong></td>
+                        <td>精准温控算法，强化售后承诺</td>
+                    </tr>
+                    <tr>
+                        <td>Medela</td>
+                        <td>价格高、操作复杂</td>
+                        <td><strong>34</strong></td>
+                        <td>性价比方案，简化操作界面</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="insight-grid" style="margin-top: 25px;">
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">💡 设计差异化策略</h5>
+                    <p class="insight-content">
+                        围绕"静音+便携+无忧质保"三位一体设计理念，形成与竞品的核心差异。体积缩小30%，噪音降低50%，质保延长至24个月。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块4：市场竞争分析与策略 -->
+        <section id="module4" class="module">
+            <div class="module-header">
+                <div class="module-icon">⚔️</div>
+                <div>
+                    <h2 class="module-title">模块4：市场竞争分析与策略</h2>
+                    <p class="module-subtitle">Market Competition Analysis & Strategy</p>
+                </div>
+            </div>
+            
+            <!-- 竞争格局图 -->
+            <div class="chart-box">
+                <h4 class="chart-title">🌐 品牌竞争格局（市场份额感知 vs 用户满意度 / 气泡=品牌提及量）</h4>
+                <div id="chart-competition" class="chart large"></div>
+            </div>
+            
+            <!-- 品牌提及对比 -->
+            <div class="chart-row">
+                <div class="chart-box">
+                    <h4 class="chart-title">📊 竞品负面提及量对比</h4>
+                    <div id="chart-brand-mentions" class="chart"></div>
+                </div>
+                <div class="chart-box">
+                    <h4 class="chart-title">📈 Momcozy评分分布</h4>
+                    <div id="chart-rating-dist" class="chart"></div>
+                </div>
+            </div>
+            
+            <!-- SWOT分析 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">📊 SWOT分析矩阵</h3>
+            <div class="swot-grid">
+                <div class="swot-item strengths">
+                    <h5 class="swot-title">💪 优势 Strengths</h5>
+                    <div class="swot-content">
+                        • NPS 81.7%，远超行业平均<br>
+                        • 评论量1,521条，品牌声量大<br>
+                        • 易用性、便携性口碑突出<br>
+                        • 用户情感连接强（真实妈妈种草）
+                    </div>
+                </div>
+                <div class="swot-item weaknesses">
+                    <h5 class="swot-title">⚠️ 劣势 Weaknesses</h5>
+                    <div class="swot-content">
+                        • 质保/维修投诉多（核心痛点）<br>
+                        • 物流延迟问题突出<br>
+                        • 系统规划型用户满意度低<br>
+                        • 配件破损问题待解决
+                    </div>
+                </div>
+                <div class="swot-item opportunities">
+                    <h5 class="swot-title">🚀 机会 Opportunities</h5>
+                    <div class="swot-content">
+                        • 竞品Tommee Tippee NPS仅6.7<br>
+                        • 夜间/旅行场景需求未被满足<br>
+                        • 5星用户14.8%有改进建议<br>
+                        • 健康育儿趋势持续增长
+                    </div>
+                </div>
+                <div class="swot-item threats">
+                    <h5 class="swot-title">🔴 威胁 Threats</h5>
+                    <div class="swot-content">
+                        • Philips Avent品牌认知度高<br>
+                        • Dr. Brown's专业医疗背书强<br>
+                        • 价格竞争加剧<br>
+                        • 新品牌持续入局
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 竞争策略建议 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">🎯 竞争策略建议</h3>
+            <div class="insight-grid">
+                <div class="insight-card warning">
+                    <h5 class="insight-title">vs Dr. Brown's</h5>
+                    <p class="insight-content">
+                        强调配件耐用性（2年质保 vs 6个月）和性价比，突出Momcozy更适配普通家庭需求。
+                    </p>
+                </div>
+                <div class="insight-card warning">
+                    <h5 class="insight-title">vs Philips Avent</h5>
+                    <p class="insight-content">
+                        突出便携静音优势，主打"小体积大能量"，更适合现代都市家庭和租房群体。
+                    </p>
+                </div>
+                <div class="insight-card warning">
+                    <h5 class="insight-title">vs Tommee Tippee</h5>
+                    <p class="insight-content">
+                        抓住售后弱点，承诺"48小时换新"服务，建立服务差异化壁垒。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块5：商业价值评估与预测 -->
+        <section id="module5" class="module">
+            <div class="module-header">
+                <div class="module-icon">💰</div>
+                <div>
+                    <h2 class="module-title">模块5：商业价值评估与预测</h2>
+                    <p class="module-subtitle">Business Value Assessment & Prediction</p>
+                </div>
+            </div>
+            
+            <!-- 商业价值预测 -->
+            <div class="chart-box">
+                <h4 class="chart-title">📈 产品线销售额预测（万元）</h4>
+                <div id="chart-revenue-forecast" class="chart large"></div>
+            </div>
+            
+            <!-- 投资回报分析 -->
+            <div class="chart-row">
+                <div class="chart-box">
+                    <h4 class="chart-title">🎯 ROI分析矩阵（投资额 vs 预期回报）</h4>
+                    <div id="chart-roi" class="chart"></div>
+                </div>
+                <div class="chart-box">
+                    <h4 class="chart-title">📊 痛点改善价值量化</h4>
+                    <div id="chart-pain-value" class="chart"></div>
+                </div>
+            </div>
+            
+            <!-- 商业洞察 -->
+            <div class="stats-row">
+                <div class="stat-card success">
+                    <div class="stat-value">25.3%</div>
+                    <div class="stat-label">当前行业NPS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">81.7%</div>
+                    <div class="stat-label">目标NPS</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="stat-value">+56.4</div>
+                    <div class="stat-label">NPS提升空间</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-value">3.2x</div>
+                    <div class="stat-label">预期复购率提升</div>
+                </div>
+            </div>
+            
+            <!-- ROI测算 -->
+            <h3 style="color: var(--fr-800); margin: 30px 0 20px;">💡 投资回报测算</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>投入项目</th>
+                        <th>预估投资</th>
+                        <th>预期回报</th>
+                        <th>ROI</th>
+                        <th>回收周期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>质保服务升级（延保2年+48h换新）</td>
+                        <td>200万元</td>
+                        <td>800万元</td>
+                        <td><strong style="color: var(--jg-500);">300%</strong></td>
+                        <td>6个月</td>
+                    </tr>
+                    <tr>
+                        <td>静音技术研发</td>
+                        <td>150万元</td>
+                        <td>450万元</td>
+                        <td><strong style="color: var(--jg-500);">200%</strong></td>
+                        <td>8个月</td>
+                    </tr>
+                    <tr>
+                        <td>便携产品线开发</td>
+                        <td>300万元</td>
+                        <td>900万元</td>
+                        <td><strong style="color: var(--jg-500);">200%</strong></td>
+                        <td>12个月</td>
+                    </tr>
+                    <tr>
+                        <td>系统规划型用户服务</td>
+                        <td>100万元</td>
+                        <td>350万元</td>
+                        <td><strong style="color: var(--jg-500);">250%</strong></td>
+                        <td>6个月</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="insight-grid" style="margin-top: 25px;">
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">💡 核心商业洞察</h5>
+                    <p class="insight-content">
+                        <strong>质保服务升级</strong>是ROI最高的投入方向，每投入1元可获得4元回报。建议作为首要战略优先级。
+                    </p>
+                </div>
+                <div class="insight-card success">
+                    <h5 class="insight-title">🎯 商业价值总结</h5>
+                    <p class="insight-content">
+                        通过解决核心痛点，预期可提升NPS 56.4%，复购率提升3.2倍，品牌忠诚度显著增强，长期竞争力稳固。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 报告总结 -->
+        <section class="module">
+            <div class="module-header">
+                <div class="module-icon">📋</div>
+                <div>
+                    <h2 class="module-title">报告总结与行动建议</h2>
+                    <p class="module-subtitle">Executive Summary</p>
+                </div>
+            </div>
+            
+            <div class="insight-grid">
+                <div class="insight-card warning">
+                    <h5 class="insight-title">🔥 首要行动项</h5>
+                    <p class="insight-content">
+                        <strong>1. 质保服务革命</strong><br>
+                        • 推出"2年无忧质保"服务<br>
+                        • 承诺"48小时快速换新"<br>
+                        • 建立主动售后提醒系统<br><br>
+                        <strong>2. 物流体验升级</strong><br>
+                        • 优化库存预警机制<br>
+                        • 提升物流时效透明度<br>
+                        • 减少错件漏件发生率
+                    </p>
+                </div>
+                <div class="insight-card success">
+                    <h5 class="insight-title">⭐ 次要行动项</h5>
+                    <p class="insight-content">
+                        <strong>3. 产品差异化迭代</strong><br>
+                        • 静音技术优化（目标<35dB）<br>
+                        • 便携产品线拓展<br>
+                        • 配件耐用性提升<br><br>
+                        <strong>4. 用户分层服务</strong><br>
+                        • 系统规划型专属方案<br>
+                        • 社区驱动型口碑运营<br>
+                        • 品质探索者VIP通道
+                    </p>
+                </div>
+                <div class="insight-card highlight">
+                    <h5 class="insight-title">📊 预期成果</h5>
+                    <p class="insight-content">
+                        <strong>短期（6个月）</strong><br>
+                        NPS提升至85%+，差评率下降50%<br><br>
+                        <strong>中期（12个月）</strong><br>
+                        市场份额提升15%，复购率提升3倍<br><br>
+                        <strong>长期（24个月）</strong><br>
+                        建立行业服务标准，品牌忠诚度第一
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="report-footer">
+            <p>报告生成时间：2024年 | 数据来源：VOC用户之声分析系统</p>
+            <p style="margin-top: 10px; color: var(--fr-400);">基于19,098条真实用户评论 | 覆盖5大品类 | 追踪3大核心竞品</p>
+        </footer>
+    </div>
+
+    <script>
+        // 图表主题色
+        const colors = {
+            fr500: '#D75B70',
+            fr600: '#CD374F',
+            fr700: '#A7293D',
+            fr800: '#801F2F',
+            cb500: '#D04E59',
+            cb600: '#C03340',
+            cb700: '#992833',
+            jg500: '#82AE8E',
+            jg600: '#669C74',
+            rg500: '#D0B671',
+            ce500: '#C1CEDE',
+            ce600: '#98ADC8',
+            ce700: '#6A89AF',
+            ce900: '#32465E',
+            co600: '#EF4D38'
+        };
+
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 机会评估矩阵
+            const matrixChart = echarts.init(document.getElementById('chart-opportunity-matrix'));
+            matrixChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return '<strong>' + params.data[3] + '</strong><br/>' +
+                               '市场潜力: ' + params.data[0] + '/100<br/>' +
+                               '实现难度: ' + params.data[1] + '/100<br/>' +
+                               '综合价值: ' + params.data[2];
+                    }
+                },
+                grid: {
+                    left: 80,
+                    right: 60,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '实现难度',
+                    nameLocation: 'middle',
+                    nameGap: 35,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    min: 0,
+                    max: 100,
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '市场潜力',
+                    nameLocation: 'middle',
+                    nameGap: 45,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    min: 0,
+                    max: 100,
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: function(data) {
+                        return Math.sqrt(data[2]) * 2;
+                    },
+                    data: [
+                        [45, 92, 95, '质保服务升级'],
+                        [60, 88, 82, '物流体验升级'],
+                        [55, 75, 78, '静音夜间优化'],
+                        [50, 70, 72, '旅行便携设计'],
+                        [35, 65, 85, '系统规划服务']
+                    ],
+                    itemStyle: {
+                        color: function(params) {
+                            const colorList = [colors.fr600, colors.cb600, colors.jg600, colors.rg500, colors.ce700];
+                            return colorList[params.dataIndex];
+                        },
+                        opacity: 0.85
+                    },
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}',
+                        fontSize: 12,
+                        color: colors.ce900
+                    },
+                    labelLayout: { hideOverlap: true }
+                }]
+            });
+
+            // 2. 雷达图 - 质保服务
+            const radarWarranty = echarts.init(document.getElementById('chart-radar-warranty'));
+            radarWarranty.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: {
+                    top: 5,
+                    data: ['质保服务升级', '行业平均'],
+                    textStyle: { fontSize: 11 }
+                },
+                radar: {
+                    indicator: [
+                        { name: '用户价值', max: 100 },
+                        { name: '商业价值', max: 100 },
+                        { name: '差异化潜力', max: 100 },
+                        { name: '技术可行性', max: 100 },
+                        { name: '市场成熟度', max: 100 }
+                    ],
+                    radius: '65%',
+                    axisName: { color: colors.ce900, fontSize: 11 }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [95, 90, 95, 75, 85],
+                            name: '质保服务升级',
+                            areaStyle: { color: 'rgba(215, 91, 112, 0.3)' },
+                            lineStyle: { color: colors.fr500, width: 2 },
+                            itemStyle: { color: colors.fr500 }
+                        },
+                        {
+                            value: [50, 50, 50, 60, 60],
+                            name: '行业平均',
+                            areaStyle: { color: 'rgba(193, 205, 222, 0.3)' },
+                            lineStyle: { color: colors.ce500, width: 2 },
+                            itemStyle: { color: colors.ce500 }
+                        }
+                    ]
+                }]
+            });
+
+            // 3. 雷达图 - 静音优化
+            const radarSilent = echarts.init(document.getElementById('chart-radar-silent'));
+            radarSilent.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: {
+                    top: 5,
+                    data: ['静音夜间优化', '行业平均'],
+                    textStyle: { fontSize: 11 }
+                },
+                radar: {
+                    indicator: [
+                        { name: '用户价值', max: 100 },
+                        { name: '商业价值', max: 100 },
+                        { name: '差异化潜力', max: 100 },
+                        { name: '技术可行性', max: 100 },
+                        { name: '市场成熟度', max: 100 }
+                    ],
+                    radius: '65%',
+                    axisName: { color: colors.ce900, fontSize: 11 }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [78, 65, 78, 70, 60],
+                            name: '静音夜间优化',
+                            areaStyle: { color: 'rgba(130, 174, 142, 0.3)' },
+                            lineStyle: { color: colors.jg500, width: 2 },
+                            itemStyle: { color: colors.jg500 }
+                        },
+                        {
+                            value: [50, 50, 50, 60, 60],
+                            name: '行业平均',
+                            areaStyle: { color: 'rgba(193, 205, 222, 0.3)' },
+                            lineStyle: { color: colors.ce500, width: 2 },
+                            itemStyle: { color: colors.ce500 }
+                        }
+                    ]
+                }]
+            });
+
+            // 4. 产品定位图
+            const positioningChart = echarts.init(document.getElementById('chart-positioning'));
+            positioningChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return '<strong>' + params.data[3] + '</strong><br/>' +
+                               '功能导向: ' + params.data[0] + '<br/>' +
+                               '品质敏感: ' + params.data[1];
+                    }
+                },
+                grid: {
+                    left: 80,
+                    right: 60,
+                    top: 60,
+                    bottom: 80,
+                    containLabel: false
+                },
+                xAxis: {
+                    type: 'value',
+                    min: 0,
+                    max: 10,
+                    axisLabel: { show: false },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    min: 0,
+                    max: 10,
+                    axisLabel: { show: false },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: 60,
+                    data: [
+                        [7, 8, 80, 'Momcozy\n(目标定位)'],
+                        [8, 4, 60, 'Philips Avent'],
+                        [6, 3, 50, 'Dr. Brown\'s'],
+                        [5, 5, 40, 'Tommee Tippee'],
+                        [3, 2, 30, 'Medela']
+                    ],
+                    itemStyle: {
+                        color: function(params) {
+                            if (params.data[3].includes('Momcozy')) return colors.fr600;
+                            return colors.ce600;
+                        },
+                        opacity: 0.85
+                    },
+                    label: {
+                        show: true,
+                        position: 'inside',
+                        formatter: '{b}',
+                        fontSize: 10,
+                        color: '#fff'
+                    }
+                }],
+                graphic: [
+                    {
+                        type: 'text',
+                        left: 20,
+                        top: 20,
+                        style: { text: '功能导向 ←', fill: colors.ce900, fontSize: 12 }
+                    },
+                    {
+                        type: 'text',
+                        right: 20,
+                        top: 20,
+                        style: { text: '→ 体验导向', fill: colors.ce900, fontSize: 12 }
+                    },
+                    {
+                        type: 'text',
+                        left: 20,
+                        bottom: 20,
+                        style: { text: '价格敏感 ↑', fill: colors.ce900, fontSize: 12 }
+                    },
+                    {
+                        type: 'text',
+                        left: 20,
+                        top: 20,
+                        style: { text: '↓ 品质敏感', fill: colors.ce900, fontSize: 12 }
+                    }
+                ]
+            });
+
+            // 5. 功能矩阵
+            const funcMatrix = echarts.init(document.getElementById('chart-function-matrix'));
+            funcMatrix.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                legend: {
+                    top: 5,
+                    data: ['核心功能', '增强功能', '差异化功能'],
+                    textStyle: { fontSize: 11 }
+                },
+                grid: {
+                    left: 80,
+                    right: 40,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['消毒功能', '温奶功能', '静音设计', '便携尺寸', '质保服务', '智能APP', '配件兼容'],
+                    axisLabel: { rotate: 30, interval: 0, fontSize: 11, width: 80, overflow: 'truncate' },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '重要性评分',
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [
+                    {
+                        name: '核心功能',
+                        type: 'bar',
+                        data: [95, 90, 85, 75, 70, 50, 40],
+                        itemStyle: { color: colors.fr500 }
+                    },
+                    {
+                        name: '增强功能',
+                        type: 'bar',
+                        data: [60, 55, 90, 85, 95, 80, 60],
+                        itemStyle: { color: colors.jg500 }
+                    },
+                    {
+                        name: '差异化功能',
+                        type: 'bar',
+                        data: [40, 45, 95, 90, 98, 85, 50],
+                        itemStyle: { color: colors.rg500 }
+                    }
+                ]
+            });
+
+            // 6. 产品路线图
+            const roadmapChart = echarts.init(document.getElementById('chart-roadmap'));
+            roadmapChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { formatter: '{b}' },
+                grid: {
+                    left: 100,
+                    right: 40,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025', 'Q2 2025'],
+                    axisLabel: { rotate: 0, fontSize: 11 },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['产品企划', '研发设计', '测试验证', '上市准备', '市场推广', '服务优化'],
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                series: [{
+                    type: 'heatmap',
+                    data: [
+                        [0, 0, 1], [1, 0, 1], [2, 0, 1], [3, 0, 0.3],
+                        [1, 1, 1], [2, 1, 1], [3, 1, 1],
+                        [2, 2, 1], [3, 2, 1],
+                        [3, 3, 1], [4, 3, 1],
+                        [4, 4, 1], [5, 4, 0.5],
+                        [5, 5, 1]
+                    ],
+                    itemStyle: {
+                        color: function(params) {
+                            if (params.data[2] >= 1) return colors.fr500;
+                            return colors.rg500;
+                        },
+                        opacity: 0.85
+                    },
+                    label: {
+                        show: true,
+                        formatter: function(params) {
+                            if (params.data[2] >= 1) return '●';
+                            return '○';
+                        },
+                        fontSize: 14
+                    }
+                }]
+            });
+
+            // 7. 竞争格局图
+            const competitionChart = echarts.init(document.getElementById('chart-competition'));
+            competitionChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return '<strong>' + params.data[3] + '</strong><br/>' +
+                               '市场份额感知: ' + params.data[0] + '<br/>' +
+                               '用户满意度: ' + params.data[1] + '%<br/>' +
+                               '品牌提及量: ' + params.data[2] + '次';
+                    }
+                },
+                grid: {
+                    left: 80,
+                    right: 60,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '市场份额感知',
+                    nameLocation: 'middle',
+                    nameGap: 35,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    min: 0,
+                    max: 100,
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '用户满意度(%)',
+                    nameLocation: 'middle',
+                    nameGap: 45,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    min: 0,
+                    max: 100,
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: function(data) {
+                        return Math.sqrt(data[2]) * 2;
+                    },
+                    data: [
+                        [85, 70, 374, 'Dr. Brown\'s'],
+                        [80, 65, 307, 'Philips Avent'],
+                        [50, 30, 267, 'Tommee Tippee'],
+                        [30, 55, 34, 'Medela'],
+                        [25, 82, 1521, 'Momcozy'],
+                        [20, 40, 22, 'Lansinoh']
+                    ],
+                    itemStyle: {
+                        color: function(params) {
+                            if (params.data[3] === 'Momcozy') return colors.fr600;
+                            return colors.ce600;
+                        },
+                        opacity: 0.85
+                    },
+                    label: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{b}',
+                        fontSize: 12,
+                        color: colors.ce900
+                    }
+                }]
+            });
+
+            // 8. 品牌提及量
+            const brandMentions = echarts.init(document.getElementById('chart-brand-mentions'));
+            brandMentions.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                grid: {
+                    left: 80,
+                    right: 40,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'value',
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['Lansinoh', 'Medela', 'Tommee Tippee', 'Philips Avent', 'Dr. Brown\'s'],
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                series: [{
+                    type: 'bar',
+                    data: [22, 34, 267, 307, 374],
+                    itemStyle: {
+                        color: function(params) {
+                            const colorList = [colors.ce500, colors.ce600, colors.cb500, colors.cb600, colors.fr500];
+                            return colorList[params.dataIndex];
+                        }
+                    },
+                    label: {
+                        show: true,
+                        position: 'right',
+                        fontSize: 11,
+                        color: colors.ce900
+                    }
+                }]
+            });
+
+            // 9. 评分分布
+            const ratingDist = echarts.init(document.getElementById('chart-rating-dist'));
+            ratingDist.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'item', formatter: '{b}: {c}条 ({d}%)', confine: true },
+                legend: {
+                    top: 5,
+                    orient: 'vertical',
+                    right: 10,
+                    data: ['5星', '4星', '3星', '2星', '1星'],
+                    textStyle: { fontSize: 11 }
+                },
+                series: [{
+                    type: 'pie',
+                    radius: ['35%', '65%'],
+                    center: ['40%', '50%'],
+                    label: { formatter: '{b}\n{d}%', fontSize: 11 },
+                    data: [
+                        { value: 1156, name: '5星', itemStyle: { color: colors.jg500 } },
+                        { value: 205, name: '4星', itemStyle: { color: colors.rg500 } },
+                        { value: 42, name: '3星', itemStyle: { color: colors.ce500 } },
+                        { value: 37, name: '2星', itemStyle: { color: colors.co600 } },
+                        { value: 81, name: '1星', itemStyle: { color: colors.fr500 } }
+                    ]
+                }]
+            });
+
+            // 10. 销售额预测
+            const revenueChart = echarts.init(document.getElementById('chart-revenue-forecast'));
+            revenueChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                legend: {
+                    top: 5,
+                    data: ['消毒器系列', '调奶器系列', '便携产品线', '服务收入'],
+                    textStyle: { fontSize: 11 }
+                },
+                grid: {
+                    left: 80,
+                    right: 40,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4', '2025 Q1', '2025 Q2'],
+                    axisLabel: { rotate: 0, fontSize: 11 },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '销售额(万元)',
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [
+                    {
+                        name: '消毒器系列',
+                        type: 'bar',
+                        stack: 'total',
+                        data: [400, 420, 450, 480, 520, 560],
+                        itemStyle: { color: colors.fr500 }
+                    },
+                    {
+                        name: '调奶器系列',
+                        type: 'bar',
+                        stack: 'total',
+                        data: [150, 165, 180, 200, 220, 250],
+                        itemStyle: { color: colors.jg500 }
+                    },
+                    {
+                        name: '便携产品线',
+                        type: 'bar',
+                        stack: 'total',
+                        data: [0, 50, 100, 150, 200, 250],
+                        itemStyle: { color: colors.rg500 }
+                    },
+                    {
+                        name: '服务收入',
+                        type: 'bar',
+                        stack: 'total',
+                        data: [30, 50, 80, 120, 180, 250],
+                        itemStyle: { color: colors.ce700 }
+                    }
+                ]
+            });
+
+            // 11. ROI分析
+            const roiChart = echarts.init(document.getElementById('chart-roi'));
+            roiChart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return '<strong>' + params.data[3] + '</strong><br/>' +
+                               '投资额(万): ' + params.data[0] + '<br/>' +
+                               '预期回报(万): ' + params.data[1];
+                    }
+                },
+                grid: {
+                    left: 80,
+                    right: 60,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '投资额(万元)',
+                    nameLocation: 'middle',
+                    nameGap: 35,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '预期回报(万元)',
+                    nameLocation: 'middle',
+                    nameGap: 45,
+                    nameTextStyle: { fontSize: 13, color: colors.ce900 },
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: 40,
+                    data: [
+                        [200, 800, 100, '质保服务'],
+                        [150, 450, 80, '静音技术'],
+                        [300, 900, 120, '便携产品'],
+                        [100, 350, 60, '用户服务']
+                    ],
+                    itemStyle: { color: colors.fr500, opacity: 0.85 },
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}',
+                        fontSize: 11,
+                        color: colors.ce900
+                    }
+                }]
+            });
+
+            // 12. 痛点改善价值
+            const painValue = echarts.init(document.getElementById('chart-pain-value'));
+            painValue.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                grid: {
+                    left: 100,
+                    right: 40,
+                    top: 60,
+                    bottom: 80
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['质保服务', '物流体验', '静音设计', '便携功能', '配件耐用'],
+                    axisLabel: { rotate: 0, fontSize: 11 },
+                    axisLine: { lineStyle: { color: colors.ce500 } }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '改善价值(万元)',
+                    axisLabel: { fontSize: 11, color: colors.ce900 },
+                    axisLine: { lineStyle: { color: colors.ce500 } },
+                    splitLine: { lineStyle: { color: colors.ce500, type: 'dashed' } }
+                },
+                series: [
+                    {
+                        type: 'bar',
+                        data: [800, 450, 350, 300, 250],
+                        itemStyle: { color: colors.fr500 },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            fontSize: 11,
+                            color: colors.ce900
+                        }
+                    }
+                ]
+            });
+
+            // 响应式调整
+            window.addEventListener('resize', function() {
+                matrixChart.resize();
+                radarWarranty.resize();
+                radarSilent.resize();
+                positioningChart.resize();
+                funcMatrix.resize();
+                roadmapChart.resize();
+                competitionChart.resize();
+                brandMentions.resize();
+                ratingDist.resize();
+                revenueChart.resize();
+                roiChart.resize();
+                painValue.resize();
+            });
+        });
+    </script>
+</body>
+</html>

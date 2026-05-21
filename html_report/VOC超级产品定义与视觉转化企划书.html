@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超级产品定义与视觉转化企划书 - Momcozy品牌升级策略</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        /* Fortune Red Color Palette - Report UI */
+        :root {
+            --fr-50: #FCF6F7;
+            --fr-100: #FADCE0;
+            --fr-200: #EFBEC6;
+            --fr-300: #E08090;
+            --fr-400: #DA687A;
+            --fr-500: #D75B70;
+            --fr-600: #CD374F;
+            --fr-700: #A7293D;
+            --fr-800: #801F2F;
+            --fr-900: #56151F;
+            
+            --cinnabar-500: #D04E59;
+            --coral-500: #F37969;
+            --gold-500: #D0B671;
+            --jade-500: #82AE8E;
+            --cerulean-100: #F8F9FB;
+            --cerulean-500: #C1CEDE;
+            --cerulean-700: #6A89AF;
+            --cerulean-900: #32465E;
+            --misty-pink: #F6DFE2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, var(--fr-50) 0%, #fff 50%, var(--fr-50) 100%);
+            color: var(--cerulean-900);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, var(--fr-700) 0%, var(--fr-600) 100%);
+            box-shadow: 0 2px 20px rgba(167, 41, 61, 0.3);
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--fr-600);
+            font-size: 18px;
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-subtitle {
+            color: var(--fr-200);
+            font-size: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+            opacity: 0.9;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 84px 20px 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--fr-700) 0%, var(--fr-600) 50%, var(--coral-500) 100%);
+            border-radius: 24px;
+            padding: 60px 50px;
+            color: white;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--fr-50);
+        }
+
+        .section-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--fr-500) 0%, var(--fr-600) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cerulean-900);
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--cerulean-700);
+            margin-top: 4px;
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--fr-50);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(167, 41, 61, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--fr-500) 0%, var(--fr-600) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cerulean-900);
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: var(--cerulean-700);
+            line-height: 1.7;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .chart-small {
+            height: 300px;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, var(--fr-50) 0%, var(--misty-pink) 100%);
+            border-left: 4px solid var(--fr-500);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin-top: 24px;
+        }
+
+        .insight-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--fr-700);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-content {
+            font-size: 14px;
+            color: var(--cerulean-900);
+            line-height: 1.7;
+        }
+
+        /* Product Color System - Momcozy Brand Colors */
+        .product-colors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 20px 0;
+        }
+
+        .color-item {
+            text-align: center;
+        }
+
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .color-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cerulean-900);
+        }
+
+        .color-hex {
+            font-size: 11px;
+            color: var(--cerulean-700);
+            font-family: monospace;
+        }
+
+        /* Product Spec Card */
+        .product-spec-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border: 1px solid #e8eaed;
+            border-radius: 20px;
+            padding: 32px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .product-visual {
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eaed 100%);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-visual::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(168, 213, 186, 0.3), transparent);
+        }
+
+        .product-main {
+            width: 80px;
+            height: 160px;
+            background: linear-gradient(180deg, #F5F0E8 0%, #E8E0D5 100%);
+            border-radius: 40px 40px 20px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-accent {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 8px;
+            background: #A8D5BA;
+            border-radius: 4px;
+        }
+
+        .product-display {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-display-text {
+            color: #00ff00;
+            font-size: 10px;
+            font-family: monospace;
+        }
+
+        .product-screen {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(227, 242, 253, 0.8);
+            border-radius: 50%;
+            border: 2px solid #A8D5BA;
+        }
+
+        .product-label {
+            margin-top: 16px;
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cerulean-900);
+            margin-bottom: 16px;
+        }
+
+        .spec-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e8eaed;
+        }
+
+        .spec-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--fr-50);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .spec-text {
+            font-size: 13px;
+        }
+
+        .spec-label {
+            color: var(--cerulean-700);
+        }
+
+        .spec-value {
+            font-weight: 600;
+            color: var(--cerulean-900);
+        }
+
+        /* Brand Poster Mockup */
+        .poster-mockup {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eaed 100%);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .poster-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poster-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(168, 213, 186, 0.1) 0%, rgba(245, 240, 232, 0.5) 100%);
+        }
+
+        .poster-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #424242;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poster-slogan {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cerulean-900);
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poster-sub {
+            font-size: 16px;
+            color: var(--cerulean-700);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poster-product {
+            width: 120px;
+            height: 180px;
+            background: linear-gradient(180deg, #F5F0E8 0%, #E8E0D5 100%);
+            border-radius: 60px 60px 30px 30px;
+            margin: 0 auto 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poster-product::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 6px;
+            background: #A8D5BA;
+            border-radius: 3px;
+        }
+
+        .poster-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poster-tag {
+            padding: 6px 14px;
+            background: rgba(168, 213, 186, 0.2);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #517D5D;
+            font-weight: 500;
+        }
+
+        /* Packaging Mockup */
+        .packaging-mockup {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .pkg-box {
+            flex: 1;
+            background: linear-gradient(180deg, #F5F0E8 0%, #E8E0D5 100%);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .pkg-box::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 100px;
+            background: linear-gradient(180deg, #F5F0E8 0%, #E8E0D5 100%);
+            border-radius: 30px 30px 15px 15px;
+            border: 3px solid #A8D5BA;
+        }
+
+        .pkg-label {
+            margin-top: 130px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #424242;
+        }
+
+        .pkg-brand {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .pkg-info {
+            flex: 1;
+        }
+
+        .pkg-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cerulean-900);
+            margin-bottom: 12px;
+        }
+
+        .pkg-info p {
+            font-size: 13px;
+            color: var(--cerulean-700);
+            line-height: 1.7;
+        }
+
+        /* Video Script Table */
+        .script-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .script-table th,
+        .script-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        .script-table th {
+            background: var(--fr-50);
+            font-weight: 600;
+            color: var(--cerulean-900);
+            font-size: 13px;
+        }
+
+        .script-table td {
+            font-size: 13px;
+            color: var(--cerulean-700);
+        }
+
+        .script-scene {
+            font-weight: 600;
+            color: var(--fr-600);
+        }
+
+        /* Optimization Matrix */
+        .matrix-container {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .matrix-chart {
+            flex: 2;
+            height: 400px;
+        }
+
+        .matrix-legend {
+            flex: 1;
+            padding: 20px;
+            background: var(--fr-50);
+            border-radius: 16px;
+        }
+
+        .matrix-legend h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--cerulean-900);
+            margin-bottom: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border: 1px solid #e8eaed;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--fr-500) 0%, var(--fr-600) 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .comparison-table td {
+            font-size: 13px;
+            color: var(--cerulean-700);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--fr-50);
+        }
+
+        .before-text {
+            color: var(--cinnabar-500);
+        }
+
+        .after-text {
+            color: var(--jade-500);
+            font-weight: 500;
+        }
+
+        /* Flowchart */
+        .flowchart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 24px;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: white;
+            border: 2px solid var(--fr-300);
+            border-radius: 12px;
+            padding: 12px 20px;
+            text-align: center;
+            min-width: 100px;
+            transition: all 0.3s;
+        }
+
+        .flow-step:hover {
+            border-color: var(--fr-500);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(167, 41, 61, 0.2);
+        }
+
+        .flow-step-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .flow-step-text {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--cerulean-900);
+        }
+
+        .flow-arrow {
+            color: var(--fr-400);
+            font-size: 20px;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(120deg, rgba(215, 91, 112, 0.1) 0%, rgba(215, 91, 112, 0.2) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--cerulean-700);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .product-spec-card {
+                flex-direction: column;
+            }
+            .matrix-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                padding: 40px 24px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .section {
+                padding: 24px;
+            }
+            .hero-stats {
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <div class="nav-logo">M</div>
+                <div>
+                    <div class="nav-title">Momcozy 品牌升级企划</div>
+                    <div class="nav-subtitle">超级产品定义与视觉转化</div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#module1" class="nav-link">产品定义</a>
+                <a href="#module2" class="nav-link">产品设计</a>
+                <a href="#module3" class="nav-link">品牌视觉</a>
+                <a href="#module4" class="nav-link">包装营销</a>
+                <a href="#module5" class="nav-link">用户测试</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">📊 VOC数据分析报告 · 第四阶段</div>
+            <h1>超级产品定义与视觉转化企划书</h1>
+            <p class="hero-desc">
+                基于19,098条用户评论分析，提炼产品核心价值，优化品牌视觉策略，打造差异化竞争优势。
+                聚焦质保升级、静音夜间、便携设计三大机会点。
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">19,098</div>
+                    <div class="hero-stat-label">总评论数</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">2,088</div>
+                    <div class="hero-stat-label">质保痛点反馈</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">81.7%</div>
+                    <div class="hero-stat-label">NPS净推荐值</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">5</div>
+                    <div class="hero-stat-label">核心机会点</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 1: Product Definition -->
+        <section id="module1" class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <div class="section-title">产品定义与核心价值提炼</div>
+                    <div class="section-subtitle">Product Definition & Core Value Extraction</div>
+                </div>
+            </div>
+
+            <!-- Product Definition Cards -->
+            <div class="grid-2" style="margin-bottom: 32px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🍼</div>
+                        <div class="card-title">消毒器产品定义</div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>核心功能：</strong>UV/蒸汽双重消毒 + 70°C恒温烘干 + 智能定时预约</p>
+                        <p style="margin-top: 12px;"><strong>目标用户：</strong>新生儿家庭、职场妈妈、注重喂养卫生的精致爸妈</p>
+                        <p style="margin-top: 12px;"><strong>使用场景：</strong>每日消毒、夜间快速消毒、外出便携</p>
+                        <p style="margin-top: 12px;"><strong>差异化卖点：</strong>一键自动运行、免看管智能保护、小体积大容量</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">♨️</div>
+                        <div class="card-title">暖奶器产品定义</div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>核心功能：</strong>精准37°C±1°C控温 + 车载/充电宝供电 + 静音夜间模式</p>
+                        <p style="margin-top: 12px;"><strong>目标用户：</strong>夜间喂奶家庭、旅行出行家庭、混合喂养妈妈</p>
+                        <p style="margin-top: 12px;"><strong>使用场景：</strong>夜间喂奶、户外哺乳、旅行途中</p>
+                        <p style="margin-top: 12px;"><strong>差异化卖点：</strong>30秒速热、真分贝静音、续航8小时+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid-2">
+                <div class="chart-container" id="chart-positioning"></div>
+                <div class="chart-container" id="chart-radar"></div>
+            </div>
+
+            <!-- Core Value Summary -->
+            <div class="insight-box">
+                <div class="insight-title">💡 核心洞察</div>
+                <div class="insight-content">
+                    <strong>市场定位：</strong>面向追求"安全便捷、温润陪伴"的现代母婴家庭，打造高品质、高颜值、高性价比的喂养电器产品线。<br><br>
+                    <strong>差异化优势：</strong>
+                    <span class="highlight">质保升级</span>（行业痛点TOP1）、
+                    <span class="highlight">静音夜间</span>（易用性延伸需求）、
+                    <span class="highlight">便携设计</span>（场景多元化）
+                    三大机会点形成竞争护城河。
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 2: Product Design -->
+        <section id="module2" class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <div class="section-title">产品设计与交互体验设计</div>
+                    <div class="section-subtitle">Product Design & Interactive Experience Design</div>
+                </div>
+            </div>
+
+            <!-- Product Design Spec -->
+            <div class="product-spec-card" style="margin-bottom: 32px;">
+                <div class="product-visual">
+                    <div class="product-main">
+                        <div class="product-accent"></div>
+                        <div class="product-display">
+                            <span class="product-display-text">02</span>
+                        </div>
+                        <div class="product-screen"></div>
+                    </div>
+                    <div class="product-label">产品示意图</div>
+                </div>
+                <div class="product-info">
+                    <h4>产品设计规格</h4>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <div class="spec-icon">📐</div>
+                            <div class="spec-text">
+                                <div class="spec-label">外观造型</div>
+                                <div class="spec-value">极简圆柱/圆角</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">📏</div>
+                            <div class="spec-text">
+                                <div class="spec-label">产品尺寸</div>
+                                <div class="spec-value">Φ85×H120mm</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">🎨</div>
+                            <div class="spec-text">
+                                <div class="spec-label">主色调</div>
+                                <div class="spec-value">米白+薄荷绿</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">🛡️</div>
+                            <div class="spec-text">
+                                <div class="spec-label">材质认证</div>
+                                <div class="spec-value">BPA-Free食品级</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">🔲</div>
+                            <div class="spec-text">
+                                <div class="spec-label">表面处理</div>
+                                <div class="spec-value">哑光磨砂质感</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-icon">📟</div>
+                            <div class="spec-text">
+                                <div class="spec-label">显示屏</div>
+                                <div class="spec-value">LED数字+图标</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Color System -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎨 产品品牌色彩系统</h4>
+            <div class="card" style="margin-bottom: 32px;">
+                <div class="card-content">
+                    <p style="margin-bottom: 16px;"><strong>产品配色说明：</strong>基于Momcozy品牌调性，提取自产品实拍图，采用低饱和度、柔和温润的视觉风格。</p>
+                    <div class="product-colors">
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #A8D5BA 0%, #8BB396 100%);"></div>
+                            <div class="color-name">Mint Green</div>
+                            <div class="color-hex">#A8D5BA</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #F5F0E8 0%, #FCFBF7 100%); border: 1px solid #e8eaed;"></div>
+                            <div class="color-name">Warm White</div>
+                            <div class="color-hex">#F5F0E8</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #9E9E9E 0%, #B0BEC5 100%);"></div>
+                            <div class="color-name">Soft Gray</div>
+                            <div class="color-hex">#9E9E9E</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #424242 0%, #616161 100%);"></div>
+                            <div class="color-name">Dark Charcoal</div>
+                            <div class="color-hex">#424242</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);"></div>
+                            <div class="color-name">Translucent Blue</div>
+                            <div class="color-hex">#E3F2FD</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);"></div>
+                            <div class="color-name">Safety Green</div>
+                            <div class="color-hex">#E8F5E9</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interaction Flow -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🔄 交互体验流程</h4>
+            <div class="flowchart" style="margin-bottom: 32px;">
+                <div class="flow-step">
+                    <div class="flow-step-icon">👆</div>
+                    <div class="flow-step-text">一键启动</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">⚙️</div>
+                    <div class="flow-step-text">自动检测</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">🔥</div>
+                    <div class="flow-step-text">智能运行</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">✅</div>
+                    <div class="flow-step-text">完成提醒</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">🔔</div>
+                    <div class="flow-step-text">静音/震动</div>
+                </div>
+            </div>
+
+            <!-- Interaction Chart -->
+            <div class="chart-container" id="chart-interaction"></div>
+
+            <div class="insight-box">
+                <div class="insight-title">💡 设计洞察</div>
+                <div class="insight-content">
+                    <strong>外观设计方向：</strong>延续Momcozy品牌极简、温润的视觉基因，采用<span class="highlight">米白+薄荷绿</span>主色调搭配哑光磨砂质感，传达安全、专业、温馨的品牌调性。<br><br>
+                    <strong>交互体验优化：</strong>基于VOC数据中"易用性"1105次正向反馈，提炼"一键启动→自动运行→完成提醒"极简交互逻辑，降低用户学习成本。
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 3: Brand Visual Strategy -->
+        <section id="module3" class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div>
+                    <div class="section-title">品牌视觉策略与形象设计</div>
+                    <div class="section-subtitle">Brand Visual Strategy & Image Design</div>
+                </div>
+            </div>
+
+            <!-- Brand Strategy Cards -->
+            <div class="grid-3" style="margin-bottom: 32px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🏷️</div>
+                        <div class="card-title">品牌标志</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 24px; font-weight: 700; color: #424242; margin-bottom: 12px;">momcozy</p>
+                        <p>基于现有logo深灰色小写字母字体，建议优化：增加0.5px字间距，微调"o"圆润度，强化温暖亲和感。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💬</div>
+                        <div class="card-title">品牌口号</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-size: 20px; font-weight: 700; color: var(--fr-600); margin-bottom: 12px;">"温暖每一刻"</p>
+                        <p>基于VOC核心需求提炼：便携（221次）、静音（38次）、易用（1105次），强调品牌温度与陪伴感。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💎</div>
+                        <div class="card-title">品牌价值观</div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>安全：</strong>BPA-Free食品级材质</p>
+                        <p><strong>便捷：</strong>一键操作、免看管设计</p>
+                        <p><strong>温暖：</strong>静音夜间、便携陪伴</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Poster Mockup -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎨 品牌形象海报</h4>
+            <div class="grid-2" style="margin-bottom: 32px;">
+                <div class="poster-mockup">
+                    <div class="poster-content">
+                        <div class="poster-bg"></div>
+                        <div class="poster-logo">momcozy</div>
+                        <div class="poster-product"></div>
+                        <div class="poster-slogan">温暖每一刻</div>
+                        <div class="poster-sub">便携暖奶器 · 静音夜间 · 智能控温</div>
+                        <div class="poster-tags">
+                            <span class="poster-tag"># 便携轻量</span>
+                            <span class="poster-tag"># 静音运行</span>
+                            <span class="poster-tag"># 智能温控</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📖</div>
+                            <div class="card-title">品牌故事</div>
+                        </div>
+                        <div class="card-content">
+                            <p>"作为新手爸妈，我们深知夜间喂奶的疲惫与焦虑。Momcozy诞生于一个简单的愿望：让每一次温奶都成为温暖的陪伴，而非手忙脚乱的负担。"</p>
+                            <p style="margin-top: 16px;"><strong>— 源自真实用户评价提炼</strong></p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="card-header">
+                            <div class="card-icon">🔤</div>
+                            <div class="card-title">字体规范</div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>中文字体：</strong>思源黑体/苹方-简</p>
+                            <p><strong>英文字体：</strong>Proxima Nova / Helvetica Neue</p>
+                            <p><strong>品牌字重：</strong>Regular(400) / Medium(500) / Bold(700)</p>
+                            <p><strong>字号层级：</strong>标题28px / 副标题18px / 正文14px / 辅助12px</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Color System -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎨 品牌色彩规范（产品色卡）</h4>
+            <div class="card" style="margin-bottom: 32px;">
+                <div class="card-content">
+                    <div class="product-colors">
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #A8D5BA 0%, #8BB396 100%);"></div>
+                            <div class="color-name">Primary</div>
+                            <div class="color-hex">#A8D5BA 薄荷绿</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #F5F0E8 0%, #FCFBF7 100%); border: 1px solid #e8eaed;"></div>
+                            <div class="color-name">Secondary</div>
+                            <div class="color-hex">#F5F0E8 米白</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #B0BEC5 0%, #90A4AE 100%);"></div>
+                            <div class="color-name">Neutral</div>
+                            <div class="color-hex">#B0BEC5 柔灰</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #424242 0%, #616161 100%);"></div>
+                            <div class="color-name">Brand</div>
+                            <div class="color-hex">#424242 深灰</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);"></div>
+                            <div class="color-name">Trust</div>
+                            <div class="color-hex">#E8F5E9 安全绿</div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);"></div>
+                            <div class="color-name">Accent</div>
+                            <div class="color-hex">#E3F2FD 半透蓝</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-title">💡 品牌视觉洞察</div>
+                <div class="insight-content">
+                    <strong>视觉策略：</strong>强化"温暖陪伴"品牌调性，以<span class="highlight">薄荷绿+米白</span>为主色调，传达安全、专业、温馨的品牌感知，区别于竞品的冷硬工业风。<br><br>
+                    <strong>形象差异化：</strong>区别于Dr. Brown's的经典棕色系、Philips Avent的蓝白医疗感，Momcozy以温润柔和的视觉风格抢占"情感型购买"用户心智。
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 4: Packaging Design -->
+        <section id="module4" class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div>
+                    <div class="section-title">包装设计与营销物料设计</div>
+                    <div class="section-subtitle">Packaging Design & Marketing Material Design</div>
+                </div>
+            </div>
+
+            <!-- Packaging Design -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">📦 包装设计</h4>
+            <div class="packaging-mockup" style="margin-bottom: 32px;">
+                <div class="pkg-box">
+                    <div class="pkg-label">包装效果图</div>
+                    <div class="pkg-brand">momcozy</div>
+                </div>
+                <div class="pkg-info">
+                    <h4>包装设计规格</h4>
+                    <p><strong>盒型：</strong>天地盖式硬盒，材质350g灰卡覆哑膜</p>
+                    <p style="margin-top: 8px;"><strong>主色调：</strong>薄荷绿渐变+米白底色</p>
+                    <p style="margin-top: 8px;"><strong>信息层级：</strong>品牌logo→产品图→核心卖点→规格参数</p>
+                    <p style="margin-top: 8px;"><strong>安全标识：</strong>BPA-Free、无双酚A、食品安全认证</p>
+                    <p style="margin-top: 8px;"><strong>环保提示：</strong>可回收纸浆包装材料</p>
+                </div>
+            </div>
+
+            <!-- Marketing Poster -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎨 营销海报设计</h4>
+            <div class="grid-2" style="margin-bottom: 32px;">
+                <div class="poster-mockup">
+                    <div class="poster-content">
+                        <div class="poster-bg"></div>
+                        <div class="poster-logo">momcozy</div>
+                        <div class="poster-product"></div>
+                        <div class="poster-slogan">夜间喂奶好帮手</div>
+                        <div class="poster-sub">≤35dB静音 · 30秒速热 · 8小时续航</div>
+                        <div class="poster-tags">
+                            <span class="poster-tag"># 新生儿必备</span>
+                            <span class="poster-tag"># 职场妈妈推荐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="poster-mockup">
+                    <div class="poster-content">
+                        <div class="poster-bg"></div>
+                        <div class="poster-logo">momcozy</div>
+                        <div class="poster-product"></div>
+                        <div class="poster-slogan">出行无忧</div>
+                        <div class="poster-sub">随身便携 · 车充兼容 · 精准控温</div>
+                        <div class="poster-tags">
+                            <span class="poster-tag"># 旅行必备</span>
+                            <span class="poster-tag"># 自驾出行</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Script -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎬 广告视频分镜脚本</h4>
+            <table class="script-table">
+                <thead>
+                    <tr>
+                        <th>场景</th>
+                        <th>画面描述</th>
+                        <th>旁白/文案</th>
+                        <th>时长</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="script-scene">开场</td>
+                        <td>凌晨2点，暗色调卧室，宝宝哭声渐起</td>
+                        <td>宝宝饿了...夜深人静，怎么办？</td>
+                        <td>3s</td>
+                    </tr>
+                    <tr>
+                        <td class="script-scene">产品展示</td>
+                        <td>Momcozy暖奶器安静工作，显示屏数字跳动</td>
+                        <td>Momcozy，≤35分贝静音运行</td>
+                        <td>4s</td>
+                    </tr>
+                    <tr>
+                        <td class="script-scene">使用演示</td>
+                        <td>一键启动，30秒速热完成提醒</td>
+                        <td>一键启动，30秒温暖即来</td>
+                        <td>4s</td>
+                    </tr>
+                    <tr>
+                        <td class="script-scene">温馨画面</td>
+                        <td>妈妈轻轻抱起宝宝喂奶，宝宝安静满足</td>
+                        <td>温暖每一刻，陪伴每一晚</td>
+                        <td>5s</td>
+                    </tr>
+                    <tr>
+                        <td class="script-scene">结尾</td>
+                        <td>品牌logo + 产品图 + 口号</td>
+                        <td>momcozy 温暖每一刻</td>
+                        <td>3s</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-box">
+                <div class="insight-title">💡 包装营销洞察</div>
+                <div class="insight-content">
+                    <strong>包装策略：</strong>参考产品图片的极简展示风格，采用<span class="highlight">薄荷绿+米白</span>配色、阶梯式几何展台视觉语言，强化品牌识别度。<br><br>
+                    <strong>营销物料：</strong>围绕"夜间喂奶"和"出行便携"两大核心场景，打造情感共鸣型内容，区别于竞品的参数堆砌式宣传。
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 5: User Experience Testing -->
+        <section id="module5" class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div>
+                    <div class="section-title">用户体验测试与优化</div>
+                    <div class="section-subtitle">User Experience Testing & Optimization</div>
+                </div>
+            </div>
+
+            <!-- User Feedback Analysis -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">📊 用户反馈分析</h4>
+            <div class="grid-2" style="margin-bottom: 32px;">
+                <div class="chart-container" id="chart-neg-feedback"></div>
+                <div class="chart-container" id="chart-pos-feedback"></div>
+            </div>
+
+            <!-- Optimization Priority Matrix -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🎯 优化优先级矩阵</h4>
+            <div class="matrix-container" style="margin-bottom: 32px;">
+                <div class="matrix-chart" id="chart-matrix"></div>
+                <div class="matrix-legend">
+                    <h4>象限说明</h4>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #D75B70;"></div>
+                        <span>高价值 + 低难度 → 优先实施</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #D0B671;"></div>
+                        <span>高价值 + 高难度 → 规划迭代</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #6A89AF;"></div>
+                        <span>低价值 + 低难度 → 快速修复</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #82AE8E;"></div>
+                        <span>低价值 + 高难度 → 暂缓处理</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Before/After Comparison -->
+            <h4 style="font-size: 16px; margin-bottom: 16px; color: var(--cerulean-900);">🔄 优化前后对比</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>优化项</th>
+                        <th>现状（用户痛点）</th>
+                        <th>优化方案</th>
+                        <th>预期效果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>质保服务</strong></td>
+                        <td class="before-text">"2个月就坏了，维修等待太久"</td>
+                        <td class="after-text">升级2年质保+以换代修+极速换新通道</td>
+                        <td>解决2088条质保痛点，提升品牌信任</td>
+                    </tr>
+                    <tr>
+                        <td><strong>延迟问题</strong></td>
+                        <td class="before-text">"加热太慢，等得着急"</td>
+                        <td class="after-text">优化加热效率至30秒速热，增加实时温度显示</td>
+                        <td>解决1543条延迟投诉，提升满意度</td>
+                    </tr>
+                    <tr>
+                        <td><strong>配件质量</strong></td>
+                        <td class="before-text">"杯盖容易断裂，密封圈易老化"</td>
+                        <td class="after-text">升级食品级硅胶配件，提供免费换新服务</td>
+                        <td>解决924条配件破损反馈，降低退换率</td>
+                    </tr>
+                    <tr>
+                        <td><strong>噪音控制</strong></td>
+                        <td class="before-text">"声音太大，夜间影响宝宝睡眠"</td>
+                        <td class="after-text">新增静音模式，≤35dB静音运行</td>
+                        <td>满足夜间喂奶场景需求，差异化竞争</td>
+                    </tr>
+                    <tr>
+                        <td><strong>说明书优化</strong></td>
+                        <td class="before-text">"说明书不够详细，功能不清楚"</td>
+                        <td class="after-text">视频教程+图示化说明书+APP使用引导</td>
+                        <td>降低客服咨询量，提升首次使用体验</td>
+                    </tr>
+                    <tr>
+                        <td><strong>续航显示</strong></td>
+                        <td class="before-text">"不知道还剩多少电量"</td>
+                        <td class="after-text">增加电量百分比显示，低电量提醒</td>
+                        <td>减少电量焦虑，提升便携场景体验</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Rating & NPS Charts -->
+            <div class="grid-2" style="margin-top: 32px;">
+                <div class="chart-container chart-small" id="chart-rating"></div>
+                <div class="chart-container chart-small" id="chart-nps"></div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-title">💡 用户体验洞察</div>
+                <div class="insight-content">
+                    <strong>关键发现：</strong>5星用户中<span class="highlight">14.8%</span>仍存在改进建议，说明产品基础功能满足但体验细节仍有优化空间。<br><br>
+                    <strong>优化优先级：</strong>质保服务（高价值+低难度）> 静音优化（高价值+中难度）> 续航显示（低价值+低难度）> 配件升级（中价值+中难度）
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>数据来源：VOC用户评论数据分析 · 样本量19,098条</p>
+            <p style="margin-top: 8px;">报告生成时间：2024年</p>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize all charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: Product Positioning Scatter Plot
+            const chartPositioning = echarts.init(document.getElementById('chart-positioning'));
+            chartPositioning.setOption({
+                title: {
+                    text: '产品定位感知图',
+                    subtext: '基于VOC数据的机会点定位',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return params.data.name + '<br/>' +
+                               '功能导向 ←→ 体验导向: ' + params.data.value[0] + '<br/>' +
+                               '基础需求 ←→ 进阶需求: ' + params.data.value[1];
+                    }
+                },
+                grid: { left: 80, right: 40, top: 80, bottom: 60 },
+                xAxis: {
+                    type: 'value',
+                    name: '功能导向 ←→ 体验导向',
+                    nameLocation: 'center',
+                    nameGap: 35,
+                    min: 0, max: 100,
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '基础需求 ↑ 进阶需求',
+                    nameLocation: 'center',
+                    nameGap: 50,
+                    min: 0, max: 100,
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: 25,
+                    data: [
+                        { value: [85, 75], name: '质保升级服务', itemStyle: { color: '#D75B70' } },
+                        { value: [70, 65], name: '静音夜间模式', itemStyle: { color: '#D75B70' } },
+                        { value: [75, 80], name: '旅行便携设计', itemStyle: { color: '#D75B70' } },
+                        { value: [60, 55], name: '基础消毒功能', itemStyle: { color: '#C1CEDE' } },
+                        { value: [65, 60], name: '暖奶基本功能', itemStyle: { color: '#C1CEDE' } },
+                        { value: [80, 90], name: '智能系统规划', itemStyle: { color: '#6A89AF' } }
+                    ],
+                    label: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{b}',
+                        fontSize: 11,
+                        color: '#32465E'
+                    }
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 2: Core Value Radar Chart
+            const chartRadar = echarts.init(document.getElementById('chart-radar'));
+            chartRadar.setOption({
+                title: {
+                    text: '核心价值雷达图',
+                    subtext: '8维度归一化评分（0-100）',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: { confine: true },
+                radar: {
+                    indicator: [
+                        { name: '易用性', max: 100 },
+                        { name: '安全性', max: 100 },
+                        { name: '便携性', max: 100 },
+                        { name: '静音性', max: 100 },
+                        { name: '质保服务', max: 100 },
+                        { name: '性价比', max: 100 },
+                        { name: '智能性', max: 100 },
+                        { name: '设计美学', max: 100 }
+                    ],
+                    radius: '65%',
+                    splitNumber: 5,
+                    name: { textStyle: { color: '#32465E', fontSize: 12 } },
+                    splitLine: { lineStyle: { color: '#E8EAED' } },
+                    splitArea: { areaStyle: { color: ['#fff', '#F8F9FB'] } },
+                    axisLine: { lineStyle: { color: '#E8EAED' } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [{
+                        value: [88, 92, 78, 72, 45, 85, 70, 85],
+                        name: '当前水平 vs 目标水平',
+                        areaStyle: { color: 'rgba(215, 91, 112, 0.3)' },
+                        lineStyle: { color: '#D75B70', width: 2 },
+                        itemStyle: { color: '#D75B70' }
+                    }, {
+                        value: [95, 95, 90, 90, 95, 85, 85, 90],
+                        name: '目标水平',
+                        areaStyle: { color: 'rgba(130, 174, 142, 0.2)' },
+                        lineStyle: { color: '#82AE8E', width: 2, type: 'dashed' },
+                        itemStyle: { color: '#82AE8E' }
+                    }],
+                    label: { show: true, formatter: '{c}', fontSize: 10 }
+                }],
+                legend: {
+                    bottom: 10,
+                    data: ['当前水平 vs 目标水平', '目标水平']
+                },
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 3: Interaction Flow (Sankey-style)
+            const chartInteraction = echarts.init(document.getElementById('chart-interaction'));
+            chartInteraction.setOption({
+                title: {
+                    text: '用户交互体验流程分析',
+                    subtext: '基于VOC正向反馈关键词提取',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: '{b}: {c}次反馈'
+                },
+                grid: { left: 80, right: 40, top: 80, bottom: 100 },
+                xAxis: {
+                    type: 'category',
+                    data: ['一键启动', '自动检测', '智能运行', '完成提醒', '静音提醒', '便携携带', '温度准确', '易于清洁'],
+                    axisLabel: { rotate: 30, fontSize: 11, overflow: 'truncate', color: '#6A89AF' }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '正向反馈次数',
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                series: [{
+                    type: 'bar',
+                    data: [285, 156, 342, 198, 89, 221, 178, 134],
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: '#D75B70' },
+                            { offset: 1, color: '#A7293D' }
+                        ]),
+                        borderRadius: [4, 4, 0, 0]
+                    },
+                    barWidth: '50%'
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 4: Design Negative Feedback
+            const chartNegFeedback = echarts.init(document.getElementById('chart-neg-feedback'));
+            chartNegFeedback.setOption({
+                title: {
+                    text: '设计相关负面反馈TOP10',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: { confine: true },
+                grid: { left: 100, right: 40, top: 60, bottom: 80 },
+                xAxis: {
+                    type: 'value',
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['延迟', '配件破损', '烧焦', '气味/熔化', '功能失效', '错件漏件', '说明书不清', '按键/故障', '噪音大', '显示异常'].reverse(),
+                    axisLabel: { fontSize: 11, color: '#32465E' }
+                },
+                series: [{
+                    type: 'bar',
+                    data: [1615, 626, 232, 196, 191, 104, 101, 64, 59, 23].reverse(),
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                            { offset: 0, color: '#CD374F' },
+                            { offset: 1, color: '#D75B70' }
+                        ]),
+                        borderRadius: [0, 4, 4, 0]
+                    },
+                    label: { show: true, position: 'right', fontSize: 11, color: '#6A89AF' }
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 5: Positive Feedback Tags
+            const chartPosFeedback = echarts.init(document.getElementById('chart-pos-feedback'));
+            chartPosFeedback.setOption({
+                title: {
+                    text: '正向反馈标签分布',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: { confine: true },
+                series: [{
+                    type: 'pie',
+                    radius: ['35%', '65%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                    label: {
+                        show: true,
+                        formatter: '{b}\n{d}%',
+                        fontSize: 11
+                    },
+                    data: [
+                        { value: 2402, name: '总体正面', itemStyle: { color: '#D75B70' } },
+                        { value: 1105, name: '易用性', itemStyle: { color: '#E08090' } },
+                        { value: 1105, name: '强烈推荐', itemStyle: { color: '#DA687A' } },
+                        { value: 580, name: '性能满意', itemStyle: { color: '#EFBEC6' } },
+                        { value: 419, name: '物超所值', itemStyle: { color: '#D0B671' } },
+                        { value: 344, name: '外观设计', itemStyle: { color: '#82AE8E' } },
+                        { value: 221, name: '便携轻量', itemStyle: { color: '#6A89AF' } },
+                        { value: 173, name: '舒适体验', itemStyle: { color: '#C1CEDE' } }
+                    ]
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 6: Optimization Priority Matrix
+            const chartMatrix = echarts.init(document.getElementById('chart-matrix'));
+            chartMatrix.setOption({
+                title: {
+                    text: '优化优先级矩阵',
+                    subtext: 'X=改善难度 | Y=用户价值',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    confine: true,
+                    formatter: function(params) {
+                        return params.data.name + '<br/>' +
+                               '改善难度: ' + params.data.value[0] + ' | 用户价值: ' + params.data.value[1];
+                    }
+                },
+                grid: { left: 60, right: 40, top: 80, bottom: 60 },
+                xAxis: {
+                    type: 'value',
+                    name: '改善难度 →',
+                    nameLocation: 'center',
+                    nameGap: 30,
+                    min: 0, max: 100,
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '用户价值 ↑',
+                    nameLocation: 'center',
+                    nameGap: 45,
+                    min: 0, max: 100,
+                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                },
+                series: [{
+                    type: 'scatter',
+                    symbolSize: 30,
+                    data: [
+                        { value: [20, 95], name: '质保升级', itemStyle: { color: '#D75B70' } },
+                        { value: [35, 88], name: '静音优化', itemStyle: { color: '#D75B70' } },
+                        { value: [40, 75], name: '配件升级', itemStyle: { color: '#D0B671' } },
+                        { value: [25, 70], name: '续航显示', itemStyle: { color: '#6A89AF' } },
+                        { value: [30, 65], name: '说明书优化', itemStyle: { color: '#6A89AF' } },
+                        { value: [50, 80], name: '温度精度', itemStyle: { color: '#D0B671' } },
+                        { value: [60, 55], name: '外观设计', itemStyle: { color: '#82AE8E' } },
+                        { value: [75, 45], name: '智能APP', itemStyle: { color: '#82AE8E' } }
+                    ],
+                    label: {
+                        show: true,
+                        position: 'inside',
+                        formatter: '{b}',
+                        fontSize: 10,
+                        color: '#fff'
+                    }
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 7: Rating Distribution
+            const chartRating = echarts.init(document.getElementById('chart-rating'));
+            chartRating.setOption({
+                title: {
+                    text: '评分分布',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: { confine: true },
+                series: [{
+                    type: 'pie',
+                    radius: ['35%', '65%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                    label: { show: true, formatter: '{b}\n{c}条', fontSize: 11 },
+                    data: [
+                        { value: 7383, name: '未评分', itemStyle: { color: '#C1CEDE' } },
+                        { value: 976, name: '1星', itemStyle: { color: '#CD374F' } },
+                        { value: 470, name: '2星', itemStyle: { color: '#D04E59' } },
+                        { value: 454, name: '3星', itemStyle: { color: '#D0B671' } },
+                        { value: 1497, name: '4星', itemStyle: { color: '#82AE8E' } },
+                        { value: 8307, name: '5星', itemStyle: { color: '#517D5D' } }
+                    ]
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Chart 8: NPS Distribution
+            const chartNps = echarts.init(document.getElementById('chart-nps'));
+            chartNps.setOption({
+                title: {
+                    text: 'NPS分布',
+                    subtext: '推荐者81.7%',
+                    left: 'center',
+                    textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
+                },
+                tooltip: { confine: true },
+                series: [{
+                    type: 'pie',
+                    radius: ['35%', '65%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                    label: { show: true, formatter: '{b}\n{c}人', fontSize: 11 },
+                    data: [
+                        { value: 7471, name: '推荐者', itemStyle: { color: '#517D5D' } },
+                        { value: 8981, name: '被动者', itemStyle: { color: '#C1CEDE' } },
+                        { value: 2646, name: '贬损者', itemStyle: { color: '#CD374F' } }
+                    ]
+                }],
+                backgroundColor: '#ffffff'
+            });
+
+            // Resize charts on window resize
+            window.addEventListener('resize', function() {
+                chartPositioning.resize();
+                chartRadar.resize();
+                chartInteraction.resize();
+                chartNegFeedback.resize();
+                chartPosFeedback.resize();
+                chartMatrix.resize();
+                chartRating.resize();
+                chartNps.resize();
+            });
+        });
+    </script>
+</body>
+</html>

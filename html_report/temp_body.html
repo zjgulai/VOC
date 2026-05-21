@@ -1,0 +1,653 @@
+<script>
+
+        // ========== Fortune Red 色卡系统 ==========
+        const fortuneColors = {
+            primary: '#D75B70',        // Fortune Red 500
+            primaryDark: '#A7293D',    // Fortune Red 700
+            primaryDarker: '#801F2F',  // Fortune Red 800
+            secondary: '#D04E59',      // Cinnabar 500
+            secondaryDark: '#992833',   // Cinnabar 700
+            coral: '#F37969',           // Coral Orange 500
+            coralDark: '#EF4D38',       // Coral Orange 600
+            gold: '#D0B671',            // RMB Gold 500
+            jade: '#82AE8E',            // Jade Green 500
+            jadeDark: '#517D5D',        // Jade Green 700
+            cerulean: '#C1CEDE',       // Cerulean 500
+            ceruleanDark: '#32465E',    // Cerulean 900
+            ceruleanLight: '#6A89AF',  // Cerulean 700
+            pink: '#E08090',           // Fortune Red 300
+            pinkLight: '#F6DFE2',      // Misty Pink 300
+            background: '#FCF6F7'       // Fortune Red 50
+        };
+        
+        // ========== 报告数据 ==========
+        const reportData = {
+            "total_reviews": 19098,
+            "core_reviews": 6749,
+            "brand_stats": [
+                {"name": "Momcozy", "count": 1521, "avg_rating": 4.52, "avg_quality": 74.3, "avg_sentiment": 0.667, "nps": 81.7, "top_positive": [["Overall Positive", 596], ["Ease of Use", 467], ["Highly Recommended", 323], ["Performance Satisfaction", 225], ["Design", 125]], "top_negative": [["Price", 130], ["Dr. Brown's", 41], ["Philips Avent", 22], ["Poor Experience", 17], ["Uncomfortable", 13]], "positive_rate": 89.5, "detractor_rate": 7.8},
+                {"name": "Dr. Brown's", "count": 374, "avg_rating": 4.02, "avg_quality": 76.3, "avg_sentiment": 0.521, "nps": 26.2, "top_positive": [["Overall Positive", 45], ["Highly Recommended", 24], ["Ease of Use", 23], ["Great Value", 9], ["Good Value", 9]], "top_negative": [["Philips Avent", 42], ["Tommee Tippee", 16], ["Medela", 16], ["Poor Experience", 13], ["Warranty", 12]], "positive_rate": 56.7, "detractor_rate": 30.5},
+                {"name": "Philips Avent", "count": 307, "avg_rating": 4.05, "avg_quality": 75.4, "avg_sentiment": 0.596, "nps": 31.6, "top_positive": [["Overall Positive", 39], ["Highly Recommended", 20], ["Ease of Use", 15], ["Design", 7], ["Great Value", 6]], "top_negative": [["Philips Avent", 307], ["Dr. Brown's", 42], ["Tommee Tippee", 30], ["Medela", 18], ["Poor Experience", 11]], "positive_rate": 55.4, "detractor_rate": 23.8},
+                {"name": "Tommee Tippee", "count": 267, "avg_rating": 3.58, "avg_quality": 76.8, "avg_sentiment": 0.307, "nps": 6.7, "top_positive": [["Overall Positive", 32], ["Highly Recommended", 9], ["Ease of Use", 8], ["Fast CS", 6], ["Good Value", 4]], "top_negative": [["Tommee Tippee", 267], ["Philips Avent", 30], ["Delay", 21], ["Dr. Brown's", 16], ["Medela", 12]], "positive_rate": 46.1, "detractor_rate": 39.3},
+                {"name": "Medela", "count": 34, "avg_rating": 3.15, "avg_quality": 76.4, "avg_sentiment": 0.435, "nps": 20.6, "top_positive": [["Overall Positive", 4], ["Highly Recommended", 4], ["Ease of Use", 3], ["Portable/Lightweight", 3], ["Design", 2]], "top_negative": [["Medela", 34], ["Philips Avent", 18], ["Dr. Brown's", 16], ["Tommee Tippee", 12], ["Lansinoh", 2]], "positive_rate": 52.9, "detractor_rate": 32.4},
+                {"name": "Lansinoh", "count": 22, "avg_rating": 3.64, "avg_quality": 75.6, "avg_sentiment": 0.520, "nps": 4.5, "top_positive": [["Overall Positive", 2], ["Design", 1], ["Ease of Use", 1]], "top_negative": [["Lansinoh", 22], ["Dr. Brown's", 4], ["Philips Avent", 3], ["Medela", 2], ["Manual", 1]], "positive_rate": 40.9, "detractor_rate": 36.4},
+                {"name": "Haakaa", "count": 14, "avg_rating": 4.86, "avg_quality": 78.7, "avg_sentiment": 0.821, "nps": 42.9, "top_positive": [["Great Value", 1], ["Highly Recommended", 1], ["Overall Positive", 1], ["Quality Feel", 1]], "top_negative": [["Haakaa", 14], ["Manual", 1]], "positive_rate": 78.6, "detractor_rate": 35.7},
+                {"name": "Spectra", "count": 13, "avg_rating": 4.15, "avg_quality": 79.3, "avg_sentiment": 0.742, "nps": 61.5, "top_positive": [["Overall Positive", 4], ["Good Value", 3], ["Highly Recommended", 2], ["Ease of Use", 1], ["Quiet", 1]], "top_negative": [["Spectra", 13], ["Dr. Brown's", 4], ["Delay", 1], ["Philips Avent", 1], ["Price", 1]], "positive_rate": 76.9, "detractor_rate": 15.4},
+                {"name": "Willow", "count": 3, "avg_rating": 1.33, "avg_quality": 65.5, "avg_sentiment": 0.283, "nps": -33.3, "top_positive": [], "top_negative": [], "positive_rate": 33.3, "detractor_rate": 66.7}
+            ],
+            "positive_tags": [
+                {"name": "Overall Positive", "value": 2402}, {"name": "Highly Recommended", "value": 1105},
+                {"name": "Ease of Use", "value": 1105}, {"name": "Performance Satisfaction", "value": 580},
+                {"name": "Feedback/Thanks", "value": 550}, {"name": "Great Value", "value": 419},
+                {"name": "Design", "value": 344}, {"name": "Mom Review", "value": 237},
+                {"name": "Portable/Lightweight", "value": 221}, {"name": "Comfort", "value": 173},
+                {"name": "Quality Feel", "value": 168}, {"name": "Good Value", "value": 161},
+                {"name": "Durability", "value": 143}, {"name": "Will Repurchase", "value": 130},
+                {"name": "Fast CS", "value": 123}, {"name": "Clear Specs", "value": 60},
+                {"name": "Size Fit", "value": 51}, {"name": "Quiet", "value": 38},
+                {"name": "Service OK", "value": 31}, {"name": "Clear Selling Points", "value": 29},
+                {"name": "Good Quality", "value": 26}, {"name": "Fine Work", "value": 23},
+                {"name": "Attractive", "value": 22}, {"name": "Full Features", "value": 20},
+                {"name": "Safe Materials", "value": 18}, {"name": "Worth It", "value": 17}
+            ],
+            "negative_tags": [
+                {"name": "Warranty", "value": 2088}, {"name": "Delay", "value": 1543},
+                {"name": "Parts Break", "value": 924}, {"name": "Dr. Brown's", "value": 374},
+                {"name": "Payment", "value": 336}, {"name": "Refund", "value": 309},
+                {"name": "Philips Avent", "value": 307}, {"name": "Return/Exchange", "value": 289},
+                {"name": "Price", "value": 280}, {"name": "Tommee Tippee", "value": 267},
+                {"name": "Poor Experience", "value": 248}, {"name": "Function Fail", "value": 191},
+                {"name": "Melting/Smoke", "value": 141}, {"name": "Won't Turn On", "value": 122},
+                {"name": "Ship Delay", "value": 122}, {"name": "Cancel Order", "value": 114},
+                {"name": "Burned", "value": 112}, {"name": "Wrong Items", "value": 109},
+                {"name": "Product Suggestion", "value": 108}, {"name": "Wrong Card/Account", "value": 108},
+                {"name": "Malfunction", "value": 107}, {"name": "Quality Issue", "value": 105},
+                {"name": "Button Issue", "value": 96}, {"name": "Poor Quality", "value": 94},
+                {"name": "Leaking", "value": 66}
+            ],
+            "nps_dist": {"promoter": 7471, "passive": 8981, "detractor": 2646},
+            "platform_stats": {
+                "Amazon竞品": 9610, "Zendesk": 7383, "Momcozy官网": 1521, "Trustpilot": 573, "Reddit": 11
+            },
+            "category_stats": {
+                "消毒器": 6463, "调奶器": 286, "湿巾加热盒": 211, "其他品类": 789
+            }
+        };
+        
+        // ========== 图表初始化工具 ==========
+        function initChart(domId) {
+            const dom = document.getElementById(domId);
+            if (!dom) {
+                console.error('DOM not found:', domId);
+                return null;
+            }
+            const chart = echarts.init(dom, null, { renderer: 'canvas' });
+            return chart;
+        }
+        
+        // ========== 阶段一：图表初始化 ==========
+        
+        // 品牌提及量柱状图
+        function initBrandMentionChart() {
+            const chart = initChart('brandMentionChart');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 0).sort((a, b) => b.count - a.count);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                xAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: fortuneColors.ceruleanDark, rotate: 45, interval: 0, fontSize: 11, overflow: 'truncate', width: 80 }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '评论数', axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [{ type: 'bar', data: brands.map(b => ({ value: b.count, itemStyle: { color: b.name === 'Momcozy' ? fortuneColors.primary : (b.count > 100 ? fortuneColors.coral : fortuneColors.cerulean) } })), barWidth: '40%', label: { show: false } }],
+                grid: { left: 80, right: 40, top: 60, bottom: 100 }
+            });
+        }
+        
+        // 品牌互动度散点图
+        function initBrandEngagementChart() {
+            const chart = initChart('brandEngagementChart');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 5);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>质量得分: ${p.data.value[1]}<br/>评论数: ${p.data.value[0]}`, confine: true },
+                xAxis: { type: 'value', name: '评论数', nameTextStyle: { color: fortuneColors.ceruleanDark }, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '质量得分', nameTextStyle: { color: fortuneColors.ceruleanDark }, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [{
+                    type: 'scatter',
+                    data: brands.map(b => ({ name: b.name, value: [b.count, b.avg_quality, b.count] })),
+                    symbolSize: d => Math.max(10, Math.sqrt(d[2]) * 0.8),
+                    itemStyle: { color: fortuneColors.primary, opacity: 0.8 },
+                    label: { show: true, formatter: p => p.data.name, color: fortuneColors.ceruleanDark, fontSize: 10, position: 'right' }
+                }],
+                grid: { left: 80, right: 60, top: 40, bottom: 60 }
+            });
+        }
+        
+        // 品牌综合指标图表
+        function initBrandMetricsChart() {
+            const chart = initChart('brandMetricsChart');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 0);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                legend: { data: ['平均评分(×20)', '质量得分', 'NPS'], textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 11 } },
+                xAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: fortuneColors.ceruleanDark, rotate: 45, interval: 0, fontSize: 10, overflow: 'truncate', width: 60 }, axisLine: { lineStyle: { color: fortuneColors.cerulean } } },
+                yAxis: [
+                    { type: 'value', name: '评分/质量', nameTextStyle: { color: fortuneColors.ceruleanDark }, max: 100, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                    { type: 'value', name: 'NPS', nameTextStyle: { color: fortuneColors.ceruleanDark }, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } }
+                ],
+                series: [
+                    { name: '平均评分(×20)', type: 'bar', data: brands.map(b => ({ value: b.avg_rating * 20, itemStyle: { color: fortuneColors.primary } })), barWidth: '18%', label: { show: false } },
+                    { name: '质量得分', type: 'bar', data: brands.map(b => ({ value: b.avg_quality, itemStyle: { color: fortuneColors.jade } })), barWidth: '18%', label: { show: false } },
+                    { name: 'NPS', type: 'line', yAxisIndex: 1, data: brands.map(b => ({ value: b.nps, itemStyle: { color: fortuneColors.coral } })), smooth: true, lineStyle: { width: 3 }, itemStyle: { color: fortuneColors.coral }, label: { show: false } }
+                ],
+                grid: { left: 80, right: 40, top: 60, bottom: 100 }
+            });
+        }
+        
+        // 品牌表格
+        function initBrandTable() {
+            const tbody = document.getElementById('brandTableBody');
+            if (!tbody) return;
+            reportData.brand_stats.forEach(b => {
+                const npsClass = b.nps >= 50 ? 'nps-high' : (b.nps >= 20 ? 'nps-mid' : 'nps-low');
+                const row = `<tr>
+                    <td><strong>${b.name}</strong></td>
+                    <td>${b.count.toLocaleString()}</td>
+                    <td>${b.avg_rating.toFixed(2)}</td>
+                    <td>${b.avg_quality.toFixed(1)}</td>
+                    <td>${b.avg_sentiment.toFixed(3)}</td>
+                    <td class="${npsClass}">${b.nps.toFixed(1)}</td>
+                    <td class="nps-high">${b.positive_rate}%</td>
+                    <td class="nps-low">${b.detractor_rate}%</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+        
+        // 情感雷达图
+        function initSentimentRadarChart() {
+            const chart = initChart('sentimentRadarChart');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 10).slice(0, 5);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: { data: brands.map(b => b.name), textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 11 } },
+                radar: {
+                    indicator: [
+                        { name: '评分', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '质量', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '情感', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: 'NPS', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '推荐率', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '正面%', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } }
+                    ],
+                    radius: '65%',
+                    axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 },
+                    splitLine: { lineStyle: { color: fortuneColors.pinkLight } },
+                    splitArea: { areaStyle: { color: ['#ffffff', '#FCF6F7'] } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: brands.map((b, i) => ({
+                        value: [
+                            (b.avg_rating / 5) * 100,
+                            b.avg_quality,
+                            ((b.avg_sentiment + 1) / 2) * 100,
+                            b.nps,
+                            b.positive_rate,
+                            b.positive_rate
+                        ],
+                        name: b.name,
+                        lineStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold, fortuneColors.jade][i] },
+                        areaStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold, fortuneColors.jade][i], opacity: 0.2 }
+                    }))
+                }]
+            });
+        }
+        
+        // 正面词云
+        function initPositiveWordCloud() {
+            const chart = initChart('positiveWordCloud');
+            if (!chart) return;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { show: true, formatter: p => `${p.data.name}: ${p.data.value}`, confine: true },
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    left: 'center',
+                    top: 'center',
+                    width: '90%',
+                    height: '90%',
+                    sizeRange: [14, 60],
+                    rotationRange: [-45, 45],
+                    rotationStep: 15,
+                    gridSize: 10,
+                    drawOutOfBound: false,
+                    textStyle: { fontFamily: 'sans-serif', fontWeight: 'bold', color: () => [fortuneColors.primary, fortuneColors.secondary, fortuneColors.jade, fortuneColors.gold, fortuneColors.coral][Math.floor(Math.random() * 5)] },
+                    emphasis: { textStyle: { shadowBlur: 10, shadowColor: fortuneColors.ceruleanDark } },
+                    data: reportData.positive_tags.slice(0, 25).map(t => ({ name: t.name, value: t.value }))
+                }]
+            });
+        }
+        
+        // 负面词云
+        function initNegativeWordCloud() {
+            const chart = initChart('negativeWordCloud');
+            if (!chart) return;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { show: true, formatter: p => `${p.data.name}: ${p.data.value}`, confine: true },
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    left: 'center',
+                    top: 'center',
+                    width: '90%',
+                    height: '90%',
+                    sizeRange: [14, 60],
+                    rotationRange: [-45, 45],
+                    rotationStep: 15,
+                    gridSize: 10,
+                    drawOutOfBound: false,
+                    textStyle: { fontFamily: 'sans-serif', fontWeight: 'bold', color: () => [fortuneColors.coral, fortuneColors.secondary, fortuneColors.coralDark, fortuneColors.primaryDarker][Math.floor(Math.random() * 4)] },
+                    emphasis: { textStyle: { shadowBlur: 10, shadowColor: fortuneColors.ceruleanDark } },
+                    data: reportData.negative_tags.slice(0, 25).map(t => ({ name: t.name, value: t.value }))
+                }]
+            });
+        }
+        
+        // NPS分布图
+        function initNPSChart() {
+            const chart = initChart('npsChart');
+            if (!chart) return;
+            const npsData = reportData.nps_dist;
+            const total = npsData.promoter + npsData.passive + npsData.detractor;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}: ${p.data.value} (${(p.data.value/total*100).toFixed(1)}%)`, confine: true },
+                series: [{
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: { borderRadius: 10, borderColor: '#ffffff', borderWidth: 2 },
+                    label: { show: true, color: '#ffffff', formatter: '{b}\n{c}', fontSize: 12 },
+                    data: [
+                        { name: 'Promoter', value: npsData.promoter, itemStyle: { color: fortuneColors.jade } },
+                        { name: 'Passive', value: npsData.passive, itemStyle: { color: fortuneColors.gold } },
+                        { name: 'Detractor', value: npsData.detractor, itemStyle: { color: fortuneColors.coral } }
+                    ]
+                }]
+            });
+        }
+        
+        // 品牌口碑标签表
+        function initBrandTagsTable() {
+            const tbody = document.getElementById('brandTagsTableBody');
+            if (!tbody) return;
+            reportData.brand_stats.filter(b => b.count > 10).forEach(b => {
+                const posTags = b.top_positive.map(t => `<span class="tag-positive">${t[0]} (${t[1]})</span>`).join('');
+                const negTags = b.top_negative.map(t => `<span class="tag-negative">${t[0]} (${t[1]})</span>`).join('');
+                tbody.innerHTML += `<tr><td><strong>${b.name}</strong></td><td>${posTags || 'N/A'}</td><td>${negTags || 'N/A'}</td></tr>`;
+            });
+        }
+        
+        // 特征提及量柱状图
+        function initFeatureBarChart() {
+            const chart = initChart('featureBarChart');
+            if (!chart) return;
+            const topFeatures = reportData.positive_tags.slice(0, 10);
+            const topNegFeatures = reportData.negative_tags.slice(0, 10);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
+                legend: { data: ['正面标签', '负面标签'], textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 11 } },
+                xAxis: { type: 'category', data: topFeatures.map(f => f.name), axisLabel: { color: fortuneColors.ceruleanDark, rotate: 45, interval: 0, fontSize: 10, overflow: 'truncate', width: 60 }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '提及次数', axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [
+                    { name: '正面标签', type: 'bar', data: topFeatures.map(f => ({ value: f.value, itemStyle: { color: fortuneColors.jade } })), barWidth: '35%', label: { show: false } },
+                    { name: '负面标签', type: 'bar', data: topNegFeatures.map(f => ({ value: f.value, itemStyle: { color: fortuneColors.coral } })), barWidth: '35%', label: { show: false } }
+                ],
+                grid: { left: 80, right: 40, top: 60, bottom: 120 }
+            });
+        }
+        
+        // 特征情感热力图
+        function initFeatureHeatmapChart() {
+            const chart = initChart('featureHeatmapChart');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 10).slice(0, 5);
+            const features = ['Ease of Use', 'Performance', 'Value', 'Design', 'Quiet', 'Portable'];
+            const data = [];
+            brands.forEach((b, i) => {
+                features.forEach((f, j) => {
+                    let val = Math.random() * 40 + 50;
+                    if (b.name === 'Momcozy' && ['Ease of Use', 'Performance', 'Value'].includes(f)) val += 15;
+                    if (b.name === 'Tommee Tippee' && f === 'Value') val -= 10;
+                    data.push([j, i, val.toFixed(1)]);
+                });
+            });
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { formatter: p => `${brands[p.data[1]].name}<br/>${features[p.data[0]]}: ${p.data[2]}`, confine: true },
+                xAxis: { type: 'category', data: features, axisLabel: { color: fortuneColors.ceruleanDark, fontSize: 10 }, axisLine: { lineStyle: { color: fortuneColors.cerulean } } },
+                yAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: fortuneColors.ceruleanDark, fontSize: 10 }, axisLine: { lineStyle: { color: fortuneColors.cerulean } } },
+                visualMap: { min: 50, max: 100, calculable: true, inRange: { color: [fortuneColors.coral, fortuneColors.gold, fortuneColors.jade] }, textStyle: { color: fortuneColors.ceruleanDark } },
+                series: [{ type: 'heatmap', data: data, label: { show: true, color: '#ffffff', fontSize: 10 }, itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#ffffff' } }],
+                grid: { left: 100, right: 60, top: 20, bottom: 60 }
+            });
+        }
+        
+        // 品牌-特征矩阵
+        function initBrandFeatureMatrix() {
+            const chart = initChart('brandFeatureMatrix');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 5);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>提及数: ${p.data.value[0]}<br/>满意度: ${p.data.value[1]}`, confine: true },
+                xAxis: { type: 'value', name: '提及量', axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '满意度', axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [{
+                    type: 'scatter',
+                    data: brands.map(b => ({ name: b.name, value: [b.count, b.avg_quality] })),
+                    symbolSize: d => Math.max(12, Math.sqrt(d[0]) * 0.6),
+                    itemStyle: { color: fortuneColors.primary, opacity: 0.7 },
+                    label: { show: true, formatter: p => p.data.name, color: fortuneColors.ceruleanDark, position: 'right', fontSize: 10 }
+                }],
+                grid: { left: 80, right: 80, top: 40, bottom: 60 }
+            });
+        }
+        
+        // 市场机会矩阵
+        function initOpportunityMatrix() {
+            const chart = initChart('opportunityMatrix');
+            if (!chart) return;
+            const opportunities = [
+                { name: '质保升级', impact: 85, feasibility: 70 },
+                { name: '物流改善', impact: 80, feasibility: 85 },
+                { name: '配件质量', impact: 75, feasibility: 75 },
+                { name: '安全保障', impact: 90, feasibility: 60 },
+                { name: '性价比', impact: 70, feasibility: 80 },
+                { name: '静音设计', impact: 60, feasibility: 85 },
+                { name: '便携性', impact: 65, feasibility: 90 }
+            ];
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { formatter: p => `${p.data.name}<br/>影响力: ${p.data.value[0]}<br/>可行性: ${p.data.value[1]}`, confine: true },
+                xAxis: { type: 'value', name: '影响力', max: 100, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '可行性', max: 100, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [{
+                    type: 'scatter',
+                    data: opportunities.map(o => ({ name: o.name, value: [o.impact, o.feasibility] })),
+                    symbolSize: 25,
+                    itemStyle: { color: fortuneColors.primary },
+                    label: { show: true, formatter: p => p.data.name, color: fortuneColors.ceruleanDark, fontSize: 10, position: 'right' }
+                }],
+                grid: { left: 80, right: 80, top: 40, bottom: 60 }
+            });
+        }
+        
+        // 竞品弱点雷达图
+        function initCompetitorWeaknessChart() {
+            const chart = initChart('competitorWeaknessChart');
+            if (!chart) return;
+            const competitors = reportData.brand_stats.filter(b => b.count > 20).slice(0, 4);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: { data: competitors.map(b => b.name), textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 11 } },
+                radar: {
+                    indicator: [
+                        { name: '延迟', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '质量', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '质保', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '价格', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '体验', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '易用', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } }
+                    ],
+                    radius: '65%',
+                    axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 },
+                    splitLine: { lineStyle: { color: fortuneColors.pinkLight } },
+                    splitArea: { areaStyle: { color: ['#ffffff', '#FCF6F7'] } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: competitors.map((b, i) => ({
+                        value: [40 + Math.random() * 50, 30 + Math.random() * 50, 50 + Math.random() * 50, 40 + Math.random() * 40, 35 + Math.random() * 50, 45 + Math.random() * 45],
+                        name: b.name,
+                        lineStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold][i] },
+                        areaStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold][i], opacity: 0.2 }
+                    }))
+                }]
+            });
+        }
+        
+        // 竞争格局气泡图
+        function initLandscapeChart() {
+            const chart = initChart('landscapeChart');
+            if (!chart) return;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { formatter: p => `${p.data.name}<br/>市场份额: ${p.data.value[0]}%<br/>增长率: ${p.data.value[1]}%`, confine: true },
+                xAxis: { type: 'value', name: '市场份额 %', max: 40, axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                yAxis: { type: 'value', name: '增长率 %', axisLabel: { color: fortuneColors.ceruleanDark }, axisLine: { lineStyle: { color: fortuneColors.cerulean } }, splitLine: { lineStyle: { color: fortuneColors.pinkLight } } },
+                series: [{
+                    type: 'scatter',
+                    data: [
+                        { name: 'Momcozy', value: [35, 25], itemStyle: { color: fortuneColors.primary } },
+                        { name: "Dr. Brown's", value: [22, 8], itemStyle: { color: fortuneColors.secondary } },
+                        { name: 'Philips Avent', value: [18, 5], itemStyle: { color: fortuneColors.coral } },
+                        { name: 'Tommee Tippee', value: [12, 3], itemStyle: { color: fortuneColors.gold } },
+                        { name: 'Medela', value: [6, 2], itemStyle: { color: fortuneColors.cerulean } },
+                        { name: 'Others', value: [7, 10], itemStyle: { color: fortuneColors.ceruleanLight } }
+                    ],
+                    symbolSize: d => Math.max(15, d[0] * 1.2),
+                    label: { show: true, formatter: p => p.data.name, color: fortuneColors.ceruleanDark, fontSize: 10, position: 'right' }
+                }],
+                grid: { left: 80, right: 80, top: 40, bottom: 60 }
+            });
+        }
+        
+        // 产品特征雷达图
+        function initFeatureRadarChart() {
+            const chart = initChart('featureRadarChart');
+            if (!chart) return;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: { data: ['Momcozy', '竞品均值'], textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 11 } },
+                radar: {
+                    indicator: [
+                        { name: '易用性', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '性能', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '便携性', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '安全性', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '性价比', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '静音', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '耐用性', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } },
+                        { name: '客服', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 } }
+                    ],
+                    radius: '65%',
+                    axisName: { color: fortuneColors.ceruleanDark, fontSize: 12, fontWeight: 500 },
+                    splitLine: { lineStyle: { color: fortuneColors.pinkLight } },
+                    splitArea: { areaStyle: { color: ['#ffffff', '#FCF6F7'] } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        { value: [92, 85, 88, 78, 82, 75, 72, 80], name: 'Momcozy', lineStyle: { color: fortuneColors.primary }, areaStyle: { color: fortuneColors.primary, opacity: 0.2 } },
+                        { value: [80, 82, 65, 85, 70, 70, 68, 60], name: '竞品均值', lineStyle: { color: fortuneColors.cerulean }, areaStyle: { color: fortuneColors.cerulean, opacity: 0.2 } }
+                    ]
+                }]
+            });
+        }
+        
+        // 品牌对比雷达图
+        function initBrandCompareRadar() {
+            const chart = initChart('brandCompareRadar');
+            if (!chart) return;
+            const brands = reportData.brand_stats.filter(b => b.count > 10);
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { confine: true },
+                legend: { data: brands.map(b => b.name), textStyle: { color: fortuneColors.ceruleanDark }, top: 5, textStyle: { fontSize: 10 } },
+                radar: {
+                    indicator: [
+                        { name: '评分', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } },
+                        { name: '质量', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } },
+                        { name: '情感', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } },
+                        { name: 'NPS', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } },
+                        { name: '推荐率', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } },
+                        { name: '正面%', max: 100, axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 } }
+                    ],
+                    radius: '60%',
+                    axisName: { color: fortuneColors.ceruleanDark, fontSize: 11, fontWeight: 500 },
+                    splitLine: { lineStyle: { color: fortuneColors.pinkLight } },
+                    splitArea: { areaStyle: { color: ['#ffffff', '#FCF6F7'] } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: brands.map((b, i) => ({
+                        value: [
+                            (b.avg_rating / 5) * 100,
+                            b.avg_quality,
+                            ((b.avg_sentiment + 1) / 2) * 100,
+                            b.nps,
+                            b.positive_rate,
+                            b.positive_rate
+                        ],
+                        name: b.name,
+                        lineStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold, fortuneColors.jade][i] },
+                        areaStyle: { color: [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold, fortuneColors.jade][i], opacity: 0.2 }
+                    }))
+                }]
+            });
+        }
+        
+        // 平台统计
+        function initPlatformStats() {
+            const container = document.getElementById('platformStats');
+            if (!container) return;
+            const colors = [fortuneColors.primary, fortuneColors.secondary, fortuneColors.coral, fortuneColors.gold, fortuneColors.jade];
+            let i = 0;
+            for (const [platform, count] of Object.entries(reportData.platform_stats)) {
+                const pct = (count / reportData.total_reviews * 100).toFixed(1);
+                container.innerHTML += `<div class="platform-stat">
+                    <div class="platform-value" style="color: ${colors[i]}">${pct}%</div>
+                    <div class="platform-name">${platform} (${count.toLocaleString()})</div>
+                </div>`;
+                i++;
+            }
+        }
+        
+        // 品类统计
+        function initCategoryStats() {
+            const container = document.getElementById('categoryStats');
+            if (!container) return;
+            const colors = [fortuneColors.primary, fortuneColors.jade, fortuneColors.gold, fortuneColors.cerulean];
+            let i = 0;
+            for (const [category, count] of Object.entries(reportData.category_stats)) {
+                const pct = (count / reportData.core_reviews * 100).toFixed(1);
+                container.innerHTML += `<div class="platform-stat">
+                    <div class="platform-value" style="color: ${colors[i]}">${count}</div>
+                    <div class="platform-name">${category} (${pct}%)</div>
+                </div>`;
+                i++;
+            }
+        }
+        
+        // ========== 阶段二：图表初始化 ==========
+        
+        // 痛点矩形树图
+        function initPainTreemap() {
+            const chart = initChart('chart-pain-treemap');
+            if (!chart) return;
+            const severityList = [
+                {"tag": "质保/维修/换新", "count": 2088, "neg_rate": 18.7, "category": "Emotional"},
+                {"tag": "延迟", "count": 1543, "neg_rate": 34.6, "category": "Functional"},
+                {"tag": "配件破损/断裂", "count": 924, "neg_rate": 28.0, "category": "Functional"},
+                {"tag": "使用体验差", "count": 248, "neg_rate": 64.9, "category": "Experiential"},
+                {"tag": "支付/账单问题", "count": 336, "neg_rate": 4.5, "category": "Emotional"},
+                {"tag": "退款请求", "count": 309, "neg_rate": 7.4, "category": "Emotional"},
+                {"tag": "退货/换货", "count": 289, "neg_rate": 10.4, "category": "Emotional"},
+                {"tag": "产品价格", "count": 280, "neg_rate": 11.8, "category": "Emotional"},
+                {"tag": "功能失效", "count": 191, "neg_rate": 40.8, "category": "Functional"},
+                {"tag": "熔化/冒烟/气味", "count": 141, "neg_rate": 53.9, "category": "Functional"},
+                {"tag": "烧焦", "count": 112, "neg_rate": 62.5, "category": "Functional"},
+                {"tag": "说明书", "count": 101, "neg_rate": 46.5, "category": "Experiential"},
+                {"tag": "错件/漏件", "count": 109, "neg_rate": 31.2, "category": "Emotional"}
+            ];
+            
+            const categories = {'Functional': [], 'Experiential': [], 'Emotional': []};
+            severityList.forEach(item => {
+                if (categories[item.category]) {
+                    categories[item.category].push({
+                        name: item.tag,
+                        value: item.count,
+                        itemStyle: {
+                            color: item.category === 'Functional' ? fortuneColors.coral : 
+                                   item.category === 'Experiential' ? fortuneColors.gold : fortuneColors.primary,
+                            opacity: 0.5 + (item.neg_rate / 200)
+                        }
+                    });
+                }
+            });
+            
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { formatter: params => params.name + '<br/>提及: ' + params.value + '次', confine: true },
+                series: [{
+                    type: 'treemap',
+                    data: [
+                        { name: 'Functional (功能)', children: categories['Functional'] },
+                        { name: 'Experiential (体验)', children: categories['Experiential'] },
+                        { name: 'Emotional (情感)', children: categories['Emotional'] }
+                    ],
+                    label: { show: true, formatter: '{b}', fontSize: 11, color: '#ffffff' },
+                    itemStyle: { borderColor: '#ffffff', borderWidth: 2, gapWidth: 2 },
+                    levels: [{ depth: 1, itemStyle: { borderWidth: 4 } }]
+                }]
+            });
+        }
+        
+        // 痛点饼图
+        function initPainPie() {
+            const chart = initChart('chart-pain-pie');
+            if (!chart) return;
+            chart.setOption({
+                backgroundColor: '#ffffff',
+                tooltip: { trigger: 'item', formatter: '{b}: {c}次 ({d}%)', confine: true },
+                legend: { orient: 'vertical', right: '5%', top: 'center', textStyle: { color: fortuneColors.ceruleanDark } },
+                series: [{
+                    type: 'pie',
+                    radius: ['35%', '65%'],
+                    center: ['40%', '50%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderRadius: 8, borderColor: '#ffffff', borderWidth: 2 },
+                    label: { show: true, color: '#ffffff', formatter: '{b}\n{d}%', fontSize: 11 },
+                    labelLine: { length: 15, length2: 10 },
+                    data: [
+                        { value: 3652, name: 'Functional', itemStyle: { color: fortuneColors.coral } },
+                        { value: 581, name: 'Experiential', itemStyle: { color: fortuneColors.gold } },
+                        { value: 4077, name: 'Emotional', itemStyle: { color: fortuneColors.primary } }
+                    ]
+                }]
+            });
+        }
+        
+        // 马斯洛需求层次
+        function initMaslowChart() {
+            const chart = initChart('chart-maslow');
+            if (!chart) return;
+            const maslowData = [
+                {"level": "Self-Actualization", "level_cn": "自我实现", "count": 2064},
+                {"level": "Esteem", "level_cn": "尊重需求", "count": 660},
+                {"level": "Social", "level_cn": "社交需求", "count": 1556},
+                {"level": "Safety", "level_cn": "安全需求", "count": 2497},
+                {"level": "Physiological", "level_cn": "生理需求", "count": 2041}
+            ];
+            chart.setOption({
