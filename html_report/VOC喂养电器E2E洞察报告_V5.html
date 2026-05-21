@@ -1293,8 +1293,7 @@
             </div>
             
             <div class="chart-grid">
-                <div class="chart-container"><div class="chart-title">SKU效率对比（万美元/SKU）</div><div id="chart-sku-efficiency-compare" class="chart"></div></div>
-                <div class="chart-container"><div class="chart-title">品类Proxy NPS对比</div><div id="chart-category-nps" class="chart"></div></div>
+                <div class="chart-container"><div class="chart-title">品类绩效仪表盘（SKU效率 + Proxy NPS）</div><div id="chart-sku-efficiency-compare" class="chart"></div></div>
             </div>
             
         </section>
@@ -5950,7 +5949,7 @@ logDebug('脚本开始解析', 'info');
                 rotationStep: 15,
                 gridSize: 10,
                 drawOutOfBound: false,
-                textStyle: {fontFamily: 'sans-serif', fontWeight: 'bold', color: function() { return [fortuneColors.primary, fortuneColors.secondary, fortuneColors.jade, fortuneColors.gold, fortuneColors.coral][Math.floor(Math.random() * 5)]; }},
+                textStyle: {fontFamily: 'sans-serif', fontWeight: 'bold', color: function() { var colors = [fortuneColors.primary, fortuneColors.coral, fortuneColors.jade, fortuneColors.gold, fortuneColors.ceruleanLight]; return colors[arguments[0] ? arguments[0].dataIndex % colors.length : 0]; }},
                 data: reportData.positive_tags.slice(0, 25).map(function(t) { return {name: t.name, value: t.value}; })
             }]
         });
@@ -5974,7 +5973,7 @@ logDebug('脚本开始解析', 'info');
                 rotationStep: 15,
                 gridSize: 10,
                 drawOutOfBound: false,
-                textStyle: {fontFamily: 'sans-serif', fontWeight: 'bold', color: function() { return [fortuneColors.coral, fortuneColors.secondary, fortuneColors.coralDark, fortuneColors.primaryDarker][Math.floor(Math.random() * 4)]; }},
+                textStyle: {fontFamily: 'sans-serif', fontWeight: 'bold', color: function() { var colors = [fortuneColors.coral, fortuneColors.coralDark, fortuneColors.primary, fortuneColors.primaryDark]; return colors[arguments[0] ? arguments[0].dataIndex % colors.length : 0]; }},
                 data: reportData.negative_tags.slice(0, 25).map(function(t) { return {name: t.name, value: t.value}; })
             }]
         });
@@ -6298,30 +6297,6 @@ logDebug('脚本开始解析', 'info');
                 label: {show: true, formatter: '{b}', fontSize: 11, color: '#ffffff'},
                 itemStyle: {borderColor: '#ffffff', borderWidth: 2, gapWidth: 2},
                 levels: [{depth: 1, itemStyle: {borderWidth: 4}}]
-            }]
-        });
-    }
-
-    function initPainPie() {
-        var chart = initChart('chart-pain-pie');
-        if (!chart) return;
-        chart.setOption({
-            backgroundColor: '#ffffff',
-            tooltip: {trigger: 'item', formatter: '{b}: {c}次 ({d}%)', confine: true},
-            legend: {orient: 'vertical', right: '5%', top: 'center', textStyle: {color: fortuneColors.ceruleanDark}},
-            series: [{
-                type: 'pie',
-                radius: ['35%', '65%'],
-                center: ['40%', '50%'],
-                avoidLabelOverlap: true,
-                itemStyle: {borderRadius: 8, borderColor: '#ffffff', borderWidth: 2},
-                label: {show: true, color: '#ffffff', formatter: '{b}\n{d}%', fontSize: 11},
-                labelLine: {length: 15, length2: 10},
-                data: [
-                    {value: 3652, name: 'Functional', itemStyle: {color: fortuneColors.coral}},
-                    {value: 581, name: 'Experiential', itemStyle: {color: fortuneColors.gold}},
-                    {value: 4077, name: 'Emotional', itemStyle: {color: fortuneColors.primary}}
-                ]
             }]
         });
     }
@@ -6715,7 +6690,7 @@ logDebug('脚本开始解析', 'info');
                 {
                     name: '2025Q1',
                     type: 'scatter',
-                    color: '#9AAFC4',
+                    color: '#6A89AF',
                     symbolSize: function(data) { return Math.max(15, Math.sqrt(data[2]) * 2.5); },
                     label: { show: true, formatter: function(p) { return p.name; }, position: 'top', fontSize: 10, color: '#424242' },
                     labelLayout: { hideOverlap: true },
@@ -7920,7 +7895,7 @@ function initSocialProductRadarChart() {
                 grid: { left: '15%', right: '5%', top: '5%', bottom: '15%' },
                 xAxis: { type: 'category', data: ['消毒器', '暖奶器', '温奶器', '便携', '静音', '智能', '速热', '车载'], axisLabel: { rotate: 30, fontSize: 11 } },
                 yAxis: { type: 'category', data: ['核心词', '长尾词', '场景词'] },
-                visualMap: { min: 0, max: 100, calculable: true, orient: 'horizontal', left: 'center', bottom: '0%', inRange: { color: ['#e8f5e9', '#66bb6a', '#43a047', '#388e3c'] } },
+                visualMap: { min: 0, max: 100, calculable: true, orient: 'horizontal', left: 'center', bottom: '0%', inRange: { color: ['#FCF6F7', '#F37969', '#D75B70', '#A7293D'] } },
                 series: [{
                     name: '关键词热度', type: 'heatmap',
                     data: [
@@ -8547,34 +8522,6 @@ function initSocialProductRadarChart() {
         });
     }
 
-    // Chart 4: ROAS Heatmap
-    function initROASHeatmapChart() {
-        var chart = initChart('chart-roas-heatmap');
-        if (!chart) return;
-        var countries = ['US', 'UK', 'FR'];
-        var categories = ['整体', '消毒器', '暖奶器'];
-        var data = [
-            [0, 0, 1.60], [0, 1, 1.74], [0, 2, 1.16],
-            [1, 0, 1.34], [1, 1, 1.66], [1, 2, 0.95],
-            [2, 0, 0.98], [2, 1, 1.05], [2, 2, 0.95]
-        ];
-        chart.setOption({
-            backgroundColor: '#ffffff',
-            tooltip: { confine: true, formatter: function(p) { return countries[p.data[1]] + ' - ' + categories[p.data[0]] + '<br/>ROAS: ' + p.data[2]; } },
-            grid: { left: 80, right: 40, top: 40, bottom: 80 },
-            xAxis: { type: 'category', data: categories, axisLabel: { fontSize: 11, color: '#424242' }, axisLine: { lineStyle: { color: '#C1CEDE' } } },
-            yAxis: { type: 'category', data: countries, axisLabel: { fontSize: 11, color: '#424242' }, axisLine: { lineStyle: { color: '#C1CEDE' } } },
-            visualMap: { min: 0.8, max: 2.0, calculable: true, orient: 'horizontal', left: 'center', bottom: 5, inRange: { color: ['#D04E59', '#FCF6F7', '#82AE8E'] }, textStyle: { color: '#6A89AF', fontSize: 10 } },
-            series: [{
-                type: 'heatmap',
-                data: data,
-                label: { show: true, formatter: function(p) { return p.data[2].toFixed(2); }, color: '#32465E', fontSize: 13, fontWeight: 600 },
-                itemStyle: { borderColor: '#fff', borderWidth: 3, borderRadius: 4 },
-                emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.3)' } }
-            }]
-        });
-    }
-
     // Chart 5: AIPL Positioning
     function initAIPLPositionChart() {
         var chart = initChart('chart-aipl-position');
@@ -8683,39 +8630,7 @@ function initSocialProductRadarChart() {
 
     // ========== V4新增：战略洞察模块图表 ==========
     
-    // 1. 五维交叉分析雷达图
-    function initFiveDimensionRadarChart() {
-        var chart = initChart('chart-five-dimension-radar');
-        if (!chart) return;
-        chart.setOption({
-            backgroundColor: '#ffffff',
-            tooltip: { confine: true },
-            legend: { top: 5, data: ['喂养电器', '婴儿监控', '推车', '高脚椅'], textStyle: { fontSize: 11 } },
-            radar: {
-                indicator: [
-                    { name: '市场吸引力', max: 5 },
-                    { name: '竞争格局', max: 5 },
-                    { name: '资源协同', max: 5 },
-                    { name: '战略契合', max: 5 },
-                    { name: '风险可控', max: 5 }
-                ],
-                radius: '65%',
-                name: { textStyle: { color: '#32465E', fontSize: 11 } },
-                splitLine: { lineStyle: { color: '#E8EAED' } },
-                splitArea: { areaStyle: { color: ['#fff', '#F8F9FB', '#fff', '#F8F9FB'] } },
-                axisLine: { lineStyle: { color: '#E8EAED' } }
-            },
-            series: [{
-                type: 'radar',
-                data: [
-                    { value: [4.5, 3.5, 4.5, 4.5, 3.5], name: '喂养电器', lineStyle: { color: '#82AE8E', width: 3 }, areaStyle: { color: 'rgba(130,174,142,0.3)' }, itemStyle: { color: '#82AE8E' } },
-                    { value: [3.0, 2.0, 2.0, 3.0, 2.5], name: '婴儿监控', lineStyle: { color: '#6A89AF', width: 2 }, areaStyle: { color: 'rgba(106,137,175,0.15)' }, itemStyle: { color: '#6A89AF' } },
-                    { value: [3.0, 2.5, 3.0, 2.5, 3.0], name: '推车', lineStyle: { color: '#D0B671', width: 2 }, areaStyle: { color: 'rgba(208,182,113,0.15)' }, itemStyle: { color: '#D0B671' } },
-                    { value: [2.5, 3.0, 3.0, 3.0, 4.0], name: '高脚椅', lineStyle: { color: '#C1CEDE', width: 2 }, areaStyle: { color: 'rgba(193,206,222,0.15)' }, itemStyle: { color: '#C1CEDE' } }
-                ]
-            }]
-        });
-    }
+    // 1. 五维交叉分析雷达图（已迁移至V5版本，见后续V5新增图表）
 
     // 2. 候选品类五维评分对比（柱状图）
     function initCategoryScreeningChart() {
@@ -8873,6 +8788,7 @@ function initSocialProductRadarChart() {
         chart.setOption({
             backgroundColor: '#ffffff',
             tooltip: {confine: true},
+            legend: {bottom: 10, data: ['喂养电器', '婴儿监控', '推车', '高脚椅'], textStyle: {fontSize: 11, color: fortuneColors.ceruleanDark}},
             radar: {
                 indicator: [
                     {name: '市场吸引力', max: 100},
@@ -8887,12 +8803,12 @@ function initSocialProductRadarChart() {
             },
             series: [{
                 type: 'radar',
-                data: [{
-                    value: [92, 78, 88, 95, 72],
-                    name: '喂养电器',
-                    lineStyle: {color: fortuneColors.primary},
-                    areaStyle: {color: fortuneColors.primary, opacity: 0.3}
-                }]
+                data: [
+                    {value: [92, 78, 88, 95, 72], name: '喂养电器', lineStyle: {color: fortuneColors.primary, width: 3}, areaStyle: {color: fortuneColors.primary, opacity: 0.3}, itemStyle: {color: fortuneColors.primary}},
+                    {value: [60, 40, 40, 60, 50], name: '婴儿监控', lineStyle: {color: fortuneColors.ceruleanLight, width: 2}, areaStyle: {color: fortuneColors.ceruleanLight, opacity: 0.15}, itemStyle: {color: fortuneColors.ceruleanLight}},
+                    {value: [60, 50, 60, 50, 60], name: '推车', lineStyle: {color: fortuneColors.gold, width: 2}, areaStyle: {color: fortuneColors.gold, opacity: 0.15}, itemStyle: {color: fortuneColors.gold}},
+                    {value: [50, 60, 60, 60, 80], name: '高脚椅', lineStyle: {color: fortuneColors.cerulean, width: 2}, areaStyle: {color: fortuneColors.cerulean, opacity: 0.15}, itemStyle: {color: fortuneColors.cerulean}}
+                ]
             }]
         });
     }
@@ -8903,42 +8819,21 @@ function initSocialProductRadarChart() {
         chart.setOption({
             backgroundColor: '#ffffff',
             tooltip: {trigger: 'axis', confine: true},
+            legend: {bottom: 10, data: ['SKU效率(万/SKU)', 'Proxy NPS'], textStyle: {fontSize: 11, color: fortuneColors.ceruleanDark}},
             xAxis: {type: 'category', data: ['消毒器', '暖奶器', '吸奶器'], axisLabel: {color: fortuneColors.ceruleanDark}, axisLine: {lineStyle: {color: fortuneColors.cerulean}}},
-            yAxis: {type: 'value', name: '万/SKU', axisLabel: {color: fortuneColors.ceruleanDark}, axisLine: {lineStyle: {color: fortuneColors.cerulean}}, splitLine: {lineStyle: {color: fortuneColors.pinkLight}}},
-            series: [{
-                type: 'bar',
-                data: [
-                    {value: 1543.8, itemStyle: {color: fortuneColors.jade}},
-                    {value: 340.4, itemStyle: {color: fortuneColors.gold}},
-                    {value: 158.8, itemStyle: {color: fortuneColors.primary}}
-                ],
-                barWidth: '50%',
-                label: {show: true, position: 'top', formatter: '{c}万', color: fortuneColors.ceruleanDark}
-            }],
-            grid: {left: 80, right: 40, top: 60, bottom: 60}
+            yAxis: [
+                {type: 'value', name: '万/SKU', axisLabel: {color: fortuneColors.ceruleanDark}, axisLine: {lineStyle: {color: fortuneColors.cerulean}}, splitLine: {lineStyle: {color: fortuneColors.pinkLight}}},
+                {type: 'value', name: 'Proxy NPS', max: 100, axisLabel: {color: fortuneColors.coral}, axisLine: {lineStyle: {color: fortuneColors.coral}}}
+            ],
+            series: [
+                {name: 'SKU效率(万/SKU)', type: 'bar', data: [{value: 1543.8, itemStyle: {color: fortuneColors.jade}}, {value: 340.4, itemStyle: {color: fortuneColors.gold}}, {value: 158.8, itemStyle: {color: fortuneColors.primary}}], barWidth: '45%', label: {show: true, position: 'top', formatter: '{c}万', color: fortuneColors.ceruleanDark}},
+                {name: 'Proxy NPS', type: 'line', yAxisIndex: 1, data: [{value: 65.3, name: '消毒器'}, {value: 41.9, name: '暖奶器'}, null], lineStyle: {color: fortuneColors.coral, width: 3}, itemStyle: {color: fortuneColors.coral}, symbol: 'diamond', symbolSize: 18, label: {show: true, position: 'top', formatter: 'NPS {c}', color: fortuneColors.coral, fontSize: 12, fontWeight: 600}}
+            ],
+            grid: {left: 80, right: 80, top: 60, bottom: 60}
         });
     }
-    
-    function initCategoryNPSChart() {
-        var chart = initChart('chart-category-nps');
-        if (!chart) return;
-        chart.setOption({
-            backgroundColor: '#ffffff',
-            tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}, confine: true},
-            xAxis: {type: 'category', data: ['消毒器', '暖奶器'], axisLabel: {color: fortuneColors.ceruleanDark}, axisLine: {lineStyle: {color: fortuneColors.cerulean}}},
-            yAxis: {type: 'value', name: 'NPS', max: 100, axisLabel: {color: fortuneColors.ceruleanDark}, axisLine: {lineStyle: {color: fortuneColors.cerulean}}, splitLine: {lineStyle: {color: fortuneColors.pinkLight}}},
-            series: [{
-                type: 'bar',
-                data: [
-                    {value: 65.3, itemStyle: {color: fortuneColors.jade}},
-                    {value: 41.9, itemStyle: {color: fortuneColors.gold}}
-                ],
-                barWidth: '40%',
-                label: {show: true, position: 'top', formatter: '{c}', color: fortuneColors.ceruleanDark}
-            }],
-            grid: {left: 80, right: 40, top: 60, bottom: 60}
-        });
-    }
+
+    // initCategoryNPSChart removed — NPS data merged into chart-sku-efficiency-compare above
     
     function initIndustryPainChart() {
         var chart = initChart('chart-industry-pain');
@@ -9062,7 +8957,6 @@ function initAllCharts() {
         safeInit('BrandCompareRadar', initBrandCompareRadar);
         
         safeInit('PainTreemap', initPainTreemap);
-        safeInit('PainPie', initPainPie);
         safeInit('Maslow', initMaslowChart);
         safeInit('Scenario', initScenarioChart);
         safeInit('Contradiction', initContradictionChart);
@@ -9124,7 +9018,6 @@ function initAllCharts() {
         safeInit('P1L1P2Funnel', initP1L1P2FunnelChart);
         safeInit('WarmerTempRoot', initWarmerTempRootChart);
         safeInit('SterilizerPainCompare', initSterilizerPainCompareChart);
-        safeInit('ROASHeatmap', initROASHeatmapChart);
         safeInit('AIPLPosition', initAIPLPositionChart);
         safeInit('DualEngineRadar', initDualEngineRadarChart);
         safeInit('CrossSellCompare', initCrossSellCompareChart);
@@ -9133,7 +9026,6 @@ function initAllCharts() {
         // V5新增：前置洞察模块图表
         safeInit('FiveDimensionRadar', initFiveDimensionRadarChart);
         safeInit('SkuEfficiencyCompare', initSkuEfficiencyCompareChart);
-        safeInit('CategoryNPS', initCategoryNPSChart);
         safeInit('IndustryPain', initIndustryPainChart);
         safeInit('ROASHeatmapNew', initROASHeatmapNewChart);
         safeInit('AIPLSevenNodes', initAIPLSevenNodesChart);
