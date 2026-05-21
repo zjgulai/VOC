@@ -68,76 +68,100 @@
         }
         
         /* 导航栏 */
-        .nav-bar {
+         .nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 0 20px;
             z-index: 1000;
-            border-bottom: 3px solid var(--fr-500);
+            border-bottom: 2px solid var(--fr-300);
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
-            gap: 12px;
+            align-items: center;
+            box-shadow: 0 1px 8px rgba(86,21,31,0.07);
+            height: 44px;
+            gap: 0;
         }
         
         .nav-title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--fr-700);
-            padding-top: 4px;
+            color: var(--fr-800);
             white-space: nowrap;
+            padding-right: 16px;
+            margin-right: 4px;
+            border-right: 2px solid var(--fr-300);
+            letter-spacing: 0.02em;
         }
         
         .nav-links {
             display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
+            gap: 0;
+            flex-wrap: nowrap;
             align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            flex: 1;
+            padding: 0 8px;
         }
+        .nav-links::-webkit-scrollbar { display: none; }
         
         .nav-link {
-            color: var(--ce-700);
+            color: var(--fr-800);
             text-decoration: none;
-            padding: 3px 8px;
+            padding: 4px 9px;
             border-radius: 4px;
-            font-size: 11px;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            font-size: 12px;
+            transition: background 0.2s, color 0.2s;
+            border: none;
             white-space: nowrap;
+            opacity: 0.72;
         }
         
-        .nav-link:hover {
-            background: rgba(215,91,112,0.1);
-            color: var(--fr-700);
-            border-color: var(--fr-300);
+        .nav-link:hover, .nav-link.active {
+            background: rgba(215,91,112,0.12);
+            color: var(--fr-600);
+            opacity: 1;
         }
         
         .nav-divider {
             width: 1px;
-            height: 18px;
-            background: var(--mp-300);
-            margin: 0 8px;
+            height: 16px;
+            background: var(--fr-300);
+            margin: 0 6px;
+            flex-shrink: 0;
         }
         
-        /* 阶段标题 */
+        /* 分组标签 */
         .phase-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--fr-600);
-            padding: 2px 8px;
-            background: rgba(215,91,112,0.1);
-            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--fr-500);
+            padding: 2px 7px;
+            background: rgba(215,91,112,0.08);
+            border-radius: 3px;
             white-space: nowrap;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+            margin: 0 2px 0 6px;
+        }
+
+        .nav-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .nav-group + .nav-group {
+            margin-left: 4px;
         }
         
         /* 报告头部 */
         .report-header {
-            padding: 80px 0 40px;
+            padding: 64px 0 0;
             text-align: center;
         }
         
@@ -814,7 +838,7 @@
             justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
-            margin: 25px 0;
+            margin: 20px 0 0;
             padding: 16px 20px;
             background: linear-gradient(135deg, rgba(215,91,112,0.08), rgba(208,182,113,0.08));
             border-radius: 12px;
@@ -1174,7 +1198,7 @@
                 <div class="flow-step-item"><div class="flow-step-num final">11</div><div class="flow-step-label">素材交付</div></div>
             </div>
             
-            <div class="key-metrics">
+            <div class="key-metrics" style="display:none;">
             </div>
         </header>
 

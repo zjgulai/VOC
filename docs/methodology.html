@@ -20,18 +20,20 @@
             background: var(--fr-50); color: var(--fr-900); line-height: 1.6;
         }
         .nav-bar {
-            background: #ffffff; border-bottom: 3px solid var(--fr-500);
-            padding: 16px 30px; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--fr-300);
+            padding: 0 24px; display: flex; align-items: center;
+            box-shadow: 0 1px 8px rgba(86,21,31,0.07);
+            height: 44px; position: sticky; top: 0; z-index: 100;
         }
-        .nav-title { font-size: 18px; font-weight: 700; color: var(--fr-700); text-decoration: none; }
-        .nav-links { display: flex; gap: 6px; }
+        .nav-title { font-size: 13px; font-weight: 700; color: var(--fr-800); text-decoration: none; white-space: nowrap; padding-right: 16px; margin-right: 4px; border-right: 2px solid var(--fr-300); letter-spacing: 0.02em; }
+        .nav-links { display: flex; gap: 0; align-items: center; }
         .nav-link {
-            color: var(--ce-700); text-decoration: none; padding: 8px 16px; border-radius: 6px;
-            font-size: 13px; transition: all 0.3s; border: 1px solid transparent;
+            color: var(--fr-800); text-decoration: none; padding: 4px 12px; border-radius: 4px;
+            font-size: 12px; transition: background 0.2s, color 0.2s; border: none; white-space: nowrap; opacity: 0.7;
         }
-        .nav-link:hover { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); }
-        .nav-link.active { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); font-weight: 600; }
+        .nav-link:hover { background: rgba(215,91,112,0.12); color: var(--fr-600); opacity: 1; }
+        .nav-link.active { background: rgba(215,91,112,0.12); color: var(--fr-600); opacity: 1; font-weight: 600; }
 
         .page-hero {
             padding: 60px 20px 30px; text-align: center; max-width: 900px; margin: 0 auto;
@@ -137,7 +139,7 @@
         <a href="product.html" class="nav-link">产品与定义</a>
         <a href="execution.html" class="nav-link">落地与执行</a>
         <a href="methodology.html" class="nav-link active">方法论</a>
-        <a href="reports/e2e-v5.html" class="nav-link" style="border-color: var(--fr-300); color: var(--fr-600);">E2E完整报告</a>
+        <a href="reports/e2e-v5.html" class="nav-link">E2E完整报告</a>
     </div>
 </nav>
 
