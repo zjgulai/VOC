@@ -222,3 +222,5 @@
 12. **E2E报告V4修正 - 已完成**: 首页8步横向流程图、删除数据来源副标题、数据口径标注、筛选逻辑改为四大协同维度
 13. **E2E报告V5战略整合 - 已完成**: 593KB/9680行/34section。综合洞察报告作为前置"市场洞察"模块整合，流程图8步→11步，新增7张图表（五维雷达/SKU效率/NPS对比/ROAS热力图/AIPL七节点/竞争矩阵/痛点饼图），导航栏新增前置洞察10锚点
 14. **导航栏全站优化 - 已完成**（2026-05-21）：V5主报告 + docs/ 5页面导航栏统一对齐。旧：三行flex-wrap + 灰蓝链接 + static定位；新：单行44px sticky + 竖线分隔brand + 深色链接opacity 0.7。提交 `0258972 fix: 导航栏对齐V5样式`，已推送 GitHub Pages 生效。
+15. **项目文档更新 - 已完成**（2026-05-21）：更新根 AGENTS.md（网站URL/GitHub Pages/目录结构/nav规范/git状态修正）、html_report/AGENTS.md（nav结构说明）、MEMORY.md 纳入git版本控制。提交 `056e239 docs: 项目文档更新`。
+16. **Codex Review - 已完成**（2026-05-21）：审查 `e5c40e9..056e239` 9文件，CSS括号匹配、nav链接一致性、chart div/safeInit无回归，零 actionable findings。
