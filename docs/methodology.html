@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作流方法论 · Momcozy E2E洞察报告库</title>
+    <style>
+        :root {
+            --fr-50: #FCF6F7; --fr-100: #FCF6F7; --fr-200: #EFBEC6; --fr-300: #E08090;
+            --fr-400: #DA687A; --fr-500: #D75B70; --fr-600: #CD374F; --fr-700: #A7293D;
+            --fr-800: #801F2F; --fr-900: #56151F; --ci-500: #D04E59; --ci-600: #C03340;
+            --ci-700: #992833; --mp-200: #FCF6F7; --mp-300: #F6DFE2; --ec-500: #F2EBC8;
+            --co-500: #F37969; --co-600: #EF4D38; --rg-500: #D0B671; --jg-500: #82AE8E;
+            --jg-600: #669C74; --jg-700: #517D5D; --ce-100: #F8F9FB; --ce-500: #C1CEDE;
+            --ce-700: #6A89AF; --ce-900: #32465E;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--fr-50); color: var(--fr-900); line-height: 1.6;
+        }
+        .nav-bar {
+            background: #ffffff; border-bottom: 3px solid var(--fr-500);
+            padding: 16px 30px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+        }
+        .nav-title { font-size: 18px; font-weight: 700; color: var(--fr-700); text-decoration: none; }
+        .nav-links { display: flex; gap: 6px; }
+        .nav-link {
+            color: var(--ce-700); text-decoration: none; padding: 8px 16px; border-radius: 6px;
+            font-size: 13px; transition: all 0.3s; border: 1px solid transparent;
+        }
+        .nav-link:hover { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); }
+        .nav-link.active { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); font-weight: 600; }
+
+        .page-hero {
+            padding: 60px 20px 30px; text-align: center; max-width: 900px; margin: 0 auto;
+        }
+        .page-hero h1 {
+            font-size: 36px; font-weight: 700;
+            background: linear-gradient(135deg, var(--fr-600), var(--fr-800));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 12px;
+        }
+        .page-hero p { font-size: 15px; color: var(--ci-700); line-height: 1.8; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+        .flow-overview {
+            background: #ffffff; border: 1px solid var(--mp-300); border-radius: 16px;
+            padding: 40px; margin-bottom: 50px; box-shadow: 0 2px 12px rgba(86,21,31,0.06);
+        }
+        .flow-overview h2 { font-size: 22px; color: var(--fr-800); margin-bottom: 20px; }
+        .pipeline {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 0; justify-content: center;
+            margin: 30px 0;
+        }
+        .pipeline-step {
+            background: linear-gradient(135deg, var(--fr-500), var(--fr-700));
+            color: #ffffff; padding: 12px 18px; border-radius: 8px; font-size: 13px;
+            font-weight: 600; text-align: center; min-width: 100px; flex-shrink: 0;
+        }
+        .pipeline-arrow {
+            font-size: 20px; color: var(--fr-400); margin: 0 4px; flex-shrink: 0;
+        }
+
+        .wf-section { margin-bottom: 45px; }
+        .wf-header {
+            display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+        }
+        .wf-number {
+            background: linear-gradient(135deg, var(--fr-500), var(--fr-700));
+            color: #ffffff; width: 46px; height: 46px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 20px; flex-shrink: 0;
+        }
+        .wf-title-group { flex: 1; }
+        .wf-name { font-size: 22px; color: var(--fr-800); font-weight: 700; }
+        .wf-report { font-size: 13px; color: var(--ce-700); margin-top: 3px; }
+
+        .wf-card {
+            background: #ffffff; border: 1px solid var(--mp-300); border-radius: 14px;
+            padding: 32px; box-shadow: 0 2px 12px rgba(86,21,31,0.06);
+        }
+        .wf-card:hover { border-color: var(--fr-500); box-shadow: 0 4px 20px rgba(215,91,112,0.10); }
+
+        .wf-field { margin-bottom: 16px; }
+        .wf-label {
+            font-size: 12px; font-weight: 600; color: var(--fr-600);
+            background: rgba(215,91,112,0.08); padding: 3px 12px; border-radius: 12px;
+            display: inline-block; margin-bottom: 6px;
+        }
+        .wf-value { font-size: 14px; color: var(--fr-900); line-height: 1.7; }
+
+        .wf-modules {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px; margin-top: 14px;
+        }
+        .wf-module-tag {
+            background: rgba(215,91,112,0.05); border: 1px solid var(--mp-300);
+            border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--fr-800);
+        }
+        .wf-module-tag .idx {
+            font-weight: 700; color: var(--fr-600); margin-right: 4px;
+        }
+
+        .wf-link {
+            display: inline-block; margin-top: 18px;
+            background: linear-gradient(135deg, var(--fr-500), var(--fr-700));
+            color: #ffffff; text-decoration: none; padding: 10px 28px;
+            border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.3s;
+        }
+        .wf-link:hover {
+            background: linear-gradient(135deg, var(--fr-600), var(--fr-800));
+            transform: translateY(-2px); box-shadow: 0 4px 16px rgba(215,91,112,0.25);
+        }
+
+        .data-note {
+            background: rgba(130,174,142,0.1); border-left: 3px solid var(--jg-500);
+            border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 16px;
+            font-size: 13px; color: var(--jg-700); line-height: 1.7;
+        }
+
+        .footer {
+            text-align: center; padding: 30px 0; color: var(--ce-500);
+            font-size: 12px; border-top: 1px solid var(--mp-300); margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html" class="nav-title">Momcozy E2E 洞察</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="strategy.html" class="nav-link">策略与洞察</a>
+        <a href="product.html" class="nav-link">产品与定义</a>
+        <a href="execution.html" class="nav-link">落地与执行</a>
+        <a href="methodology.html" class="nav-link active">方法论</a>
+        <a href="reports/e2e-v5.html" class="nav-link" style="border-color: var(--fr-300); color: var(--fr-600);">E2E完整报告</a>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <h1>工作流方法论</h1>
+    <p>7步端到端AI工作流，从竞品VOC到产品上市素材。每个工作流由专业AI角色驱动，输出独立HTML洞察报告。</p>
+</div>
+
+<div class="container">
+
+    <div class="flow-overview">
+        <h2>端到端AI工作流全景</h2>
+        <div class="pipeline">
+            <div class="pipeline-step">WF01<br>竞品格局</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF02<br>用户需求</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF03<br>产品机会</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF04<br>产品定义</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF05<br>视觉转化</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF06<br>网站SEO</div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">WF07<br>拍摄视频</div>
+        </div>
+        <div class="data-note">
+            <strong>提示词原文件：</strong><code>/workflow_prompt/</code> 目录 · 数据基座：6源交叉验证（D1-D6）· 所有工作流均已完成
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">01</div>
+            <div class="wf-title-group">
+                <div class="wf-name">竞品格局与爆款特征分析</div>
+                <div class="wf-report">产出：[竞品格局与用户口碑分析报告](reports/stage1-competitor.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深社交媒体分析师和用户洞察专家，10年以上用户评论分析经验，擅长NLP和跨境电商母婴行业</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">Amazon VOC评论Excel（评分、品牌、产品特征） · 北美和欧洲市场 · 喂养电器品类（消毒器+暖奶器）</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">分析模块</span>
+                <div class="wf-modules">
+                    <div class="wf-module-tag"><span class="idx">1</span>品牌提及与热度分析</div>
+                    <div class="wf-module-tag"><span class="idx">2</span>用户情感与口碑分析</div>
+                    <div class="wf-module-tag"><span class="idx">3</span>产品特征与偏好分析</div>
+                    <div class="wf-module-tag"><span class="idx">4</span>市场机会与竞争策略</div>
+                    <div class="wf-module-tag"><span class="idx">5</span>竞品格局与爆款特征</div>
+                </div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心方法</span>
+                <div class="wf-value">品牌提及量统计、互动度散点图、NLP情感分类、口碑关键词提取、品牌-特征关联矩阵、未满足需求识别</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">用户对不同品牌的情感反馈 → WF02 用户需求深潜；产品特征偏好分析 → 识别核心功能方向</div>
+            </div>
+            <a href="reports/stage1-competitor.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">02</div>
+            <div class="wf-title-group">
+                <div class="wf-name">用户体验与需求挖掘</div>
+                <div class="wf-report">产出：[用户需求深潜与痛点机会报告](reports/stage2-user-needs.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深用户体验研究专家和消费者行为学家，10年以上洞察经验，擅长JTBD理论、痛点金字塔模型、反直觉需求挖掘</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">Amazon VOC评论Excel + 上一阶段竞品分析报告 · 仅从评论数据挖掘，不使用外部数据源</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">分析模块</span>
+                <div class="wf-modules">
+                    <div class="wf-module-tag"><span class="idx">1</span>痛点图谱与需求分层</div>
+                    <div class="wf-module-tag"><span class="idx">2</span>场景化需求还原与矛盾分析</div>
+                    <div class="wf-module-tag"><span class="idx">3</span>细分人群焦虑分析</div>
+                    <div class="wf-module-tag"><span class="idx">4</span>反直觉需求挖掘</div>
+                    <div class="wf-module-tag"><span class="idx">5</span>创新机会缺口与价值评估</div>
+                </div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心方法</span>
+                <div class="wf-value">NLP聚类分析（功能/体验/情感三层痛点）、JTBD场景还原、马斯洛需求层次、对立矛盾矩阵、极端场景分析</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">未满足痛点 → WF03 产品机会点；场景化需求 → 定义使用场景和核心功能；反直觉需求 → 差异化创新点</div>
+            </div>
+            <a href="reports/stage2-user-needs.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">03</div>
+            <div class="wf-title-group">
+                <div class="wf-name">产品机会挖掘与企划方案</div>
+                <div class="wf-report">产出：[产品机会挖掘与企划方案报告](reports/stage3-opportunity.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深产品战略专家和创新顾问，10年以上产品企划经验，擅长JTBD、KANO模型、细分人群焦虑分析</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">上一阶段用户需求洞察报告 + 用户评论Excel（可选）· 基于前序分析结果，不在本阶段重复读取原始数据</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">分析模块</span>
+                <div class="wf-modules">
+                    <div class="wf-module-tag"><span class="idx">1</span>产品机会点提炼</div>
+                    <div class="wf-module-tag"><span class="idx">2</span>产品定义与定位</div>
+                    <div class="wf-module-tag"><span class="idx">3</span>产品企划与设计方向</div>
+                    <div class="wf-module-tag"><span class="idx">4</span>市场竞争分析与策略</div>
+                    <div class="wf-module-tag"><span class="idx">5</span>商业价值评估与预测</div>
+                </div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心方法</span>
+                <div class="wf-value">实现难度×市场潜力矩阵、产品五层次定义、SWOT分析、ROI评估、竞争格局定位图</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">产品机会点 → WF04 产品定义与开发项目；竞争策略 → 市场推广和销售方向</div>
+            </div>
+            <a href="reports/stage3-opportunity.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">04</div>
+            <div class="wf-title-group">
+                <div class="wf-name">产品定义与视觉策略</div>
+                <div class="wf-report">产出：[超级产品定义与视觉转化企划书](reports/stage4-product-definition.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深产品设计师和视觉策略专家，10年以上产品设计和品牌视觉经验，擅长UX设计和品牌策略</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">上一阶段产品企划方案报告 · 基于前序产品定义和机会评估，进行视觉和品牌转化</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">分析模块</span>
+                <div class="wf-modules">
+                    <div class="wf-module-tag"><span class="idx">1</span>产品定义与核心价值提炼</div>
+                    <div class="wf-module-tag"><span class="idx">2</span>产品设计与交互体验</div>
+                    <div class="wf-module-tag"><span class="idx">3</span>品牌视觉策略与形象设计</div>
+                    <div class="wf-module-tag"><span class="idx">4</span>包装设计与视觉呈现</div>
+                    <div class="wf-module-tag"><span class="idx">5</span>品牌传播与推广策略</div>
+                </div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心方法</span>
+                <div class="wf-value">产品定位图、核心价值雷达图、产品设计效果图、交互体验流程图、品牌色彩系统、包装设计规范</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">视觉设计规范 → WF05 AI图像生成产品概念图；品牌视觉策略 → WF06 网站设计和视觉一致性</div>
+            </div>
+            <a href="reports/stage4-product-definition.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">05</div>
+            <div class="wf-title-group">
+                <div class="wf-name">产品设计与视觉转化（AI生图）</div>
+                <div class="wf-report">产出：7张AI产品概念图 · 无独立HTML报告</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">AI图像生成执行器，基于上一阶段的视觉设计规范生成产品设想图，非分析型工作流</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">超级产品定义与视觉转化企划书（产品设计效果图、配色方案、材质说明、场景描述）</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心输出</span>
+                <div class="wf-value">7张产品概念图（消毒器+暖奶器各方向）· 外观设计描述（造型/材质/色彩/尺寸/细节）· 场景化渲染（使用场景/用户行为/环境氛围）· 品牌视觉元素应用</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">产品概念图 → WF06 网站设计视觉素材；WF07 六视图参考方向</div>
+            </div>
+            <a href="reports/e2e-v5.html#phase5-visualization" class="wf-link">在E2E报告中查看</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">06</div>
+            <div class="wf-title-group">
+                <div class="wf-name">产品网站设计及SEO优化</div>
+                <div class="wf-report">产出：[产品网站设计与SEO优化方案](reports/stage6-website-seo.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深产品网站架构师、电商转化策略师和DTC品牌PDP页面设计专家，移动端优先</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">产品定义、品牌身份、文案策略、视觉策略、目标平台 · 最多6个页面的MVP网站架构</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心输出</span>
+                <div class="wf-value">网站架构设计（6页面MVP）· PDP商品详情页结构 · SEO关键词策略 · 用户转化路径设计 · 移动端信息层级</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">下游衔接</span>
+                <div class="wf-value">网站设计规范 → WF07 商品摄影和视频内容方向；作为Shopify/Landing Page开发输入</div>
+            </div>
+            <a href="reports/stage6-website-seo.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+    <div class="wf-section">
+        <div class="wf-header">
+            <div class="wf-number">07</div>
+            <div class="wf-title-group">
+                <div class="wf-name">产品六视图及视频制作方案</div>
+                <div class="wf-report">产出：[产品六视图与视频制作方案](reports/stage7-sixview-video.html)</div>
+            </div>
+        </div>
+        <div class="wf-card">
+            <div class="wf-field">
+                <span class="wf-label">AI 角色</span>
+                <div class="wf-value">资深商品摄影策划师、商业视觉导演、电商视频制作策划师和DTC品牌内容制作顾问</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">输入数据</span>
+                <div class="wf-value">产品定义、品牌身份、视觉策略、文案策略 · 双重输出：摄影脚本 + 视频制作方案</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">核心输出</span>
+                <div class="wf-value">六视图拍摄方案（正/背/左右/顶/底+45°角+细节）· 核心卖点图+场景图 · 品牌氛围图 · 视频分镜脚本+制作规格 · 后期修图规范 · 移动端优先展示</div>
+            </div>
+            <div class="wf-field">
+                <span class="wf-label">最终交付</span>
+                <div class="wf-value">14张Shopify素材图 + 1支产品展示视频（MP4）· 摄影脚本+视频方案均可直接执行</div>
+            </div>
+            <a href="reports/stage7-sixview-video.html" class="wf-link">查看产出报告</a>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    Workflow 01-07 · AI驱动端到端工作流 · 6源交叉验证数据基座
+</footer>
+
+</body>
+</html>
