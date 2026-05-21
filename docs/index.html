@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momcozy 喂养电器 · E2E洞察报告库</title>
+    <meta property="og:title" content="Momcozy 喂养电器 · E2E洞察报告库">
+    <meta property="og:description" content="6源交叉验证 · 19,098条VOC + 75,291条社媒 · 从战略洞察到产品上市完整端到端">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            --fr-50: #FCF6F7;
+            --fr-100: #FCF6F7;
+            --fr-200: #EFBEC6;
+            --fr-300: #E08090;
+            --fr-400: #DA687A;
+            --fr-500: #D75B70;
+            --fr-600: #CD374F;
+            --fr-700: #A7293D;
+            --fr-800: #801F2F;
+            --fr-900: #56151F;
+            --ci-500: #D04E59;
+            --ci-600: #C03340;
+            --ci-700: #992833;
+            --mp-200: #FCF6F7;
+            --mp-300: #F6DFE2;
+            --ec-500: #F2EBC8;
+            --co-500: #F37969;
+            --co-600: #EF4D38;
+            --rg-500: #D0B671;
+            --jg-500: #82AE8E;
+            --jg-600: #669C74;
+            --jg-700: #517D5D;
+            --ce-100: #F8F9FB;
+            --ce-500: #C1CEDE;
+            --ce-700: #6A89AF;
+            --ce-900: #32465E;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--fr-50);
+            color: var(--fr-900);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* 顶部导航 */
+        .nav-bar {
+            background: #ffffff;
+            border-bottom: 3px solid var(--fr-500);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--fr-700);
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 6px; }
+        .nav-link {
+            color: var(--ce-700);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(215,91,112,0.1);
+            color: var(--fr-700);
+            border-color: var(--fr-300);
+        }
+        .nav-link.active { font-weight: 600; }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-title {
+            font-size: 44px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--fr-600), var(--fr-800), var(--fr-900));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--ci-700);
+            margin-bottom: 10px;
+        }
+        .hero-meta {
+            font-size: 14px;
+            color: var(--ce-700);
+        }
+
+        /* 核心指标 */
+        .metrics {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+        }
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid var(--mp-300);
+            border-radius: 12px;
+            padding: 28px 36px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+            min-width: 180px;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--fr-500);
+            box-shadow: 0 4px 20px rgba(215,91,112,0.15);
+        }
+        .metric-value {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--fr-600);
+        }
+        .metric-label {
+            font-size: 13px;
+            color: var(--ce-700);
+            margin-top: 6px;
+        }
+
+        /* 报告卡片 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--fr-600);
+            padding: 4px 14px;
+            background: rgba(215,91,112,0.1);
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .report-card {
+            background: #ffffff;
+            border: 1px solid var(--mp-300);
+            border-radius: 14px;
+            padding: 32px 28px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.06);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--fr-500);
+            box-shadow: 0 6px 28px rgba(215,91,112,0.13);
+        }
+        .report-card.primary {
+            border-left: 4px solid var(--fr-500);
+            background: linear-gradient(135deg, #ffffff 0%, var(--fr-50) 100%);
+        }
+        .report-card.primary:hover {
+            border-color: var(--fr-600);
+            border-left-color: var(--fr-600);
+        }
+        .card-category {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--fr-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--fr-800);
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            font-size: 14px;
+            color: var(--ce-700);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .card-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--ce-500);
+            flex-wrap: wrap;
+        }
+        .card-meta span {
+            background: rgba(215,91,112,0.06);
+            padding: 3px 10px;
+            border-radius: 12px;
+            color: var(--fr-700);
+        }
+
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--ce-500);
+            font-size: 12px;
+            border-top: 1px solid var(--mp-300);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html" class="nav-title">Momcozy E2E 洞察</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="strategy.html" class="nav-link">策略与洞察</a>
+        <a href="product.html" class="nav-link">产品与定义</a>
+        <a href="execution.html" class="nav-link">落地与执行</a>
+        <a href="reports/e2e-v5.html" class="nav-link" style="border-color: var(--fr-300); color: var(--fr-600);">E2E完整报告</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1 class="hero-title">Momcozy 喂养电器 E2E 洞察报告库</h1>
+    <p class="hero-subtitle">从战略洞察到产品上市 — 完整端到端操盘方案</p>
+    <p class="hero-meta">6源交叉验证 · Amazon VOC 19,098条 · Meltwater全网 75,291条 · 竞品VOC 54,189条 · 2026</p>
+</section>
+
+<div class="metrics">
+    <div class="metric-card">
+        <div class="metric-value">11步</div>
+        <div class="metric-label">端到端流程</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">34</div>
+        <div class="metric-label">洞察章节</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">80+</div>
+        <div class="metric-label">ECharts图表</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-value">6源</div>
+        <div class="metric-label">交叉验证数据基座</div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="section-label">主报告</div>
+    <div class="report-grid" style="grid-template-columns: 1fr; margin-bottom: 40px;">
+        <a href="reports/e2e-v5.html" class="report-card primary">
+            <div class="card-category">E2E 完整报告 · V5</div>
+            <div class="card-title">Momcozy第二增长曲线和E2E洞察报告</div>
+            <div class="card-desc">
+                宏观战略洞察 → 品类分析 → 用户深潜 → 机会提炼 → 产品定义 → 视觉转化 → 网站设计 → 拍摄制作 → 素材交付。
+                34个章节，前置洞察10模块 + E2E执行24模块，完整覆盖双引擎（消毒器主引擎 + 暖奶器协同引擎）全链路。
+            </div>
+            <div class="card-meta">
+                <span>9,229行</span>
+                <span>540 KB</span>
+                <span>Fortune Red 色系</span>
+                <span>11步端到端流程</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="section-label">阶段报告</div>
+    <div class="report-grid">
+        <a href="strategy.html" class="report-card">
+            <div class="card-category">策略与洞察</div>
+            <div class="card-title">竞品格局 + 用户需求深潜</div>
+            <div class="card-desc">
+                Stage 1 竞品格局与用户口碑分析 + Stage 2 用户需求深潜与痛点机会。
+                品牌热度排名、情感分析、需求层次、场景还原，为产品决策提供用户端证据。
+            </div>
+            <div class="card-meta">
+                <span>Stage 1-2</span>
+                <span>竞品格局</span>
+                <span>用户需求</span>
+                <span>痛点分层</span>
+            </div>
+        </a>
+
+        <a href="product.html" class="report-card">
+            <div class="card-category">产品与定义</div>
+            <div class="card-title">产品机会挖掘 + 产品定义与视觉</div>
+            <div class="card-desc">
+                Stage 3 产品机会挖掘与企划方案 + Stage 4 超级产品定义与视觉转化。
+                从机会矩阵到产品概念图，消毒器真烘干 + 暖奶器精准温控双线推进。
+            </div>
+            <div class="card-meta">
+                <span>Stage 3-4</span>
+                <span>机会矩阵</span>
+                <span>产品定义</span>
+                <span>概念图</span>
+            </div>
+        </a>
+
+        <a href="execution.html" class="report-card">
+            <div class="card-category">落地与执行</div>
+            <div class="card-title">网站SEO + 六视图与视频</div>
+            <div class="card-desc">
+                Stage 6 产品网站设计与SEO优化方案 + Stage 7 产品六视图及视频制作方案。
+                从营销落地页到拍摄规范，完整上市素材包。
+            </div>
+            <div class="card-meta">
+                <span>Stage 6-7</span>
+                <span>网站SEO</span>
+                <span>六视图</span>
+                <span>视频制作</span>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<footer class="footer">
+    Momcozy 喂养电器 E2E洞察报告库 · Fortune Red 主题 · 内部专用
+</footer>
+
+</body>
+</html>

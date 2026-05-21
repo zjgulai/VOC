@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow07 - 产品六视图及视频制作方案 | Momcozy喂养电器</title>
+<style>
+/* Fortune Red Color Palette */
+:root {
+    --primary: #D75B70;
+    --primary-dark: #A7293D;
+    --primary-darker: #801F2F;
+    --secondary: #D04E59;
+    --secondary-dark: #992833;
+    --coral: #F37969;
+    --coral-dark: #EF4D38;
+    --gold: #D0B671;
+    --gold-dark: #C3A34D;
+    --jade: #82AE8E;
+    --jade-dark: #517D5D;
+    --cerulean: #C1CEDE;
+    --cerulean-dark: #32465E;
+    --cerulean-light: #6A89AF;
+    --pink: #E08090;
+    --pink-light: #F6DFE2;
+    --background: #FCF6F7;
+    --text-dark: #2D2D2D;
+    --text-muted: #666666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Navigation */
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 12px 24px;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(215, 91, 112, 0.3);
+}
+
+.nav-header h1 {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.nav-tab {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.15);
+}
+
+.nav-tab:hover {
+    background: rgba(255,255,255,0.3);
+    color: white;
+}
+
+/* Main Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--coral) 50%, var(--gold) 100%);
+    border-radius: 24px;
+    padding: 60px 48px;
+    margin-bottom: 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(15deg);
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.hero h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.95;
+    max-width: 700px;
+}
+
+.hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Section Styling */
+.section {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--pink-light);
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--coral) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Cards */
+.card {
+    background: var(--pink-light);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary);
+}
+
+.card h4 {
+    color: var(--primary-dark);
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card p, .card li {
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+/* Grid Layouts */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+/* Tables */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--pink-light);
+}
+
+tr:hover {
+    background: rgba(215, 91, 112, 0.05);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-high {
+    background: #FFEAEA;
+    color: var(--primary);
+}
+
+.badge-medium {
+    background: #FFF4E5;
+    color: var(--coral-dark);
+}
+
+.badge-low {
+    background: #E8F5E9;
+    color: var(--jade-dark);
+}
+
+.badge-info {
+    background: var(--cerulean);
+    color: var(--cerulean-dark);
+}
+
+/* Charts */
+.chart-container {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.chart {
+    width: 100%;
+    height: 400px;
+}
+
+.chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Six View Display */
+.six-view-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.six-view-item {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.six-view-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(215, 91, 112, 0.2);
+}
+
+.six-view-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--jade) 0%, var(--jade-dark) 100%);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.six-view-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.six-view-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Shot Cards */
+.shot-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    border: 1px solid #eee;
+}
+
+.shot-header {
+    background: linear-gradient(135deg, var(--cerulean) 0%, var(--cerulean-light) 100%);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shot-header h5 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.shot-id {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.shot-body {
+    padding: 20px;
+}
+
+.shot-detail {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.shot-detail-label {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 90px;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--coral), var(--gold));
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 20px;
+    width: 14px;
+    height: 14px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(215, 91, 112, 0.4);
+}
+
+.timeline-time {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.timeline-content {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Gantt Chart Style */
+.gantt-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.gantt-label {
+    width: 120px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.gantt-bar-container {
+    flex: 1;
+    height: 28px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.gantt-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.gantt-time {
+    width: 180px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 12px;
+}
+
+/* Storyboard */
+.storyboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.story-frame {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.story-frame-number {
+    background: var(--primary);
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.story-frame-content {
+    padding: 14px;
+}
+
+.story-frame-time {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.story-frame-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.story-frame-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Checklist */
+.checklist {
+    list-style: none;
+}
+
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.checklist li::before {
+    content: '✓';
+    color: var(--jade-dark);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Platform Tags */
+.platform-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.platform-tag {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tag-amazon { background: #FF9908; color: white; }
+.tag-shopify { background: #96BF48; color: white; }
+.tag-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+.tag-tiktok { background: #000; color: white; }
+.tag-youtube { background: #FF0000; color: white; }
+.tag-facebook { background: #1877F2; color: white; }
+
+/* Color Swatches */
+.color-swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 16px;
+    margin-bottom: 8px;
+}
+
+.swatch-color {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid rgba(0,0,0,0.1);
+}
+
+.swatch-label {
+    font-size: 12px;
+    color: var(--text-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 90px 16px 40px;
+    }
+    
+    .hero {
+        padding: 40px 24px;
+    }
+    
+    .hero h2 {
+        font-size: 26px;
+    }
+    
+    .six-view-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .section {
+        padding: 20px;
+    }
+    
+    .nav-tabs {
+        gap: 4px;
+    }
+    
+    .nav-tab {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .nav-header {
+        position: relative;
+    }
+    
+    .chart {
+        page-break-inside: avoid;
+    }
+}
+
+/* Highlight Box */
+.highlight-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--coral) 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.highlight-box h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.highlight-box p {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+/* Quote */
+.quote {
+    background: var(--pink-light);
+    border-left: 4px solid var(--primary);
+    padding: 20px 24px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--text-dark);
+}
+
+.quote-author {
+    margin-top: 12px;
+    font-size: 13px;
+    font-style: normal;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Icon Fonts (using emojis as fallback) */
+.icon-camera::before { content: '📷'; }
+.icon-video::before { content: '🎬'; }
+.icon-light::before { content: '💡'; }
+.icon-edit::before { content: '✂️'; }
+.icon-check::before { content: '✅'; }
+
+/* Tab Navigation within sections */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.footer-brand {
+    font-weight: 600;
+    color: var(--primary);
+}
+</style>
+<style>
+.nav-bar { top: 36px !important; }
+</style>
+</head>
+<body>
+
+<div class="site-global-nav" style="
+    position:fixed;top:0;left:0;right:0;z-index:1001;height:36px;
+    background:var(--fr-800);display:flex;align-items:center;justify-content:center;
+    gap:20px;font-size:12px;box-shadow:0 1px 6px rgba(0,0,0,0.15);
+">
+    <a href="../index.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">首页</a>
+    <a href="../strategy.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">策略与洞察</a>
+    <a href="../product.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">产品与定义</a>
+    <a href="../execution.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">落地与执行</a>
+    <a href="../index.html" style="color:var(--rg-500);text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;font-weight:600;">E2E报告库</a>
+</div>
+<style>
+.site-global-nav a:hover{background:rgba(255,255,255,0.12);}
+</style>
+
+
+
+<!-- Navigation -->
+<nav class="nav-header">
+    <h1>Workflow07 - 产品六视图及视频制作方案</h1>
+    <div class="nav-tabs">
+        <a href="#sec1" class="nav-tab">📷 六视图拍摄</a>
+        <a href="#sec2" class="nav-tab">✨ 卖点细节图</a>
+        <a href="#sec3" class="nav-tab">🏠 场景图方案</a>
+        <a href="#sec4" class="nav-tab">🎨 后期修图规范</a>
+        <a href="#sec5" class="nav-tab">🎬 视频脚本</a>
+        <a href="#sec6" class="nav-tab">📽️ 分镜设计</a>
+        <a href="#sec7" class="nav-tab">📐 制作规格</a>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-badge">🎯 Workflow 07</div>
+        <h2>产品六视图及视频制作方案</h2>
+        <p>为Momcozy消毒器与暖奶器打造专业级商品摄影与视频内容，覆盖标准六视图、卖点细节、场景图、后期规范及完整视频制作方案。</p>
+        <div class="hero-meta">
+            <span>📅 2026-05-14</span>
+            <span>🏷️ 产品摄影 | 视频制作 | 内容企划</span>
+            <span>💼 Momcozy品牌</span>
+        </div>
+    </div>
+
+    <!-- Module 1: 六视图拍摄方案 -->
+    <section id="sec1" class="section">
+        <div class="section-header">
+            <div class="section-icon">📷</div>
+            <div>
+                <div class="section-title">模块1：商品摄影脚本 - 六视图拍摄方案</div>
+                <div class="section-subtitle">Standard Product Photography - Six View Shot Plan</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4>💡 拍摄统一规范</h4>
+            <p>所有六视图必须统一：背景（纯白#FFFFFF或浅灰#F5F5F5）、光线（柔光箱45度角）、产品比例（统一占画面70%）、色彩还原（Delta E < 2）、角度一致性。</p>
+        </div>
+
+        <h4 style="margin: 24px 0 16px; color: var(--primary-dark);">六视图角度示意图</h4>
+        <div class="six-view-grid">
+            <div class="six-view-item">
+                <div class="six-view-icon">▶</div>
+                <div class="six-view-label">正面视图</div>
+                <div class="six-view-desc">Front View<br>0°</div>
+            </div>
+            <div class="six-view-item">
+                <div class="six-view-icon">◀</div>
+                <div class="six-view-label">左侧视图</div>
+                <div class="six-view-desc">Left View<br>90°</div>
+            </div>
+            <div class="six-view-item">
+                <div class="six-view-icon">▼</div>
+                <div class="six-view-label">底部视图</div>
+                <div class="six-view-desc">Bottom View<br>180°</div>
+            </div>
+            <div class="six-view-item">
+                <div class="six-view-icon">▶</div>
+                <div class="six-view-label">右侧视图</div>
+                <div class="six-view-desc">Right View<br>270°</div>
+            </div>
+            <div class="six-view-item">
+                <div class="six-view-icon">▲</div>
+                <div class="six-view-label">顶部视图</div>
+                <div class="six-view-desc">Top View<br>270°</div>
+            </div>
+            <div class="six-view-item">
+                <div class="six-view-icon">◆</div>
+                <div class="six-view-label">背面视图</div>
+                <div class="six-view-desc">Back View<br>180°</div>
+            </div>
+        </div>
+
+        <div id="chart-six-view" class="chart"></div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">消毒器 - 标准六视图拍摄脚本</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>shot_id</th>
+                        <th>shot_name</th>
+                        <th>product_angle</th>
+                        <th>composition</th>
+                        <th>lighting</th>
+                        <th>feature_to_show</th>
+                        <th>execution_notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-001</span></td>
+                        <td>消毒器_正面_主图</td>
+                        <td>0° 正视</td>
+                        <td>产品居中，占比70%</td>
+                        <td>双柔光箱45°</td>
+                        <td>品牌LOGO、产品轮廓</td>
+                        <td>白色无缝背景，LED屏点亮</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-002</span></td>
+                        <td>消毒器_左侧面</td>
+                        <td>90° 左侧</td>
+                        <td>左侧3/4展示</td>
+                        <td>主光左侧60°</td>
+                        <td>开合盖设计、侧面线条</td>
+                        <td>盖子微开30°角</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-003</span></td>
+                        <td>消毒器_右侧面</td>
+                        <td>270° 右侧</td>
+                        <td>右侧3/4展示</td>
+                        <td>主光右侧60°</td>
+                        <td>通风口、散热孔</td>
+                        <td>强调散热系统设计</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-004</span></td>
+                        <td>消毒器_顶部</td>
+                        <td>90° 俯视</td>
+                        <td>垂直俯拍</td>
+                        <td>顶光+漫反射</td>
+                        <td>顶盖按钮、密封圈</td>
+                        <td>360°展示盖子完整性</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-005</span></td>
+                        <td>消毒器_底部</td>
+                        <td>270° 仰视</td>
+                        <td>垂直俯拍底部</td>
+                        <td>底部透光板</td>
+                        <td>防滑垫、型号铭牌</td>
+                        <td>产品参数清晰可见</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">D-SV-006</span></td>
+                        <td>消毒器_背面</td>
+                        <td>180° 后视</td>
+                        <td>背面居中</td>
+                        <td>背光勾勒轮廓</td>
+                        <td>USB-C接口、电源线</td>
+                        <td>接口区域清晰展示</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">暖奶器 - 标准六视图拍摄脚本</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>shot_id</th>
+                        <th>shot_name</th>
+                        <th>product_angle</th>
+                        <th>composition</th>
+                        <th>lighting</th>
+                        <th>feature_to_show</th>
+                        <th>execution_notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-001</span></td>
+                        <td>暖奶器_正面_主图</td>
+                        <td>0° 正视</td>
+                        <td>产品居中，占比70%</td>
+                        <td>双柔光箱45°</td>
+                        <td>品牌LOGO、LED温度显示</td>
+                        <td>白色无缝背景，温度显示37°C</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-002</span></td>
+                        <td>暖奶器_左侧面</td>
+                        <td>90° 左侧</td>
+                        <td>左侧3/4展示</td>
+                        <td>主光左侧60°</td>
+                        <td>静音指示灯、握持区域</td>
+                        <td>突出便携胶囊造型</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-003</span></td>
+                        <td>暖奶器_右侧面</td>
+                        <td>270° 右侧</td>
+                        <td>右侧3/4展示</td>
+                        <td>主光右侧60°</td>
+                        <td>USB-C充电口、电量指示</td>
+                        <td>强调充电便捷性</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-004</span></td>
+                        <td>暖奶器_顶部</td>
+                        <td>90° 俯视</td>
+                        <td>垂直俯拍</td>
+                        <td>顶光+漫反射</td>
+                        <td>瓶口设计、加热区域</td>
+                        <td>展示与奶瓶的适配性</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-005</span></td>
+                        <td>暖奶器_底部</td>
+                        <td>270° 仰视</td>
+                        <td>垂直俯拍底部</td>
+                        <td>底部透光板</td>
+                        <td>防滑底座、散热孔</td>
+                        <td>安全稳定性展示</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">W-SV-006</span></td>
+                        <td>暖奶器_45度角</td>
+                        <td>45° 斜侧</td>
+                        <td>3/4展示</td>
+                        <td>45°侧光</td>
+                        <td>整体造型、便携性</td>
+                        <td>最重要的展示角度</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">附加拍摄：45度角图 & 局部特写 & 功能演示 & 配件组合 & 包装展示</h4>
+        <div class="grid-3">
+            <div class="card">
+                <h4>🎯 45度角图</h4>
+                <p><strong>消毒器</strong>：D-45-001 综合展示 / D-45-002 场景道具</p>
+                <p><strong>暖奶器</strong>：W-45-001 综合展示 / W-45-002 场景道具</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">光线：45°侧光+轮廓光 | 背景：渐变灰 | 构图：黄金分割</p>
+            </div>
+            <div class="card">
+                <h4>🔍 局部特写图</h4>
+                <p><strong>消毒器</strong>：D-DC-001 LED屏 / D-DC-002 密封圈 / D-DC-003 散热孔</p>
+                <p><strong>暖奶器</strong>：W-DC-001 温度显示 / W-DC-002 USB-C / W-DC-003 静音灯</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">微距镜头 | 顶光+补光 | 强调材质质感</p>
+            </div>
+            <div class="card">
+                <h4>⚡ 功能演示图</h4>
+                <p><strong>消毒器</strong>：D-FD-001 蒸汽效果 / D-FD-002 工作状态</p>
+                <p><strong>暖奶器</strong>：W-FD-001 快速加热 / W-FD-002 车载使用</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">动态捕捉 | 高速闪光 | 透明蒸汽效果</p>
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top:16px;">
+            <div class="card">
+                <h4>📦 配件组合图</h4>
+                <p><strong>消毒器配件</strong>：奶瓶支架×2、量杯、说明书（可选）</p>
+                <p><strong>暖奶器配件</strong>：USB-C充电线、便携袋、说明书</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">平铺展示 | 45°俯拍 | 品牌元素融入</p>
+            </div>
+            <div class="card">
+                <h4>🎁 包装展示图</h4>
+                <p><strong>消毒器</strong>：D-PK-001 开盒 / D-PK-002 全家福</p>
+                <p><strong>暖奶器</strong>：W-PK-001 开盒 / W-PK-002 全家福</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--text-muted);">环保纸盒 | 品牌色系 | 吊牌/贴纸</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 2: 核心卖点图与细节图 -->
+    <section id="sec2" class="section">
+        <div class="section-header">
+            <div class="section-icon">✨</div>
+            <div>
+                <div class="section-title">模块2：商品摄影脚本 - 核心卖点图与细节图</div>
+                <div class="section-subtitle">Key Selling Points & Detail Photography</div>
+            </div>
+        </div>
+
+        <h4 style="margin: 24px 0 16px; color: var(--primary-dark);">卖点图优先级矩阵</h4>
+        <div id="chart-selling-points" class="chart"></div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">核心卖点图拍摄方案</h4>
+        <div class="grid-2">
+            <div class="shot-card">
+                <div class="shot-header">
+                    <h5>🛡️ 卖点1：质保服务升级</h5>
+                    <span class="shot-id">优先级: HIGH</span>
+                </div>
+                <div class="shot-body">
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">视觉焦点</span>
+                        <span>质保标签、品牌承诺卡</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">拍摄方式</span>
+                        <span>特写+中景 | 情感共鸣</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">道具</span>
+                        <span>质保卡、品牌贴纸、笑脸道具</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">光线</span>
+                        <span>暖色主光，营造温馨感</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">文案</span>
+                        <span>"2年质保·只换不修" | "妈妈更放心"</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">Shot ID</span>
+                        <span>D-CSP-001 (消毒器) / W-CSP-001 (暖奶器)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shot-card">
+                <div class="shot-header">
+                    <h5>🔇 卖点2：静音夜间模式</h5>
+                    <span class="shot-id">优先级: HIGH</span>
+                </div>
+                <div class="shot-body">
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">视觉焦点</span>
+                        <span>暖奶器+静音指示灯特写</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">拍摄方式</span>
+                        <span>暗调拍摄 | 柔光箱模拟夜间</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">道具</span>
+                        <span>婴儿床品、夜灯、时钟</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">光线</span>
+                        <span>极暗背景+产品发光</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">文案</span>
+                        <span>"<35dB真静音" | "宝宝安睡一整夜"</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">Shot ID</span>
+                        <span>W-CSP-002 (暖奶器专用)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shot-card">
+                <div class="shot-header">
+                    <h5>🎒 卖点3：旅行便携设计</h5>
+                    <span class="shot-id">优先级: HIGH</span>
+                </div>
+                <div class="shot-body">
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">视觉焦点</span>
+                        <span>暖奶器+便携袋+车载充电</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">拍摄方式</span>
+                        <span>平铺+手持 | 旅行感</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">道具</span>
+                        <span>旅行箱、背包、护照、便携袋</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">光线</span>
+                        <span>自然光 | 旅行场景</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">文案</span>
+                        <span>"随身携带·随时温暖" | "出行必备"</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">Shot ID</span>
+                        <span>W-CSP-003 (暖奶器专用)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shot-card">
+                <div class="shot-header">
+                    <h5>⚡ 卖点4：30秒速热</h5>
+                    <span class="shot-id">优先级: MEDIUM</span>
+                </div>
+                <div class="shot-body">
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">视觉焦点</span>
+                        <span>温度变化过程展示</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">拍摄方式</span>
+                        <span>高速摄影 | 动态捕捉</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">道具</span>
+                        <span>计时器、温度计、奶瓶</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">光线</span>
+                        <span>高速闪光 | 清晰定格</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">文案</span>
+                        <span>"30秒速热" | "宝宝哭闹不等候"</span>
+                    </div>
+                    <div class="shot-detail">
+                        <span class="shot-detail-label">Shot ID</span>
+                        <span>W-CSP-004 (暖奶器专用)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">产品细节图拍摄方案</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail ID</th>
+                        <th>细节部位</th>
+                        <th>拍摄重点</th>
+                        <th>镜头</th>
+                        <th>光线</th>
+                        <th>强调元素</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>D-DT-001</td>
+                        <td>UV/蒸汽发生器</td>
+                        <td>内部杀菌元件</td>
+                        <td>微距 90mm</td>
+                        <td>透射光</td>
+                        <td>科技感、专业性</td>
+                    </tr>
+                    <tr>
+                        <td>D-DT-002</td>
+                        <td>密封胶圈</td>
+                        <td>密封性、防漏</td>
+                        <td>微距 60mm</td>
+                        <td>侧光强调轮廓</td>
+                        <td>材质安全、精密</td>
+                    </tr>
+                    <tr>
+                        <td>D-DT-003</td>
+                        <td>LED触控屏</td>
+                        <td>数字显示清晰</td>
+                        <td>微距 + 偏振镜</td>
+                        <td>45°偏振消除反光</td>
+                        <td>智能操控</td>
+                    </tr>
+                    <tr>
+                        <td>D-DT-004</td>
+                        <td>散热通风孔</td>
+                        <td>工艺细节</td>
+                        <td>微距 50mm</td>
+                        <td>结构光</td>
+                        <td>散热效率</td>
+                    </tr>
+                    <tr>
+                        <td>W-DT-001</td>
+                        <td>加热底座</td>
+                        <td>均匀受热区域</td>
+                        <td>微距 90mm</td>
+                        <td>顶光+补光</td>
+                        <td>温控精准</td>
+                    </tr>
+                    <tr>
+                        <td>W-DT-002</td>
+                        <td>LED温度显示</td>
+                        <td>37°C精准显示</td>
+                        <td>中焦</td>
+                        <td>点亮发光效果</td>
+                        <td>读数清晰</td>
+                    </tr>
+                    <tr>
+                        <td>W-DT-003</td>
+                        <td>USB-C接口</td>
+                        <td>充电便捷</td>
+                        <td>微距 60mm</td>
+                        <td>轮廓光</td>
+                        <td>兼容性强</td>
+                    </tr>
+                    <tr>
+                        <td>W-DT-004</td>
+                        <td>静音夜间灯</td>
+                        <td>柔和发光</td>
+                        <td>特写</td>
+                        <td>暗调+发光</td>
+                        <td>夜间可视不刺眼</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="chart-detail-priority" class="chart"></div>
+    </section>
+
+    <!-- Module 3: 场景图拍摄方案 -->
+    <section id="sec3" class="section">
+        <div class="section-header">
+            <div class="section-icon">🏠</div>
+            <div>
+                <div class="section-title">模块3：商品摄影脚本 - 场景图拍摄方案</div>
+                <div class="section-subtitle">Lifestyle & Usage Scenario Photography</div>
+            </div>
+        </div>
+
+        <h4 style="margin: 24px 0 16px; color: var(--primary-dark);">场景情绪光谱图</h4>
+        <div id="chart-emotion-spectrum" class="chart"></div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">场景图拍摄方案详情</h4>
+        
+        <div class="shot-card">
+            <div class="shot-header" style="background: linear-gradient(135deg, #6A89AF 0%, #32465E 100%);">
+                <h5>🌙 场景1：夜间喂奶场景</h5>
+                <span class="shot-id">暖奶器专用</span>
+            </div>
+            <div class="shot-body">
+                <div class="grid-2">
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">scene_id</span>
+                            <span>W-SC-001</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">use_case</span>
+                            <span>夜间快速温奶·宝宝哭闹</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">user_behavior</span>
+                            <span>妈妈半睡状态、单手操作</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">environment</span>
+                            <span>昏暗卧室、婴儿床旁</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">composition</span>
+                            <span>暖奶器居中+模糊妈妈剪影</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">lighting</span>
+                            <span>极暗环境+暖奶器发光+月光</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">props</span>
+                            <span>婴儿床、睡袋、夜灯、手机</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">emotional_tone</span>
+                            <span>温馨、宁静、安心、省心</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">copy_overlay</span>
+                            <span>"深夜喂奶·一键温暖"</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">execution_notes</span>
+                            <span>真实夜晚拍摄或棚内模拟</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shot-card">
+            <div class="shot-header" style="background: linear-gradient(135deg, #F37969 0%, #EF4D38 100%);">
+                <h5>🚗 场景2：旅行便携场景</h5>
+                <span class="shot-id">暖奶器专用</span>
+            </div>
+            <div class="shot-body">
+                <div class="grid-2">
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">scene_id</span>
+                            <span>W-SC-002</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">use_case</span>
+                            <span>自驾旅行·户外哺乳·移动电源</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">user_behavior</span>
+                            <span>旅途休息站、快速准备</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">environment</span>
+                            <span>车内/露营地/休息区</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">composition</span>
+                            <span>暖奶器+便携袋+充电设备</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">lighting</span>
+                            <span>自然光/车内暖光</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">props</span>
+                            <span>车载充电线、充电宝、妈咪包</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">emotional_tone</span>
+                            <span>轻松、自由、说走就走</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">copy_overlay</span>
+                            <span>"旅行在外·温暖随行"</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">execution_notes</span>
+                            <span>真实旅途场景或场景合成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shot-card">
+            <div class="shot-header" style="background: linear-gradient(135deg, #82AE8E 0%, #517D5D 100%);">
+                <h5>☀️ 场景3：日常消毒场景</h5>
+                <span class="shot-id">消毒器专用</span>
+            </div>
+            <div class="shot-body">
+                <div class="grid-2">
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">scene_id</span>
+                            <span>D-SC-001</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">use_case</span>
+                            <span>每日消毒·奶瓶洗护·育儿日常</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">user_behavior</span>
+                            <span>放入奶瓶、一键启动、放心离开</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">environment</span>
+                            <span>整洁厨房台面/婴儿护理台</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">composition</span>
+                            <span>消毒器+整齐排列的奶瓶</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">lighting</span>
+                            <span>明亮自然光/厨房顶灯</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">props</span>
+                            <span>奶瓶、奶嘴、量杯、绿植</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">emotional_tone</span>
+                            <span>整洁、安心、省心、专业</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">copy_overlay</span>
+                            <span>"一键消毒·守护健康"</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">execution_notes</span>
+                            <span>真实厨房或影棚厨房场景</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shot-card">
+            <div class="shot-header" style="background: linear-gradient(135deg, #D0B671 0%, #C3A34D 100%);">
+                <h5>🍵 场景4：厨房台面场景</h5>
+                <span class="shot-id">消毒器专用</span>
+            </div>
+            <div class="shot-body">
+                <div class="grid-2">
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">scene_id</span>
+                            <span>D-SC-002</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">use_case</span>
+                            <span>烘干功能展示·大容量收纳</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">user_behavior</span>
+                            <span>取出消毒好的奶瓶、准备喂养</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">environment</span>
+                            <span>现代简约厨房台面</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">composition</span>
+                            <span>消毒器+烘干中的奶瓶+蒸汽</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">lighting</span>
+                            <span>自然侧光+产品轮廓光</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">props</span>
+                            <span>现代厨具、计时器、水杯</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">emotional_tone</span>
+                            <span>品质感、现代感、精致生活</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">copy_overlay</span>
+                            <span>"70°C恒温烘干·即取即用"</span>
+                        </div>
+                        <div class="shot-detail">
+                            <span class="shot-detail-label">execution_notes</span>
+                            <span>蒸汽效果需后期合成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">场景图拍摄规划</h4>
+        <div id="chart-scene-planning" class="chart"></div>
+    </section>
+
+    <!-- Module 4: 后期修图规范 -->
+    <section id="sec4" class="section">
+        <div class="section-header">
+            <div class="section-icon">🎨</div>
+            <div>
+                <div class="section-title">模块4：商品摄影脚本 - 后期修图规范</div>
+                <div class="section-subtitle">Post-Production & Retouching Guidelines</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4>🎯 色彩校正 Color Correction</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li>白平衡校准：中性灰/白参考点</li>
+                    <li>色彩空间：sRGB IEC61966-2.1</li>
+                    <li>色彩一致性：Delta E < 2（同批次图片）</li>
+                    <li>品牌色还原：薄荷绿#A8D5BA、米白#F5F0E8</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>✨ 材质纹理 Material Texture</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li>哑光磨砂质感保留，不可过度抛光</li>
+                    <li>材质纹理细节清晰可见</li>
+                    <li>避免过曝导致材质信息丢失</li>
+                    <li>BPA-Free材质标识清晰</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>🌑 阴影与反光 Shadow & Reflection</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li>自然柔和阴影，不可过重或过轻</li>
+                    <li>反光点可适当减弱，保留材质感</li>
+                    <li>玻璃/塑料高光需自然</li>
+                    <li>禁用极端HDR效果</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>🧹 背景清理 Background Cleanup</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li>纯白背景：RGB 255,255,255</li>
+                    <li>灰尘/瑕疵全部清除</li>
+                    <li>边缘干净无毛边</li>
+                    <li>投影自然过渡</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h4>🚫 修图限制 Retouching Limits</h4>
+            <div class="grid-2" style="margin-top: 12px;">
+                <div>
+                    <p style="font-size: 13px; color: var(--jade-dark); font-weight: 600;">✅ 可修内容：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>去除灰尘、指纹、划痕</li>
+                        <li>色彩一致性调整</li>
+                        <li>适度提亮暗部</li>
+                        <li>背景纯化</li>
+                        <li>产品比例微调（不超过5%）</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: var(--primary); font-weight: 600;">❌ 禁止修内容：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>添加不存在的产品特征</li>
+                        <li>改变产品结构/比例</li>
+                        <li>添加不实功能效果</li>
+                        <li>过度美化失真</li>
+                        <li>移除必要的产品元素</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">文本叠加规则 Text Overlay Rules</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>内容类型</th>
+                        <th>字体要求</th>
+                        <th>颜色规范</th>
+                        <th>位置</th>
+                        <th>字号参考</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>品牌LOGO</td>
+                        <td>momcozy原版字体</td>
+                        <td>深灰#424242</td>
+                        <td>右下角/图片底部</td>
+                        <td>图片宽度5-8%</td>
+                    </tr>
+                    <tr>
+                        <td>核心卖点</td>
+                        <td>无衬线粗体</td>
+                        <td>白底深色/深灰</td>
+                        <td>图片中心偏下</td>
+                        <td>图片宽度3-5%</td>
+                    </tr>
+                    <tr>
+                        <td>功能数据</td>
+                        <td>数字强调字体</td>
+                        <td>品牌绿/金色点缀</td>
+                        <td>左下角/右上角</td>
+                        <td>适中可见</td>
+                    </tr>
+                    <tr>
+                        <td>CTA文案</td>
+                        <td>无衬线加粗</td>
+                        <td>高对比色</td>
+                        <td>图片底部中央</td>
+                        <td>醒目但不过大</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">图片规格 Image Ratios & Formats</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>用途</th>
+                        <th>比例</th>
+                        <th>分辨率</th>
+                        <th>格式</th>
+                        <th>色彩模式</th>
+                        <th>文件大小</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-high">电商主图</span></td>
+                        <td>1:1 (方形)</td>
+                        <td>2000×2000px</td>
+                        <td>JPEG/PNG</td>
+                        <td>sRGB</td>
+                        <td>≤2MB</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">详情长图</span></td>
+                        <td>3:4 (竖版)</td>
+                        <td>1200×1600px</td>
+                        <td>JPEG/PNG</td>
+                        <td>sRGB</td>
+                        <td>≤3MB</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-medium">场景图</span></td>
+                        <td>16:9 (横版)</td>
+                        <td>1920×1080px</td>
+                        <td>JPEG</td>
+                        <td>sRGB</td>
+                        <td>≤4MB</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-low">视频封面</span></td>
+                        <td>16:9 / 9:16</td>
+                        <td>1920×1080px</td>
+                        <td>JPEG/PNG</td>
+                        <td>sRGB</td>
+                        <td>≤5MB</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">后期规范检查清单</h4>
+        <div id="chart-quality-checklist" class="chart"></div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h4>📋 文件命名规则 File Naming Rules</h4>
+            <div style="font-family: monospace; background: #f5f5f5; padding: 16px; border-radius: 8px; font-size: 13px;">
+                <p><strong>格式：</strong>{产品代码}_{拍摄类型}_{角度/场景}_{序号}_{日期}</p>
+                <p style="margin-top: 8px;"><strong>示例：</strong></p>
+                <p>D-SV-001-front-01-20260514.jpg</p>
+                <p>W-SC-001-night-01-20260514.jpg</p>
+                <p>D-CSP-001-warranty-01-20260514.png</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 5: 视频脚本 -->
+    <section id="sec5" class="section">
+        <div class="section-header">
+            <div class="section-icon">🎬</div>
+            <div>
+                <div class="section-title">模块5：商品视频制作方案 - 视频脚本</div>
+                <div class="section-subtitle">Product Video Script & Storyline</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4>🎯 视频核心策略</h4>
+            <p><strong>目标</strong>：提升品牌认知，促进转化购买<br>
+            <strong>受众</strong>：新生儿家庭、职场妈妈、旅行出行家庭<br>
+            <strong>核心信息</strong>：安全便捷温暖，Momcozy陪伴每一刻<br>
+            <strong>视频类型</strong>：品牌故事型 + 产品功能型混合</p>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">视频结构规划</h4>
+        <div class="grid-4">
+            <div class="card" style="text-align: center;">
+                <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">1</div>
+                <h4 style="font-size: 14px;">0-3秒<br>黄金吸引</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">痛点画面/情感冲击<br>快速抓住注意力</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="width: 50px; height: 50px; background: var(--coral); border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">2</div>
+                <h4 style="font-size: 14px;">3-10秒<br>痛点呈现</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">夜间喂奶焦虑<br>外出携带不便</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="width: 50px; height: 50px; background: var(--jade); border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">3</div>
+                <h4 style="font-size: 14px;">10-40秒<br>产品与卖点</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">产品出现<br>核心功能演示</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="width: 50px; height: 50px; background: var(--gold); border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">4</div>
+                <h4 style="font-size: 14px;">40-60秒<br>CTA转化</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">真实场景<br>信任背书+购买引导</p>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">完整视频脚本（60秒版）</h4>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-time">0:00 - 0:03</div>
+                <div class="timeline-title">🎬 Opening - 黄金3秒</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 特写 - 宝宝哭闹的嘴巴 + 妈妈焦虑的表情（浅焦）</p>
+                    <p><strong>Voiceover:</strong> "宝宝饿哭了..."</p>
+                    <p><strong>On-screen Text:</strong> 时间刻度跳动 "00:00 → 00:01 → 00:02..."</p>
+                    <p><strong>Camera:</strong> 快速推近 | 紧张节奏</p>
+                    <p><strong>Emotional:</strong> 紧迫感、同理心</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:03 - 0:10</div>
+                <div class="timeline-title">😰 Pain Point - 痛点共鸣</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 快速切换 - 手忙脚乱找水源/水温试了又试/宝宝哭声持续</p>
+                    <p><strong>Voiceover:</strong> "半夜起来调水温，等奶温好宝宝已经哭累了..."</p>
+                    <p><strong>On-screen Text:</strong> "调水温?等降温?手忙脚乱?"</p>
+                    <p><strong>Camera:</strong> 手持跟拍 | 混乱场景</p>
+                    <p><strong>Emotional:</strong> 代入感、痛点共鸣</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:10 - 0:15</div>
+                <div class="timeline-title">✨ Product Reveal - 产品出现</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 柔和光效 → 产品缓缓出现 | 薄荷绿+米白配色特写</p>
+                    <p><strong>Voiceover:</strong> "直到遇见Momcozy..."</p>
+                    <p><strong>On-screen Text:</strong> 品牌LOGO渐显 "momcozy"</p>
+                    <p><strong>Camera:</strong> 360°旋转展示 | 慢动作优雅</p>
+                    <p><strong>Emotional:</strong> 转机、期待</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:15 - 0:28</div>
+                <div class="timeline-title">⚡ Core Features - 核心功能演示</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 分屏/快速切换展示三大卖点</p>
+                    <p style="color: var(--jade-dark); font-weight: 600;">【静音模式】暖奶器静音指示灯亮起 | <35dB标注</p>
+                    <p style="color: var(--primary); font-weight: 600;">【30秒速热】温度计快速上升动画 | 25°C → 37°C</p>
+                    <p style="color: var(--coral); font-weight: 600;">【一键消毒】消毒器盖子打开 | 蒸汽效果 | 奶瓶整齐排列</p>
+                    <p><strong>Voiceover:</strong> "37°C精准控温，30秒速热，<35dB真静音..."</p>
+                    <p><strong>On-screen Text:</strong> 核心数据动画展示</p>
+                    <p><strong>Camera:</strong> 特写+中景切换 | 流畅转场</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:28 - 0:42</div>
+                <div class="timeline-title">👨‍👩‍👧 Real Scenes - 真实场景</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 真实用户场景混剪</p>
+                    <p>🌙 夜间：妈妈轻松单手操作，宝宝安静等待</p>
+                    <p>🚗 旅行：车内暖奶器+充电宝，随走随用</p>
+                    <p>☀️ 日常：放入奶瓶，一键启动，去忙其他事</p>
+                    <p><strong>Voiceover:</strong> "无论深夜还是旅途，温暖随时在线"</p>
+                    <p><strong>On-screen Text:</strong> 场景标签 "夜间喂奶·旅行便携·日常消毒"</p>
+                    <p><strong>Camera:</strong> 纪录片风格 | 自然光线 | 真实情绪</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:42 - 0:50</div>
+                <div class="timeline-title">🛡️ Trust Build - 信任背书</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 数据展示 + 认证标识</p>
+                    <p><strong>NPS 81.7</strong> | avg_rating 4.52 ⭐ | 2年质保</p>
+                    <p>BPA-Free | FDA认证 | CE认证</p>
+                    <p><strong>Voiceover:</strong> "81.7%用户推荐，4.52分好评，2年质保只换不修"</p>
+                    <p><strong>Camera:</strong> 数据动画 | 证书特写</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:50 - 0:58</div>
+                <div class="timeline-title">💕 Emotional Close - 情感收尾</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 温馨画面 - 妈妈抱着喂奶的宝宝 | 温暖微笑</p>
+                    <p><strong>Voiceover:</strong> "Momcozy，温暖每一刻"</p>
+                    <p><strong>On-screen Text:</strong> 品牌口号 "温暖每一刻"</p>
+                    <p><strong>Camera:</strong> 慢动作 | 柔焦 | 暖色调</p>
+                    <p><strong>Emotional:</strong> 温馨、信任、治愈</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">0:58 - 1:00</div>
+                <div class="timeline-title">🛒 CTA - 行动号召</div>
+                <div class="timeline-content">
+                    <p><strong>Visual:</strong> 产品+价格+购买按钮</p>
+                    <p><strong>On-screen Text:</strong> "立即购买" + 店铺链接</p>
+                    <p><strong>Voiceover:</strong> "点击下方链接，给宝宝更温暖的开始"</p>
+                    <p><strong>Camera:</strong> 产品特写 | CTA动画</p>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">视频时间轴甘特图</h4>
+        <div id="chart-video-timeline" class="chart"></div>
+    </section>
+
+    <!-- Module 6: 分镜设计 -->
+    <section id="sec6" class="section">
+        <div class="section-header">
+            <div class="section-icon">📽️</div>
+            <div>
+                <div class="section-title">模块6：商品视频制作方案 - 分镜设计</div>
+                <div class="section-subtitle">Storyboard & Shot Design</div>
+            </div>
+        </div>
+
+        <h4 style="margin: 24px 0 16px; color: var(--primary-dark);">分镜镜头角度分布图</h4>
+        <div id="chart-camera-distribution" class="chart"></div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">完整分镜表 (60秒视频)</h4>
+        <div class="storyboard">
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 01 | 0:00-0:03</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">3秒</div>
+                    <div class="story-frame-title">开场 - 宝宝哭声</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 特写 - 宝宝嘴巴</p>
+                        <p>📐 低角度微仰</p>
+                        <p>🎬 快速推近</p>
+                        <p>💡 暖色调</p>
+                        <p>📝 文字: 时间跳动</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 02 | 0:03-0:06</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">3秒</div>
+                    <div class="story-frame-title">妈妈焦虑</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 中景 - 妈妈手忙脚乱</p>
+                        <p>📐 手持跟拍</p>
+                        <p>🎬 轻微晃动</p>
+                        <p>💡 自然光</p>
+                        <p>📝 VO: 半夜调水温...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 03 | 0:06-0:10</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">4秒</div>
+                    <div class="story-frame-title">痛点展示</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 快速切换 3个镜头</p>
+                        <p>📐 混乱场景</p>
+                        <p>🎬 快切节奏</p>
+                        <p>💡 冷色调</p>
+                        <p>📝 文字: 手忙脚乱?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 04 | 0:10-0:15</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">5秒</div>
+                    <div class="story-frame-title">产品出现</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 产品360°展示</p>
+                        <p>📐 环绕运镜</p>
+                        <p>🎬 慢动作优雅</p>
+                        <p>💡 产品光效</p>
+                        <p>📝 LOGO渐显</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 05 | 0:15-0:20</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">5秒</div>
+                    <div class="story-frame-title">静音功能</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 暖奶器特写</p>
+                        <p>📐 侧光45°</p>
+                        <p>🎬 固定镜头</p>
+                        <p>💡 暗调+发光</p>
+                        <p>📝 数字: <35dB</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 06 | 0:20-0:25</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">5秒</div>
+                    <div class="story-frame-title">速热功能</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 温度计动画</p>
+                        <p>📐 垂直俯拍</p>
+                        <p>🎬 延时摄影</p>
+                        <p>💡 明亮干净</p>
+                        <p>📝 数字: 30秒</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 07 | 0:25-0:28</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">3秒</div>
+                    <div class="story-frame-title">消毒功能</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 消毒器内部</p>
+                        <p>📐 透视角度</p>
+                        <p>🎬 蒸汽效果</p>
+                        <p>💡 科技感</p>
+                        <p>📝 文字: UV+蒸汽</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 08 | 0:28-0:34</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">6秒</div>
+                    <div class="story-frame-title">夜间场景</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 真实卧室</p>
+                        <p>📐 中景叙事</p>
+                        <p>🎬 缓慢推近</p>
+                        <p>💡 月光氛围</p>
+                        <p>📝 VO: 深夜温暖</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 09 | 0:34-0:38</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">4秒</div>
+                    <div class="story-frame-title">旅行场景</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 车内/户外</p>
+                        <p>📐 侧面跟随</p>
+                        <p>🎬 稳定器</p>
+                        <p>💡 自然日光</p>
+                        <p>📝 VO: 旅途温暖</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 10 | 0:38-0:42</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">4秒</div>
+                    <div class="story-frame-title">日常场景</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 厨房台面</p>
+                        <p>📐 俯角45°</p>
+                        <p>🎬 平滑移动</p>
+                        <p>💡 明亮自然</p>
+                        <p>📝 VO: 日常守护</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 11 | 0:42-0:46</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">4秒</div>
+                    <div class="story-frame-title">数据展示</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 数字动画</p>
+                        <p>📐 居中特写</p>
+                        <p>🎬 数据跳动</p>
+                        <p>💡 品牌色背景</p>
+                        <p>📝 NPS/评分/质保</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 12 | 0:46-0:52</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">6秒</div>
+                    <div class="story-frame-title">情感收尾</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 母子温馨</p>
+                        <p>📐 柔焦中景</p>
+                        <p>🎬 慢动作</p>
+                        <p>💡 暖色调</p>
+                        <p>📝 品牌口号</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 13 | 0:52-0:58</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">6秒</div>
+                    <div class="story-frame-title">产品展示</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 双品组合</p>
+                        <p>📐 3/4角度</p>
+                        <p>🎬 缓慢旋转</p>
+                        <p>💡 产品光效</p>
+                        <p>📝 价格/优惠</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-frame">
+                <div class="story-frame-number">Scene 14 | 0:58-1:00</div>
+                <div class="story-frame-content">
+                    <div class="story-frame-time">2秒</div>
+                    <div class="story-frame-title">CTA结尾</div>
+                    <div class="story-frame-desc">
+                        <p>🎥 产品+按钮</p>
+                        <p>📐 简洁构图</p>
+                        <p>🎬 动态强调</p>
+                        <p>💡 高对比</p>
+                        <p>📝 立即购买</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">分镜技术规格表</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>镜头类型</th>
+                        <th>数量</th>
+                        <th>占比</th>
+                        <th>时长</th>
+                        <th>拍摄要点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-high">特写镜头</span></td>
+                        <td>6个</td>
+                        <td>43%</td>
+                        <td>25秒</td>
+                        <td>产品细节、功能展示、数字动画</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-info">中景镜头</span></td>
+                        <td>4个</td>
+                        <td>29%</td>
+                        <td>17秒</td>
+                        <td>场景叙事、情感表达</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-medium">全景镜头</span></td>
+                        <td>2个</td>
+                        <td>14%</td>
+                        <td>10秒</td>
+                        <td>产品整体展示、环境交代</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-low">运动镜头</span></td>
+                        <td>2个</td>
+                        <td>14%</td>
+                        <td>8秒</td>
+                        <td>360°展示、稳定器跟随</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Module 7: 制作规格 -->
+    <section id="sec7" class="section">
+        <div class="section-header">
+            <div class="section-icon">📐</div>
+            <div>
+                <div class="section-title">模块7：商品视频制作方案 - 制作规格</div>
+                <div class="section-subtitle">Production Specs & Platform Requirements</div>
+            </div>
+        </div>
+
+        <h4 style="margin: 24px 0 16px; color: var(--primary-dark);">平台适配规格对比表</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>比例</th>
+                        <th>分辨率</th>
+                        <th>时长</th>
+                        <th>帧率</th>
+                        <th>字幕</th>
+                        <th>特别要求</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="platform-tag tag-amazon">Amazon</span></td>
+                        <td>16:9</td>
+                        <td>1920×1080</td>
+                        <td>15-60秒</td>
+                        <td>23.976/29.97</td>
+                        <td>推荐</td>
+                        <td>A+内容优先</td>
+                    </tr>
+                    <tr>
+                        <td><span class="platform-tag tag-shopify">Shopify</span></td>
+                        <td>1:1 / 16:9</td>
+                        <td>1080×1080 / 1920×1080</td>
+                        <td>30-60秒</td>
+                        <td>24/30</td>
+                        <td>必须</td>
+                        <td>静音预览</td>
+                    </tr>
+                    <tr>
+                        <td><span class="platform-tag tag-instagram">Instagram</span></td>
+                        <td>9:16</td>
+                        <td>1080×1920</td>
+                        <td>15-30秒</td>
+                        <td>30</td>
+                        <td>必须</td>
+                        <td>Reels格式</td>
+                    </tr>
+                    <tr>
+                        <td><span class="platform-tag tag-tiktok">TikTok</span></td>
+                        <td>9:16</td>
+                        <td>1080×1920</td>
+                        <td>15-60秒</td>
+                        <td>30/60</td>
+                        <td>必须</td>
+                        <td>前3秒关键</td>
+                    </tr>
+                    <tr>
+                        <td><span class="platform-tag tag-youtube">YouTube Shorts</span></td>
+                        <td>9:16</td>
+                        <td>1080×1920</td>
+                        <td>≤60秒</td>
+                        <td>30</td>
+                        <td>推荐</td>
+                        <td>移动端优化</td>
+                    </tr>
+                    <tr>
+                        <td><span class="platform-tag tag-facebook">Facebook Ads</span></td>
+                        <td>1:1 / 16:9 / 9:16</td>
+                        <td>1080×1080</td>
+                        <td>15-60秒</td>
+                        <td>30</td>
+                        <td>必须</td>
+                        <td>CTA Overlay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card">
+                <h4>🎨 色彩调色 Color Grading</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li><strong>整体基调：</strong>暖色调，强调温馨感</li>
+                    <li><strong>高光：</strong>偏暖黄/金色，营造温暖氛围</li>
+                    <li><strong>阴影：</strong>保持细节，不过度压暗</li>
+                    <li><strong>品牌色：</strong>薄荷绿#A8D5BA、米白#F5F0E8保留</li>
+                    <li><strong>肤色：</strong>自然还原，避免过度饱和</li>
+                    <li><strong>对比度：</strong>适中，保持柔和感</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>🎵 音乐与音效 Music & Sound</h4>
+                <ul style="margin-left: 16px; font-size: 13px;">
+                    <li><strong>音乐风格：</strong>轻柔温馨钢琴/吉他背景音乐</li>
+                    <li><strong>节奏：</strong>慢-中-快-慢，符合情感曲线</li>
+                    <li><strong>音效：</strong>产品操作音（可选）</li>
+                    <li><strong>人声：</strong>温柔女声/妈妈声线</li>
+                    <li><strong>静音版本：</strong>必须准备，保留文字动画</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h4>✏️ 字幕样式 Subtitle Style</h4>
+            <div class="grid-2">
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; color: var(--primary-dark);">字幕规范：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>字体：无衬线字体（如PingFang/Helvetica）</li>
+                        <li>字号：画面高度的3-5%</li>
+                        <li>颜色：白色带黑色描边（#FFFFFF stroke 2px）</li>
+                        <li>位置：底部居中，距边缘10-15%</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; color: var(--primary-dark);">动态字幕：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>出现动画：淡入 0.3s</li>
+                        <li>消失动画：淡出 0.2s</li>
+                        <li>关键词可放大/变色强调</li>
+                        <li>数字数据使用弹跳动画</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h4>📝 Logo使用规范 Logo Usage</h4>
+            <div class="grid-2">
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; color: var(--primary-dark);">出现位置：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>视频10-15秒处：品牌首次亮相</li>
+                        <li>结尾前3秒：品牌口号+LOGO</li>
+                        <li>全程：水印可选（透明度20-30%）</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; color: var(--primary-dark);">使用规范：</p>
+                    <ul style="margin-left: 16px; font-size: 13px;">
+                        <li>LOGO颜色：深灰#424242</li>
+                        <li>尺寸：画面宽度8-12%</li>
+                        <li>间距：距边缘5%</li>
+                        <li>动画：淡入或轻微缩放</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h4>🖱️ CTA按钮设计 CTA Placement</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>平台</th>
+                            <th>CTA类型</th>
+                            <th>文案示例</th>
+                            <th>动画</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Amazon</td>
+                            <td>Video CTA / A+</td>
+                            <td>"立即选购" / "加入购物车"</td>
+                            <td>脉动效果</td>
+                        </tr>
+                        <tr>
+                            <td>Shopify</td>
+                            <td>视频卡片链接</td>
+                            <td>"立即购买" / "查看详情"</td>
+                            <td>弹出动画</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram</td>
+                            <td>贴纸/swipe up</td>
+                            <td>"立即购买" / "了解更多"</td>
+                            <td>循环动画</td>
+                        </tr>
+                        <tr>
+                            <td>TikTok</td>
+                            <td>购物车链接</td>
+                            <td>"立即下单" / "限时优惠"</td>
+                            <td>闪烁效果</td>
+                        </tr>
+                        <tr>
+                            <td>YouTube</td>
+                            <td>卡片/结束画面</td>
+                            <td>"查看链接" / "订阅频道"</td>
+                            <td>渐进显示</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h4 style="margin: 32px 0 16px; color: var(--primary-dark);">剪辑要点 Editing Notes</h4>
+        <div class="grid-3">
+            <div class="card">
+                <h4>🎬 剪辑节奏</h4>
+                <p style="font-size: 13px;">0-3s: 快节奏紧张 → 3-10s: 痛点铺垫 → 10-28s: 功能展示 → 28-42s: 场景演绎 → 42-58s: 情感升华 → 58-60s: CTA收尾</p>
+            </div>
+            <div class="card">
+                <h4>🔗 转场风格</h4>
+                <p style="font-size: 13px;">产品展示：缓慢推进 | 场景切换：叠化/淡入淡出 | 功能展示：硬切 | 情感段落：慢动作</p>
+            </div>
+            <div class="card">
+                <h4>💡 产品高亮</h4>
+                <p style="font-size: 13px;">发光效果/轮廓光强调 | 背景虚化突出主体 | 文字标注关键功能点 | 数字动画吸引注意</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 24px;">
+            <h4>📋 交付物清单</h4>
+            <div class="grid-3" style="margin-top: 12px;">
+                <div style="font-size: 13px;">
+                    <p style="font-weight: 600; margin-bottom: 6px;">📹 视频文件</p>
+                    <ul style="margin-left: 16px;">
+                        <li>原版 4K (Master)</li>
+                        <li>1080p 通用版</li>
+                        <li>各平台适配版</li>
+                    </ul>
+                </div>
+                <div style="font-size: 13px;">
+                    <p style="font-weight: 600; margin-bottom: 6px;">🖼️ 封面/缩略图</p>
+                    <ul style="margin-left: 16px;">
+                        <li>1920×1080 横版</li>
+                        <li>1080×1920 竖版</li>
+                        <li>1080×1080 方形</li>
+                    </ul>
+                </div>
+                <div style="font-size: 13px;">
+                    <p style="font-weight: 600; margin-bottom: 6px;">📝 配套素材</p>
+                    <ul style="margin-left: 16px;">
+                        <li>SRT字幕文件</li>
+                        <li>分镜PDF文档</li>
+                        <li>素材使用说明</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><span class="footer-brand">Momcozy</span> 产品六视图及视频制作方案 | Workflow 07</p>
+        <p style="margin-top: 8px;">温暖每一刻 | Safe · Convenient · Warm</p>
+    </div>
+</div>
+
+<!-- ECharts Scripts - Dynamic Loading -->
+<script>
+function loadEChartsAndInit() {
+    var sources = [
+        'https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js',
+        'https://unpkg.com/echarts@5.4.3/dist/echarts.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js'
+    ];
+    var idx = 0;
+    function tryLoad() {
+        if (typeof echarts !== 'undefined') { startInit(); return; }
+        if (idx >= sources.length) { console.warn('ECharts failed to load'); return; }
+        var s = document.createElement('script');
+        s.src = sources[idx];
+        s.onload = function() { startInit(); };
+        s.onerror = function() { idx++; tryLoad(); };
+        document.head.appendChild(s);
+    }
+    tryLoad();
+}
+
+function startInit() {
+    initSixViewChart();
+    initSellingPointsChart();
+    initDetailPriorityChart();
+    initEmotionSpectrumChart();
+    initScenePlanningChart();
+    initQualityChecklistChart();
+    initVideoTimelineChart();
+    initCameraDistributionChart();
+}
+
+// Initialize charts
+function initChart(domId) {
+    var dom = document.getElementById(domId);
+    if (!dom) return null;
+    return echarts.init(dom);
+}
+
+function initSixViewChart() {
+    var chart = initChart('chart-six-view');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '六视图角度拍摄规划', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: 80, right: 40, top: 60, bottom: 80 },
+        xAxis: {
+            type: 'category',
+            data: ['正面', '左侧', '底部', '右侧', '顶部', '背面'],
+            axisLabel: { rotate: 0, fontSize: 12 },
+            name: '拍摄角度'
+        },
+        yAxis: {
+            type: 'value',
+            name: '优先级分数',
+            max: 100,
+            axisLabel: { fontSize: 11 }
+        },
+        series: [
+            {
+                name: '消毒器',
+                type: 'bar',
+                data: [95, 80, 70, 75, 85, 65],
+                itemStyle: { color: '#82AE8E', borderRadius: [4, 4, 0, 0] },
+                label: { show: true, position: 'top', fontSize: 11 }
+            },
+            {
+                name: '暖奶器',
+                type: 'bar',
+                data: [90, 85, 70, 80, 75, 60],
+                itemStyle: { color: '#A8D5BA', borderRadius: [4, 4, 0, 0] },
+                label: { show: true, position: 'top', fontSize: 11 }
+            }
+        ]
+    };
+    chart.setOption(option);
+}
+
+function initSellingPointsChart() {
+    var chart = initChart('chart-selling-points');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '卖点图优先级矩阵', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'item', formatter: function(p) { return p.data[0] + '<br/>转化贡献度: ' + p.data[1] + '<br/>拍摄复杂度: ' + p.data[2]; } },
+        grid: { left: 80, right: 40, top: 60, bottom: 80 },
+        xAxis: { type: 'value', name: '拍摄复杂度 →', min: 0, max: 100, axisLabel: { fontSize: 11 } },
+        yAxis: { type: 'value', name: '转化贡献度 →', min: 0, max: 100, axisLabel: { fontSize: 11 } },
+        series: [{
+            type: 'scatter',
+            symbolSize: 30,
+            data: [
+                [20, 95, '质保升级'],
+                [30, 90, '静音夜间'],
+                [50, 88, '旅行便携'],
+                [40, 85, '30秒速热'],
+                [35, 80, '一键消毒'],
+                [25, 75, '精准控温'],
+                [60, 70, '场景图'],
+                [70, 65, '细节图']
+            ],
+            itemStyle: {
+                color: function(p) {
+                    if (p.data[1] >= 85) return '#D75B70';
+                    if (p.data[1] >= 75) return '#F37969';
+                    return '#82AE8E';
+                }
+            },
+            label: {
+                show: true,
+                formatter: function(p) { return p.data[3] || p.data[2]; },
+                position: 'right',
+                fontSize: 11
+            }
+        }]
+    };
+    chart.setOption(option);
+}
+
+function initDetailPriorityChart() {
+    var chart = initChart('chart-detail-priority');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '细节图拍摄优先级', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: 100, right: 40, top: 60, bottom: 80 },
+        xAxis: { type: 'value', name: '优先级评分', max: 100, axisLabel: { fontSize: 11 } },
+        yAxis: {
+            type: 'category',
+            data: ['LED触控屏', '温度显示', 'USB-C接口', '静音指示灯', '密封胶圈', '散热通风孔', 'UV发生器', '加热底座'],
+            axisLabel: { fontSize: 11 }
+        },
+        series: [{
+            type: 'bar',
+            data: [92, 90, 88, 85, 78, 75, 72, 70],
+            itemStyle: {
+                color: function(p) {
+                    if (p.data >= 85) return '#D75B70';
+                    if (p.data >= 75) return '#F37969';
+                    return '#82AE8E';
+                },
+                borderRadius: [0, 4, 4, 0]
+            },
+            label: { show: true, position: 'right', fontSize: 11 }
+        }]
+    };
+    chart.setOption(option);
+}
+
+function initEmotionSpectrumChart() {
+    var chart = initChart('chart-emotion-spectrum');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '场景情绪光谱图', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'axis' },
+        radar: {
+            indicator: [
+                { name: '温馨感', max: 100 },
+                { name: '安心度', max: 100 },
+                { name: '便捷感', max: 100 },
+                { name: '品质感', max: 100 },
+                { name: '轻松感', max: 100 }
+            ],
+            radius: '65%',
+            name: { textStyle: { fontSize: 11, color: '#666' } }
+        },
+        series: [{
+            type: 'radar',
+            data: [
+                {
+                    value: [95, 90, 85, 75, 70],
+                    name: '夜间喂奶',
+                    lineStyle: { color: '#6A89AF' },
+                    areaStyle: { color: 'rgba(106, 137, 175, 0.3)' },
+                    label: { show: true }
+                },
+                {
+                    value: [80, 70, 95, 65, 90],
+                    name: '旅行便携',
+                    lineStyle: { color: '#F37969' },
+                    areaStyle: { color: 'rgba(243, 121, 105, 0.3)' },
+                    label: { show: true }
+                },
+                {
+                    value: [85, 95, 90, 85, 75],
+                    name: '日常消毒',
+                    lineStyle: { color: '#82AE8E' },
+                    areaStyle: { color: 'rgba(130, 174, 142, 0.3)' },
+                    label: { show: true }
+                },
+                {
+                    value: [90, 88, 80, 90, 85],
+                    name: '厨房台面',
+                    lineStyle: { color: '#D0B671' },
+                    areaStyle: { color: 'rgba(208, 182, 113, 0.3)' },
+                    label: { show: true }
+                }
+            ]
+        }]
+    };
+    chart.setOption(option);
+}
+
+function initScenePlanningChart() {
+    var chart = initChart('chart-scene-planning');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '场景图拍摄规划', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: ['拍摄数量', '预计时长'], top: 30 },
+        grid: { left: 80, right: 40, top: 80, bottom: 60 },
+        xAxis: {
+            type: 'category',
+            data: ['夜间喂奶', '旅行便携', '日常消毒', '厨房台面', '配件组合'],
+            axisLabel: { rotate: 15, fontSize: 11 }
+        },
+        yAxis: [
+            { type: 'value', name: '拍摄数量', axisLabel: { fontSize: 11 } },
+            { type: 'value', name: '预计时长(分钟)', axisLabel: { fontSize: 11 } }
+        ],
+        series: [
+            {
+                name: '拍摄数量',
+                type: 'bar',
+                data: [8, 6, 5, 5, 4],
+                itemStyle: { color: '#D75B70', borderRadius: [4, 4, 0, 0] },
+                label: { show: true, position: 'top', fontSize: 11 }
+            },
+            {
+                name: '预计时长',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [120, 90, 75, 75, 60],
+                lineStyle: { color: '#6A89AF', width: 3 },
+                itemStyle: { color: '#6A89AF' },
+                label: { show: true, position: 'top', fontSize: 11 },
+                smooth: true
+            }
+        ]
+    };
+    chart.setOption(option);
+}
+
+function initQualityChecklistChart() {
+    var chart = initChart('chart-quality-checklist');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '后期规范检查清单', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: 150, right: 40, top: 60, bottom: 60 },
+        xAxis: { type: 'value', max: 100, name: '完成度%', axisLabel: { fontSize: 11 } },
+        yAxis: {
+            type: 'category',
+            data: ['色彩还原一致', '材质纹理清晰', '阴影自然过渡', '背景干净整洁', '文字规范呈现', '比例尺寸统一'],
+            axisLabel: { fontSize: 11 }
+        },
+        series: [{
+            type: 'bar',
+            data: [98, 95, 92, 99, 90, 96],
+            itemStyle: {
+                color: function(p) {
+                    if (p.data >= 95) return '#82AE8E';
+                    return '#F37969';
+                },
+                borderRadius: [0, 4, 4, 0]
+            },
+            label: { show: true, position: 'right', formatter: '{c}%', fontSize: 11 }
+        }]
+    };
+    chart.setOption(option);
+}
+
+function initVideoTimelineChart() {
+    var chart = initChart('chart-video-timeline');
+    if (!chart) return;
+    
+    // Gantt-style timeline
+    var categories = ['开场吸引', '痛点呈现', '产品出现', '功能演示', '场景展示', '信任背书', '情感收尾', 'CTA转化'];
+    var data = [
+        { name: '开场吸引', value: 0, duration: 3 },
+        { name: '痛点呈现', value: 1, duration: 7 },
+        { name: '产品出现', value: 2, duration: 5 },
+        { name: '功能演示', value: 3, duration: 13 },
+        { name: '场景展示', value: 4, duration: 14 },
+        { name: '信任背书', value: 5, duration: 8 },
+        { name: '情感收尾', value: 6, duration: 6 },
+        { name: 'CTA转化', value: 7, duration: 4 }
+    ];
+    
+    var option = {
+        title: { text: '视频时间轴甘特图', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: {
+            formatter: function(p) {
+                return p.data.name + '<br/>时长: ' + p.data.duration + '秒<br/>时间: ' + getTimeRange(p.data.value, p.data.duration);
+            }
+        },
+        grid: { left: 100, right: 40, top: 60, bottom: 60 },
+        xAxis: {
+            type: 'value',
+            min: 0,
+            max: 60,
+            name: '时间(秒)',
+            axisLabel: {
+                formatter: function(v) { return v + 's'; },
+                fontSize: 11
+            },
+            markLine: {
+                data: [{ xAxis: 60, name: '60s' }],
+                lineStyle: { color: '#999' }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: categories,
+            axisLabel: { fontSize: 11 }
+        },
+        series: [{
+            type: 'bar',
+            stack: 'total',
+            barWidth: 25,
+            data: data.map(function(item, idx) {
+                var start = getStartTime(data.slice(0, idx));
+                return {
+                    name: item.name,
+                    value: start,
+                    duration: item.duration,
+                    itemStyle: {
+                        color: ['#D75B70', '#E08090', '#F37969', '#82AE8E', '#A8D5BA', '#D0B671', '#6A89AF', '#C1CEDE'][idx],
+                        borderRadius: idx === data.length - 1 ? [0, 4, 4, 0] : 0
+                    }
+                };
+            }),
+            label: {
+                show: true,
+                formatter: function(p) { return p.data.duration + 's'; },
+                position: 'inside',
+                fontSize: 11,
+                color: 'white'
+            }
+        }]
+    };
+    
+    function getStartTime(arr) {
+        return arr.reduce(function(sum, item) { return sum + item.duration; }, 0);
+    }
+    
+    function getTimeRange(idx, dur) {
+        var start = 0;
+        for (var i = 0; i < idx; i++) {
+            start += data[i].duration;
+        }
+        return start + 's - ' + (start + dur) + 's';
+    }
+    
+    chart.setOption(option);
+}
+
+function initCameraDistributionChart() {
+    var chart = initChart('chart-camera-distribution');
+    if (!chart) return;
+    
+    var option = {
+        title: { text: '分镜镜头角度分布', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
+        tooltip: { trigger: 'item', formatter: '{b}: {c}个 ({d}%)' },
+        legend: { orient: 'vertical', right: '5%', top: 'center' },
+        series: [
+            {
+                type: 'pie',
+                radius: ['40%', '70%'],
+                center: ['40%', '50%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 6,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: true,
+                    formatter: '{b}\n{c}个',
+                    fontSize: 12
+                },
+                labelLine: { show: true },
+                data: [
+                    { value: 6, name: '特写镜头', itemStyle: { color: '#D75B70' } },
+                    { value: 4, name: '中景镜头', itemStyle: { color: '#82AE8E' } },
+                    { value: 2, name: '全景镜头', itemStyle: { color: '#6A89AF' } },
+                    { value: 2, name: '运动镜头', itemStyle: { color: '#D0B671' } }
+                ]
+            }
+        ]
+    };
+    chart.setOption(option);
+}
+
+// Initialize when DOM ready
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(loadEChartsAndInit, 1);
+} else {
+    document.addEventListener('DOMContentLoaded', loadEChartsAndInit);
+}
+
+// Resize handler
+window.addEventListener('resize', function() {
+    if (typeof echarts !== 'undefined') {
+        var charts = document.querySelectorAll('.chart');
+        charts.forEach(function(dom) {
+            var chart = echarts.getInstanceByDom(dom);
+            if (chart) chart.resize();
+        });
+    }
+});
+</script>
+
+</body>
+</html>

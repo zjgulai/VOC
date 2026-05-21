@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品与定义 · Momcozy E2E洞察报告库</title>
+    <style>
+        :root {
+            --fr-50: #FCF6F7;
+            --fr-100: #FCF6F7;
+            --fr-200: #EFBEC6;
+            --fr-300: #E08090;
+            --fr-400: #DA687A;
+            --fr-500: #D75B70;
+            --fr-600: #CD374F;
+            --fr-700: #A7293D;
+            --fr-800: #801F2F;
+            --fr-900: #56151F;
+            --ci-500: #D04E59;
+            --ci-600: #C03340;
+            --ci-700: #992833;
+            --mp-200: #FCF6F7;
+            --mp-300: #F6DFE2;
+            --ec-500: #F2EBC8;
+            --co-500: #F37969;
+            --co-600: #EF4D38;
+            --rg-500: #D0B671;
+            --jg-500: #82AE8E;
+            --jg-600: #669C74;
+            --jg-700: #517D5D;
+            --ce-100: #F8F9FB;
+            --ce-500: #C1CEDE;
+            --ce-700: #6A89AF;
+            --ce-900: #32465E;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--fr-50);
+            color: var(--fr-900);
+            line-height: 1.6;
+        }
+        .nav-bar {
+            background: #ffffff;
+            border-bottom: 3px solid var(--fr-500);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.08);
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--fr-700);
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 6px; }
+        .nav-link {
+            color: var(--ce-700);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .nav-link:hover { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); }
+        .nav-link.active { background: rgba(215,91,112,0.1); color: var(--fr-700); border-color: var(--fr-300); font-weight: 600; }
+
+        .page-hero {
+            padding: 60px 20px 30px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--fr-600), var(--fr-800));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .page-hero p { font-size: 15px; color: var(--ci-700); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
+
+        .stage-block { margin-bottom: 50px; }
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .stage-number {
+            background: linear-gradient(135deg, var(--fr-500), var(--fr-700));
+            color: #ffffff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .stage-title { font-size: 24px; color: var(--fr-800); font-weight: 700; }
+
+        .report-section {
+            background: #ffffff;
+            border: 1px solid var(--mp-300);
+            border-radius: 14px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(86,21,31,0.06);
+        }
+        .report-section:hover {
+            border-color: var(--fr-500);
+            box-shadow: 0 4px 20px rgba(215,91,112,0.10);
+        }
+        .report-section h3 {
+            font-size: 20px;
+            color: var(--fr-700);
+            margin-bottom: 10px;
+        }
+        .report-desc {
+            font-size: 14px;
+            color: var(--ce-700);
+            margin-bottom: 18px;
+            line-height: 1.8;
+        }
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .module-tag {
+            background: rgba(215,91,112,0.06);
+            border: 1px solid var(--mp-300);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--fr-800);
+            text-align: center;
+        }
+        .btn-view {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--fr-500), var(--fr-700));
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-view:hover {
+            background: linear-gradient(135deg, var(--fr-600), var(--fr-800));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(215,91,112,0.25);
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--fr-400);
+            margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--ce-500);
+            font-size: 12px;
+            border-top: 1px solid var(--mp-300);
+        }
+
+        .concept-highlight {
+            background: rgba(215,91,112,0.06);
+            border-left: 3px solid var(--fr-500);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--fr-800);
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html" class="nav-title">Momcozy E2E 洞察</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="strategy.html" class="nav-link">策略与洞察</a>
+        <a href="product.html" class="nav-link active">产品与定义</a>
+        <a href="execution.html" class="nav-link">落地与执行</a>
+        <a href="reports/e2e-v5.html" class="nav-link" style="border-color: var(--fr-300); color: var(--fr-600);">E2E完整报告</a>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <h1>产品与定义</h1>
+    <p>从机会矩阵到产品概念图，消毒器真烘干 + 暖奶器精准温控双线推进</p>
+</div>
+
+<div class="container">
+
+    <!-- Stage 3 -->
+    <div class="stage-block">
+        <div class="stage-header">
+            <div class="stage-number">3</div>
+            <div class="stage-title">产品机会挖掘与企划方案</div>
+        </div>
+
+        <div class="report-section">
+            <h3>产品机会挖掘与企划方案报告</h3>
+            <p class="report-desc">
+                基于用户需求深潜结果，交叉验证市场数据和竞争格局，构建产品机会优先级矩阵（P0/P1/P2）。
+                消毒器真烘干突破（18,432条负向）+ 暖奶器精准温控升级（50,117条内部负向）。
+            </p>
+            <div class="module-grid">
+                <div class="module-tag">机会优先级矩阵</div>
+                <div class="module-tag">市场规模测算</div>
+                <div class="module-tag">竞争定位分析</div>
+                <div class="module-tag">ROI预估</div>
+            </div>
+            <a href="reports/stage3-opportunity.html" class="btn-view">查看报告</a>
+        </div>
+    </div>
+
+    <div class="flow-arrow">&#8595;</div>
+
+    <!-- Stage 4 -->
+    <div class="stage-block">
+        <div class="stage-header">
+            <div class="stage-number">4</div>
+            <div class="stage-title">产品定义与视觉转化</div>
+        </div>
+
+        <div class="report-section">
+            <h3>超级产品定义与视觉转化企划书</h3>
+            <p class="report-desc">
+                将产品机会转化为具体可执行的超级产品定义，包含品牌视觉策略和7张AI生成产品概念图。
+                消毒器="放心"（安心+干爽），暖奶器="省心"（零试错确定性）。
+            </p>
+            <div class="module-grid">
+                <div class="module-tag">产品核心定义</div>
+                <div class="module-tag">品牌视觉策略</div>
+                <div class="module-tag">AI产品概念图</div>
+                <div class="module-tag">材质与CMF方案</div>
+            </div>
+            <div class="concept-highlight">
+                消毒器核心定义："放心" — 不是"杀菌"，是安心+干爽；暖奶器核心定义："省心" — 不是"加热"，是零试错确定性
+            </div>
+            <a href="reports/stage4-product-definition.html" class="btn-view" style="margin-top: 16px;">查看报告</a>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    Stage 3-4 · 产品与定义 · Momcozy E2E洞察报告库
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow06 - 产品网站设计与SEO优化方案 | Momcozy</title>
+    <style>
+        :root {
+            --primary: #D75B70;
+            --primary-dark: #A7293D;
+            --primary-darker: #801F2F;
+            --secondary: #D04E59;
+            --secondary-dark: #992833;
+            --coral: #F37969;
+            --coral-dark: #EF4D38;
+            --gold: #D0B671;
+            --gold-dark: #C3A34D;
+            --jade: #82AE8E;
+            --jade-dark: #517D5D;
+            --cerulean: #C1CEDE;
+            --cerulean-dark: #32465E;
+            --cerulean-light: #6A89AF;
+            --pink: #E08090;
+            --pink-light: #F6DFE2;
+            --background: #FCF6F7;
+            
+            /* Momcozy Brand Colors */
+            --mint: #A8D5BA;
+            --mint-dark: #8BB396;
+            --cream: #F5F0E8;
+            --gray-soft: #9E9E9E;
+            --gray-dark: #424242;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(215, 91, 112, 0.3);
+        }
+        
+        .nav-brand {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-brand span {
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px 48px;
+        }
+        
+        /* Header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 48px 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 16px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .report-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .report-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .report-header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .report-header .brand-tag {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--pink-light);
+        }
+        
+        .section-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            margin-right: 16px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+        
+        .section-desc {
+            color: var(--gray-soft);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .card {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--pink-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(215, 91, 112, 0.15);
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--mint) 0%, var(--jade) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 8px;
+        }
+        
+        .card-content {
+            font-size: 14px;
+            color: var(--gray-soft);
+        }
+        
+        .card-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--pink-light);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+        
+        /* Table Styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+        
+        .data-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+        
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--pink-light);
+        }
+        
+        .data-table tr:hover {
+            background: var(--pink-light);
+        }
+        
+        .data-table tr:last-child td:first-child {
+            border-radius: 0 0 0 8px;
+        }
+        
+        .data-table tr:last-child td:last-child {
+            border-radius: 0 0 8px 0;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            margin: 24px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--pink-light);
+        }
+        
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--jade) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        
+        .info-box-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-box-content {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .badge-gold {
+            background: var(--gold);
+            color: white;
+        }
+        
+        .badge-jade {
+            background: var(--jade);
+            color: white;
+        }
+        
+        .badge-mint {
+            background: var(--mint);
+            color: var(--gray-dark);
+        }
+        
+        /* Flow Diagram */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: var(--background);
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        
+        .flow-step {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary);
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .flow-arrow {
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        /* Highlight Section */
+        .highlight-section {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--background) 100%);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .highlight-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        /* Page Preview */
+        .page-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .page-preview {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .page-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .page-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .page-mockup {
+            height: 160px;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--pink-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--mint);
+        }
+        
+        .page-info {
+            padding: 16px;
+        }
+        
+        .page-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 4px;
+        }
+        
+        .page-type {
+            font-size: 12px;
+            color: var(--gray-soft);
+        }
+        
+        /* CTA Button */
+        .cta-demo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--mint) 0%, var(--jade) 100%);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-demo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(130, 174, 142, 0.4);
+        }
+        
+        /* SEO Keywords */
+        .keyword-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 24px;
+        }
+        
+        .keyword-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .keyword-tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .keyword-high {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .keyword-medium {
+            background: var(--coral);
+            color: white;
+        }
+        
+        .keyword-low {
+            background: var(--mint);
+            color: var(--gray-dark);
+        }
+        
+        /* Brand Colors Showcase */
+        .brand-colors {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        
+        .color-swatch {
+            text-align: center;
+        }
+        
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .color-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .color-code {
+            font-size: 11px;
+            color: var(--gray-soft);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--gray-soft);
+            font-size: 14px;
+        }
+        
+        .footer-brand {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* List Styling */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--pink-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        /* Module Card */
+        .module-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--pink-light);
+            transition: border-color 0.3s;
+        }
+        
+        .module-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+        
+        .module-priority {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .priority-high {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .priority-medium {
+            background: var(--gold);
+            color: white;
+        }
+        
+        .priority-normal {
+            background: var(--mint);
+            color: var(--gray-dark);
+        }
+    </style>
+<style>
+.nav-bar { top: 36px !important; }
+</style>
+</head>
+<body>
+
+<div class="site-global-nav" style="
+    position:fixed;top:0;left:0;right:0;z-index:1001;height:36px;
+    background:var(--fr-800);display:flex;align-items:center;justify-content:center;
+    gap:20px;font-size:12px;box-shadow:0 1px 6px rgba(0,0,0,0.15);
+">
+    <a href="../index.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">首页</a>
+    <a href="../strategy.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">策略与洞察</a>
+    <a href="../product.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">产品与定义</a>
+    <a href="../execution.html" style="color:#FCF6F7;text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;">落地与执行</a>
+    <a href="../index.html" style="color:var(--rg-500);text-decoration:none;padding:4px 10px;border-radius:4px;transition:all 0.3s;font-weight:600;">E2E报告库</a>
+</div>
+<style>
+.site-global-nav a:hover{background:rgba(255,255,255,0.12);}
+</style>
+
+
+    <nav class="nav">
+        <div class="nav-brand">Momcozy <span>| 产品网站设计</span></div>
+        <div class="nav-links">
+            <a href="#architecture">网站架构</a>
+            <a href="#pdp">PDP详情页</a>
+            <a href="#visual">视觉策略</a>
+            <a href="#seo">SEO优化</a>
+            <a href="#conversion">转化策略</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Report Header -->
+        <div class="report-header">
+            <h1>产品网站设计与SEO优化方案</h1>
+            <p class="subtitle">Momcozy 喂养电器 | UV消毒器 & 暖奶器</p>
+            <span class="brand-tag">Workflow 06 | 温暖每一刻</span>
+        </div>
+
+        <!-- Module 1: Website Architecture -->
+        <section id="architecture" class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <h2 class="section-title">网站架构设计</h2>
+                    <p class="section-desc">MVP 6页产品网站架构 · 站点地图可视化</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box-title">🎯 设计目标</div>
+                <div class="info-box-content">
+                    构建极简高效的Momcozy产品网站，突出"温暖每一刻"品牌价值，围绕NPS 81.7高口碑和质保服务升级核心机会点，通过清晰的信息架构实现高效转化。
+                </div>
+            </div>
+
+            <h3 class="chart-title">📍 网站站点地图</h3>
+            <div class="chart-container">
+                <div id="sitemapChart" class="chart"></div>
+            </div>
+
+            <h3 class="chart-title" style="margin-top: 32px;">📋 页面结构定义</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>页面ID</th>
+                        <th>页面名称</th>
+                        <th>页面类型</th>
+                        <th>URL别名</th>
+                        <th>转化目标</th>
+                        <th>移动优先</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">P01</span></td>
+                        <td>Landing Page</td>
+                        <td>首页/落地页</td>
+                        <td>/ 或 /home</td>
+                        <td>品牌认知 + 产品点击</td>
+                        <td><span class="badge badge-jade">✓ 高优先</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">P02</span></td>
+                        <td>Product Catalog</td>
+                        <td>产品目录</td>
+                        <td>/products</td>
+                        <td>产品浏览 + 比较</td>
+                        <td><span class="badge badge-jade">✓ 高优先</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-secondary">P03</span></td>
+                        <td>Product Detail</td>
+                        <td>商品详情页</td>
+                        <td>/products/{slug}</td>
+                        <td>加入购物车/购买</td>
+                        <td><span class="badge badge-jade">✓ 高优先</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">P04</span></td>
+                        <td>About Us</td>
+                        <td>品牌故事</td>
+                        <td>/about</td>
+                        <td>品牌信任 + 情感连接</td>
+                        <td><span class="badge badge-gold">○ 中优先</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">P05</span></td>
+                        <td>FAQ</td>
+                        <td>常见问题</td>
+                        <td>/faq</td>
+                        <td>疑虑消除 + 信任建立</td>
+                        <td><span class="badge badge-jade">✓ 高优先</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-mint">P06</span></td>
+                        <td>Contact</td>
+                        <td>联系我们</td>
+                        <td>/contact</td>
+                        <td>客服支持 + 售前咨询</td>
+                        <td><span class="badge badge-mint">△ 一般</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="chart-title" style="margin-top: 32px;">🔄 用户浏览路径</h3>
+            <div class="flow-container">
+                <div class="flow-step">首页 Landing</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">产品目录 Products</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">商品详情 PDP</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Checkout</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">确认订单</div>
+            </div>
+
+            <div class="highlight-section">
+                <div class="highlight-title">💡 移动端用户流程优先级</div>
+                <ul class="feature-list">
+                    <li>
+                        <span class="feature-icon">1</span>
+                        <div><strong>高优先级路径：</strong>首页 → 产品列表 → PDP → 加购 → 结算（全流程移动优化）</div>
+                    </li>
+                    <li>
+                        <span class="feature-icon">2</span>
+                        <div><strong>次优先级路径：</strong>首页 → 品牌故事 → FAQ → 返回产品页</div>
+                    </li>
+                    <li>
+                        <span class="feature-icon">3</span>
+                        <div><strong>辅助路径：</strong>产品页内链跳转、相关产品推荐、评论区引流</div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Module 2: PDP Structure -->
+        <section id="pdp" class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <h2 class="section-title">PDP商品详情页结构</h2>
+                    <p class="section-desc">高转化产品详情页模块设计 · 优先级矩阵 · 转化漏斗</p>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">转化核心指标</div>
+                    <div class="card-content">
+                        基于VOC分析，质保痛点(2088次)为最高转化障碍，需在PDP首屏强化质保服务展示。
+                    </div>
+                    <span class="card-tag">信任先行</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <div class="card-title">移动端适配</div>
+                    <div class="card-content">
+                        移动端首屏需包含：产品图、核心卖点、CTA按钮，避免过多信息折叠。
+                    </div>
+                    <span class="card-tag">Mobile First</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <div class="card-title">NPS 81.7 驱动</div>
+                    <div class="card-content">
+                        高口碑产品，善用评分4.52和真实用户评价作为社会证明核心素材。
+                    </div>
+                    <span class="card-tag">口碑转化</span>
+                </div>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">📊 PDP模块优先级矩阵</div>
+                    <div id="pdpPriorityChart" class="chart" style="height: 350px;"></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">🔻 用户浏览转化漏斗</div>
+                    <div id="funnelChart" class="chart" style="height: 350px;"></div>
+                </div>
+            </div>
+
+            <h3 class="chart-title" style="margin-top: 32px;">📋 PDP模块详细定义</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>模块ID</th>
+                        <th>模块名称</th>
+                        <th>内容类型</th>
+                        <th>优先级</th>
+                        <th>转化角色</th>
+                        <th>移动端布局</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">M01</span></td>
+                        <td>首屏产品价值区</td>
+                        <td>hero</td>
+                        <td><span class="priority-high module-priority">P0 最高</span></td>
+                        <td>第一印象 + 核心价值主张</td>
+                        <td>首屏必现</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">M02</span></td>
+                        <td>产品主图区</td>
+                        <td>product_gallery</td>
+                        <td><span class="priority-high module-priority">P0 最高</span></td>
+                        <td>产品视觉确认</td>
+                        <td>可滑动图组</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">M03</span></td>
+                        <td>核心卖点区</td>
+                        <td>features</td>
+                        <td><span class="priority-high module-priority">P0 最高</span></td>
+                        <td>快速决策支撑</td>
+                        <td>3要点卡片</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-secondary">M04</span></td>
+                        <td>功能与利益转化区</td>
+                        <td>benefits</td>
+                        <td><span class="priority-medium module-priority">P1 高</span></td>
+                        <td>痛点解决方案</td>
+                        <td>左右交替</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-secondary">M05</span></td>
+                        <td>使用场景区</td>
+                        <td>usage_scenario</td>
+                        <td><span class="priority-medium module-priority">P1 高</span></td>
+                        <td>场景共鸣激发</td>
+                        <td>生活方式图</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">M06</span></td>
+                        <td>产品细节与材质区</td>
+                        <td>product_detail</td>
+                        <td><span class="priority-normal module-priority">P2 中</span></td>
+                        <td>品质确认</td>
+                        <td>可展开详情</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">M07</span></td>
+                        <td>社会证明区</td>
+                        <td>social_proof</td>
+                        <td><span class="priority-medium module-priority">P1 高</span></td>
+                        <td>口碑背书</td>
+                        <td>评分+评论</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">M08</span></td>
+                        <td>信任保障区</td>
+                        <td>trust</td>
+                        <td><span class="priority-medium module-priority">P1 高</span></td>
+                        <td>购买阻力消除</td>
+                        <td>图标列表</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-mint">M09</span></td>
+                        <td>FAQ区</td>
+                        <td>faq</td>
+                        <td><span class="priority-normal module-priority">P2 中</span></td>
+                        <td>疑虑消除</td>
+                        <td>手风琴式</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">M10</span></td>
+                        <td>购买CTA区</td>
+                        <td>cta</td>
+                        <td><span class="priority-high module-priority">P0 最高</span></td>
+                        <td>最终转化</td>
+                        <td>固定底部</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Module 3: Core Page Structure -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div>
+                    <h2 class="section-title">核心页面结构设计</h2>
+                    <p class="section-desc">Landing · Product · About 三大核心页面详细规划</p>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-title">🏠 Landing Page 首页</div>
+                    <span class="priority-high module-priority">高转化落地页</span>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">页面Sections</h4>
+                        <ul class="feature-list">
+                            <li><span class="feature-icon">1</span><div><strong>Hero首屏：</strong>品牌标语"温暖每一刻" + 主打产品形象 + 主CTA"探索产品"</div></li>
+                            <li><span class="feature-icon">2</span><div><strong>产品组合展示：</strong>消毒器+暖奶器双品图 + 差异化卖点摘要</div></li>
+                            <li><span class="feature-icon">3</span><div><strong>核心卖点区：</strong>3大买点图标展示（一键消毒/精准控温/静音设计）</div></li>
+                            <li><span class="feature-icon">4</span><div><strong>使用场景区：</strong>夜间喂奶、旅行出行、家庭使用场景图</div></li>
+                            <li><span class="feature-icon">5</span><div><strong>口碑展示区：</strong>NPS 81.7 + 4.52评分 + 精选评价</div></li>
+                            <li><span class="feature-icon">6</span><div><strong>质保服务区：</strong>升级质保服务亮点（核心痛点解决方案）</div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">CTA布局策略</h4>
+                        <div class="highlight-section" style="margin: 0 0 16px 0;">
+                            <strong>Primary CTA：</strong>"立即选购" / "探索产品"<br>
+                            <strong>Secondary CTA：</strong>"了解更多" / "查看评价"<br>
+                            <strong>Sticky Mobile CTA：</strong>底部固定"立即购买"按钮
+                        </div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">移动端优先级</h4>
+                        <ul class="feature-list" style="font-size: 13px;">
+                            <li><span class="feature-icon">A</span><div><strong>首屏价值点：</strong>品牌标语 + 主CTA + 产品图</div></li>
+                            <li><span class="feature-icon">B</span><div><strong>核心卖点：</strong>3要点快速浏览</div></li>
+                            <li><span class="feature-icon">C</span><div><strong>早期信任元素：</strong>评分展示 + 质保承诺图标</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-title">🛍️ Product 产品页</div>
+                    <span class="priority-medium module-priority">产品目录页</span>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">页面Sections</h4>
+                        <ul class="feature-list">
+                            <li><span class="feature-icon">1</span><div><strong>产品分类导航：</strong>消毒器 / 暖奶器 / 配件</div></li>
+                            <li><span class="feature-icon">2</span><div><strong>产品卡片网格：</strong>产品图 + 名称 + 价格 + 评分 + 快速CTA</div></li>
+                            <li><span class="feature-icon">3</span><div><strong>产品比较区：</strong>消毒器vs暖奶器核心参数对比</div></li>
+                            <li><span class="feature-icon">4</span><div><strong>组合购买引导：</strong>"喂养套装"组合推荐</div></li>
+                            <li><span class="feature-icon">5</span><div><strong>筛选与排序：</strong>按功能/价格/评分筛选</div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">CTA布局策略</h4>
+                        <div class="highlight-section" style="margin: 0 0 16px 0;">
+                            <strong>Primary CTA：</strong>"查看详情"<br>
+                            <strong>Secondary CTA：</strong>"加入心愿单" / "比较"<br>
+                            <strong>Sticky Mobile CTA：</strong>底部"查看全部产品"
+                        </div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">产品卡片元素</h4>
+                        <div style="font-size: 13px; color: var(--gray-soft);">
+                            产品图 | 产品名 | 核心功能标签 | ¥价格 | ★4.52评分 | 质保标识
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-header">
+                    <div class="module-title">💝 About 品牌故事</div>
+                    <span class="priority-normal module-priority">品牌信任页</span>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">页面Sections</h4>
+                        <ul class="feature-list">
+                            <li><span class="feature-icon">1</span><div><strong>品牌理念区：</strong>"温暖每一刻"品牌故事 + 创始愿景</div></li>
+                            <li><span class="feature-icon">2</span><div><strong>产品设计哲学：</strong>安全、便捷、温暖三大核心价值</div></li>
+                            <li><span class="feature-icon">3</span><div><strong>品质承诺区：</strong>材质说明 + 安全认证 + 质检流程</div></li>
+                            <li><span class="feature-icon">4</span><div><strong>用户故事：</strong>真实用户使用场景与反馈</div></li>
+                            <li><span class="feature-icon">5</span><div><strong>联系我们：</strong>客服渠道 + 社交媒体</div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">CTA布局策略</h4>
+                        <div class="highlight-section" style="margin: 0 0 16px 0;">
+                            <strong>Primary CTA：</strong>"选购产品"<br>
+                            <strong>Secondary CTA：</strong>"查看FAQ" / "联系我们"<br>
+                            <strong>Sticky Mobile CTA：</strong>底部"开始选购"
+                        </div>
+                        <h4 style="margin-bottom: 12px; color: var(--primary);">信任建立元素</h4>
+                        <div style="font-size: 13px; color: var(--gray-soft);">
+                            安全认证图标 | 材质说明 | 质检流程图 | 用户评价精选 | 品牌故事视频
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 4: Visual Strategy -->
+        <section id="visual" class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div>
+                    <h2 class="section-title">视觉转化策略</h2>
+                    <p class="section-desc">产品视觉特性 → 网站设计决策映射</p>
+                </div>
+            </div>
+
+            <div class="brand-colors" style="justify-content: flex-start; gap: 24px;">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #A8D5BA;"></div>
+                    <div class="color-name">薄荷绿</div>
+                    <div class="color-code">#A8D5BA</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #8BB396;"></div>
+                    <div class="color-name">薄荷深</div>
+                    <div class="color-code">#8BB396</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #F5F0E8;"></div>
+                    <div class="color-name">米白</div>
+                    <div class="color-code">#F5F0E8</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #9E9E9E;"></div>
+                    <div class="color-name">柔灰</div>
+                    <div class="color-code">#9E9E9E</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #424242;"></div>
+                    <div class="color-name">深灰</div>
+                    <div class="color-code">#424242</div>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-top: 24px;">
+                <div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">🖼️ 产品造型 → 首屏构图</div>
+                        <div class="card-content">
+                            Φ85×H120mm极简圆柱设计 → 网站首屏采用产品特写+留白构图，强调小体积优势
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">✨ 材质质感 → 图片动效</div>
+                        <div class="card-content">
+                            哑光磨砂质感 → 配合柔和光影产品图，hover时微动效展示材质细节
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">🎨 产品配色 → 主视觉</div>
+                        <div class="card-content">
+                            米白+薄荷绿 → 网站主色调采用品牌色，CTA按钮使用薄荷绿突出
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">👆 交互设计 → 功能讲解</div>
+                        <div class="card-content">
+                            一键自动运行 → 使用交互式图示展示操作步骤，GIF/视频演示
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">🏠 使用场景 → 生活方式图</div>
+                        <div class="card-content">
+                            夜间厨房/旅行便携 → 大量使用场景图，营造温馨家庭氛围
+                        </div>
+                    </div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-title">📐 极简风格 → 节奏留白</div>
+                        <div class="card-content">
+                            大量留白，呼吸感布局，柔和低饱和配色营造舒适浏览体验
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="chart-title" style="margin-top: 32px;">📊 视觉决策映射雷达图</h3>
+            <div class="chart-container">
+                <div id="radarChart" class="chart"></div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box-title">💡 视觉策略核心原则</div>
+                <div class="info-box-content">
+                    <strong>品牌一致性：</strong>全站使用Momcozy品牌视觉系统，从色彩到字体到图片风格保持统一。<br>
+                    <strong>转化导向：</strong>每个视觉元素都服务于转化目标 - 引导用户从浏览到购买的每一步决策。<br>
+                    <strong>情感共鸣：</strong>通过温暖柔和的视觉语言，传递"温暖每一刻"品牌价值主张。
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 5: SEO Strategy -->
+        <section id="seo" class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div>
+                    <h2 class="section-title">SEO优化策略</h2>
+                    <p class="section-desc">关键词策略 · Meta优化 · 结构化数据 · 内链布局</p>
+                </div>
+            </div>
+
+            <div class="highlight-section">
+                <div class="highlight-title">🎯 核心关键词定位</div>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px;">
+                    <span class="badge badge-primary" style="font-size: 14px; padding: 8px 16px;">Primary: 婴儿消毒器</span>
+                    <span class="badge badge-secondary" style="font-size: 14px; padding: 8px 16px;">Primary: 暖奶器推荐</span>
+                    <span class="badge badge-gold" style="font-size: 14px; padding: 8px 16px;">Primary: 母乳温奶器</span>
+                </div>
+            </div>
+
+            <h3 class="chart-title">🔥 SEO关键词热力图</h3>
+            <div class="chart-container">
+                <div id="keywordHeatChart" class="chart"></div>
+            </div>
+
+            <h3 class="chart-title" style="margin-top: 32px;">🔗 内链关系网络图</h3>
+            <div class="chart-container">
+                <div id="internalLinkChart" class="chart"></div>
+            </div>
+
+            <div class="two-col" style="margin-top: 24px;">
+                <div>
+                    <h4 class="chart-title">📝 Meta标签优化</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>类型</th>
+                                <th>内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Meta Title</strong></td>
+                                <td>婴儿消毒器_暖奶器推荐 | Momcozy专业喂养电器【官网】</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Meta Desc</strong></td>
+                                <td>Momcozy婴儿消毒器采用UV/蒸汽双重消毒，70°C恒温烘干；暖奶器精准37°C控温，30秒速热。支持预约，质保升级，NPS 81.7高分推荐。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4 class="chart-title">🏷️ Secondary Keywords</h4>
+                    <div class="keyword-cloud">
+                        <span class="keyword-tag keyword-high">温奶器便携</span>
+                        <span class="keyword-tag keyword-high">消毒器小型</span>
+                        <span class="keyword-tag keyword-medium">宝宝喂养电器</span>
+                        <span class="keyword-tag keyword-medium">恒温奶瓶加热</span>
+                        <span class="keyword-tag keyword-medium">婴儿消毒柜</span>
+                        <span class="keyword-tag keyword-low">暖奶器车载</span>
+                        <span class="keyword-tag keyword-low">母乳加热器</span>
+                        <span class="keyword-tag keyword-low">奶瓶消毒锅</span>
+                        <span class="keyword-tag keyword-low">温奶器静音</span>
+                        <span class="keyword-tag keyword-low">智能消毒器</span>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="chart-title" style="margin-top: 32px;">📋 结构化数据 Schema</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>应用页面</th>
+                        <th>核心字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">Product</span></td>
+                        <td>PDP页面</td>
+                        <td>name, image, description, brand, sku, price, availability, rating</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-secondary">Offer</span></td>
+                        <td>PDP/Checkout</td>
+                        <td>price, priceCurrency, availability, seller</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-gold">Review</span></td>
+                        <td>PDP评论区</td>
+                        <td>reviewRating, author, reviewBody, datePublished</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-jade">FAQPage</span></td>
+                        <td>FAQ页</td>
+                        <td>mainEntity: question + acceptedAnswer</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-mint">BreadcrumbList</span></td>
+                        <td>所有页面</td>
+                        <td>itemListElement: position, name, item</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">Organization</span></td>
+                        <td>首页</td>
+                        <td>name, logo, url, sameAs (社交媒体)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="chart-title" style="margin-top: 32px;">🔄 功能关键词映射</h4>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>产品功能</th>
+                        <th>对应关键词</th>
+                        <th>着陆页面</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UV/蒸汽双重消毒</td>
+                        <td>婴儿消毒器、专业消毒</td>
+                        <td>/products/uv-sterilizer</td>
+                    </tr>
+                    <tr>
+                        <td>70°C恒温烘干</td>
+                        <td>恒温烘干、消毒烘干</td>
+                        <td>/products/uv-sterilizer</td>
+                    </tr>
+                    <tr>
+                        <td>精准37°C控温</td>
+                        <td>温奶器、恒温温奶</td>
+                        <td>/products/milk-warmer</td>
+                    </tr>
+                    <tr>
+                        <td>30秒速热</td>
+                        <td>速热暖奶、快速温奶</td>
+                        <td>/products/milk-warmer</td>
+                    </tr>
+                    <tr>
+                        <td>静音夜间模式</td>
+                        <td>静音温奶器、夜间喂奶</td>
+                        <td>/products/milk-warmer</td>
+                    </tr>
+                    <tr>
+                        <td>车载/充电宝供电</td>
+                        <td>便携暖奶器、车载温奶</td>
+                        <td>/products/milk-warmer</td>
+                    </tr>
+                    <tr>
+                        <td>智能定时预约</td>
+                        <td>智能消毒器、定时消毒</td>
+                        <td>/products/uv-sterilizer</td>
+                    </tr>
+                    <tr>
+                        <td>质保升级服务</td>
+                        <td>婴儿电器质保、品质保障</td>
+                        <td>/warranty</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Module 6: Conversion Strategy -->
+        <section id="conversion" class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <div>
+                    <h2 class="section-title">转化策略</h2>
+                    <p class="section-desc">全链路转化设计 · CTA文案 · 用户路径优化</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box-title">🎯 转化核心洞察</div>
+                <div class="info-box-content">
+                    基于VOC分析，质保/维修痛点(2088次)是最大转化障碍，需通过质保升级承诺、信任背书、社会证明等多维度消除购买阻力。
+                    Momcozy高NPS(81.7)和评分(4.52)为核心转化资产，需在关键节点突出展示。
+                </div>
+            </div>
+
+            <h3 class="chart-title">🔀 用户转化路径流程图</h3>
+            <div class="chart-container">
+                <div id="conversionFlowChart" class="chart"></div>
+            </div>
+
+            <div class="two-col" style="margin-top: 32px;">
+                <div>
+                    <h4 class="chart-title">📣 CTA文案策略</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>CTA文案</th>
+                                <th>语气</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>首屏Hero</td>
+                                <td>"探索Momcozy"</td>
+                                <td>引导探索</td>
+                            </tr>
+                            <tr>
+                                <td>产品卡片</td>
+                                <td>"查看详情"</td>
+                                <td>简洁直接</td>
+                            </tr>
+                            <tr>
+                                <td>PDP主CTA</td>
+                                <td>"立即购买"</td>
+                                <td>行动号召</td>
+                            </tr>
+                            <tr>
+                                <td>PDP次要CTA</td>
+                                <td>"加入购物车"</td>
+                                <td>低承诺</td>
+                            </tr>
+                            <tr>
+                                <td>移动端固定</td>
+                                <td>"立即下单"</td>
+                                <td>紧迫感</td>
+                            </tr>
+                            <tr>
+                                <td>质保区CTA</td>
+                                <td>"升级质保服务"</td>
+                                <td>增值引导</td>
+                            </tr>
+                            <tr>
+                                <td>FAQ/品牌页</td>
+                                <td>"开始选购"</td>
+                                <td>温和引导</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4 class="chart-title">🏆 五大机会点转化设计</h4>
+                    <div class="card" style="margin-bottom: 12px; padding: 16px;">
+                        <div class="card-title" style="color: var(--primary);">1. 质保服务升级（最高优先）</div>
+                        <div class="card-content" style="font-size: 13px;">PDP首屏展示质保升级选项，首页设置专属入口，消除最大购买障碍</div>
+                    </div>
+                    <div class="card" style="margin-bottom: 12px; padding: 16px;">
+                        <div class="card-title" style="color: var(--secondary);">2. 物流体验升级</div>
+                        <div class="card-content" style="font-size: 13px;">CTA区域展示配送承诺（次日达/包邮），减少延迟焦虑</div>
+                    </div>
+                    <div class="card" style="margin-bottom: 12px; padding: 16px;">
+                        <div class="card-title" style="color: var(--coral);">3. 静音夜间优化</div>
+                        <div class="card-content" style="font-size: 13px;">暖奶器页面突出静音卖点，夜间场景图展示，配合NPS展示</div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="chart-title" style="margin-top: 32px;">📊 转化率优化指标</h4>
+            <div class="card-grid">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 700; color: var(--primary);">NPS 81.7</div>
+                    <div class="card-content">净推荐值 · 极高口碑</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 700; color: var(--mint);">4.52 ⭐</div>
+                    <div class="card-content">平均评分 · 信任资产</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 700; color: var(--gold);">2088</div>
+                    <div class="card-content">质保痛点提及 · 核心优化点</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 700; color: var(--coral);">5</div>
+                    <div class="card-content">核心机会点 · 系统规划</div>
+                </div>
+            </div>
+
+            <div class="flow-container" style="margin-top: 24px;">
+                <div class="flow-step" style="background: var(--pink-light); border-color: var(--primary);">浏览 Landing</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step" style="background: var(--pink-light); border-color: var(--primary);">探索 Products</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step" style="background: var(--mint); color: var(--gray-dark);">决策 PDP</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step" style="background: var(--primary); color: white;">转化 Checkout</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step" style="background: var(--jade); color: white;">完成 订单</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Momcozy 产品网站设计与SEO优化方案 | Workflow 06</p>
+            <p class="footer-brand">温暖每一刻</p>
+            <p style="margin-top: 8px; font-size: 12px;">Generated for Momcozy 喂养电器产品企划</p>
+        </div>
+    </div>
+    <script>
+    // ====== 动态加载ECharts（Coze预览环境不支持静态CDN） ======
+    function loadEChartsAndInit() {
+        var sources = [
+            'https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js',
+            'https://unpkg.com/echarts@5.4.3/dist/echarts.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js',
+            'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js'
+        ];
+        var idx = 0;
+        function tryLoad() {
+            if (typeof echarts !== 'undefined') { startInit(); return; }
+            if (idx >= sources.length) { document.getElementById('sitemapChart') && (document.getElementById('sitemapChart').innerHTML = '<p style="text-align:center;padding:40px;color:#999;">ECharts加载失败，请刷新页面重试</p>'); return; }
+            var s = document.createElement('script');
+            s.src = sources[idx];
+            s.onload = function() { startInit(); };
+            s.onerror = function() { idx++; tryLoad(); };
+            document.head.appendChild(s);
+        }
+        tryLoad();
+    }
+    
+    function startInit() {
+        // Chart color palettes
+        const momcozyColors = {
+            mint: '#A8D5BA',
+            mintDark: '#8BB396',
+            cream: '#F5F0E8',
+            graySoft: '#9E9E9E',
+            grayDark: '#424242'
+        };
+        
+        const fortuneRedColors = {
+            primary: '#D75B70',
+            primaryDark: '#A7293D',
+            secondary: '#D04E59',
+            coral: '#F37969',
+            gold: '#D0B671',
+            jade: '#82AE8E',
+            cerulean: '#C1CEDE',
+            pink: '#E08090',
+            pinkLight: '#F6DFE2'
+        };
+
+        function initChart(domId, option) {
+            const dom = document.getElementById(domId);
+            if (!dom) return null;
+            const chart = echarts.init(dom);
+            chart.setOption(option);
+            return chart;
+        }
+
+        // 1. Sitemap Tree Chart
+        const sitemapOption = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove',
+                formatter: function(params) {
+                    return params.data.name + (params.data.url ? '<br/>URL: ' + params.data.url : '');
+                }
+            },
+            series: [{
+                type: 'tree',
+                data: [{
+                    name: 'Momcozy官网',
+                    url: '/',
+                    children: [
+                        {
+                            name: '首页 Landing',
+                            url: '/home',
+                            children: [
+                                { name: '产品组合', url: '/#products' },
+                                { name: '核心卖点', url: '/#features' },
+                                { name: '口碑展示', url: '/#reviews' }
+                            ]
+                        },
+                        {
+                            name: '产品目录 Products',
+                            url: '/products',
+                            children: [
+                                { name: '消毒器 UV-Sterilizer', url: '/products/uv-sterilizer' },
+                                { name: '暖奶器 Milk-Warmer', url: '/products/milk-warmer' },
+                                { name: '配件 Accessories', url: '/products/accessories' }
+                            ]
+                        },
+                        {
+                            name: '品牌故事 About',
+                            url: '/about',
+                            children: [
+                                { name: '品牌理念', url: '/about#philosophy' },
+                                { name: '品质承诺', url: '/about#quality' }
+                            ]
+                        },
+                        {
+                            name: '常见问题 FAQ',
+                            url: '/faq',
+                            children: [
+                                { name: '产品使用', url: '/faq#usage' },
+                                { name: '质保服务', url: '/faq#warranty' }
+                            ]
+                        },
+                        {
+                            name: '联系我们 Contact',
+                            url: '/contact'
+                        }
+                    ]
+                }],
+                symbol: 'circle',
+                symbolSize: 14,
+                itemStyle: {
+                    color: fortuneRedColors.primary,
+                    borderColor: fortuneRedColors.primaryDark,
+                    borderWidth: 2
+                },
+                lineStyle: {
+                    color: fortuneRedColors.pinkLight,
+                    width: 2
+                },
+                label: {
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: fortuneRedColors.primaryDark
+                },
+                leaves: {
+                    itemStyle: {
+                        color: fortuneRedColors.jade,
+                        borderColor: fortuneRedColors.jade
+                    },
+                    label: {
+                        color: fortuneRedColors.jadeDark
+                    }
+                },
+                emphasis: {
+                    focus: 'descendant'
+                },
+                expandAndCollapse: true,
+                initialTreeDepth: 2
+            }],
+            grid: { left: 20, right: 20, top: 30, bottom: 20 }
+        };
+        initChart('sitemapChart', sitemapOption);
+
+        // 2. PDP Priority Scatter Chart
+        const pdpPriorityOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    return '<strong>' + params.data[3] + '</strong><br/>' +
+                           '转化贡献度: ' + params.data[0] + '<br/>' +
+                           '开发复杂度: ' + params.data[1] + '<br/>' +
+                           '优先级: ' + (params.data[2] === 'P0' ? '🔴 最高' : params.data[2] === 'P1' ? '🟡 高' : '🟢 中');
+                }
+            },
+            xAxis: {
+                type: 'value',
+                name: '开发复杂度 →',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: 0,
+                max: 10,
+                axisLabel: { color: '#666' },
+                axisLine: { lineStyle: { color: '#666' } },
+                splitLine: { lineStyle: { color: '#f0f0f0' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: '转化贡献度 ↑',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: 0,
+                max: 10,
+                axisLabel: { color: '#666' },
+                axisLine: { lineStyle: { color: '#666' } },
+                splitLine: { lineStyle: { color: '#f0f0f0' } }
+            },
+            series: [{
+                type: 'scatter',
+                symbolSize: function(data) {
+                    return data[2] === 'P0' ? 35 : data[2] === 'P1' ? 28 : 22;
+                },
+                data: [
+                    [2, 9, 'P0', '首屏产品价值区'],
+                    [3, 9, 'P0', '产品主图区'],
+                    [4, 8, 'P0', '核心卖点区'],
+                    [5, 7, 'P1', '功能利益转化区'],
+                    [4, 7, 'P1', '使用场景区'],
+                    [6, 5, 'P2', '产品细节材质区'],
+                    [3, 7, 'P1', '社会证明区'],
+                    [2, 7, 'P1', '信任保障区'],
+                    [5, 4, 'P2', 'FAQ区'],
+                    [1, 9, 'P0', '购买CTA区']
+                ],
+                itemStyle: {
+                    color: function(params) {
+                        if (params.data[2] === 'P0') return fortuneRedColors.primary;
+                        if (params.data[2] === 'P1') return fortuneRedColors.gold;
+                        return fortuneRedColors.jade;
+                    },
+                    opacity: 0.85,
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0,0,0,0.2)'
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 20,
+                        shadowColor: 'rgba(0,0,0,0.3)'
+                    }
+                }
+            }],
+            grid: { left: 70, right: 40, top: 40, bottom: 60 },
+            graphic: [
+                {
+                    type: 'rect',
+                    left: 10,
+                    top: 10,
+                    shape: { width: 80, height: 90 },
+                    style: { fill: '#fff', stroke: fortuneRedColors.pinkLight, lineWidth: 1 }
+                },
+                { type: 'text', left: 20, top: 25, style: { text: '🔴 P0: 最高', fill: fortuneRedColors.primary, font: '12px sans-serif' }},
+                { type: 'text', left: 20, top: 45, style: { text: '🟡 P1: 高', fill: fortuneRedColors.gold, font: '12px sans-serif' }},
+                { type: 'text', left: 20, top: 65, style: { text: '🟢 P2: 中', fill: fortuneRedColors.jade, font: '12px sans-serif' }},
+                { type: 'text', left: 20, top: 85, style: { text: '圆圈大小=重要性', fill: '#999', font: '10px sans-serif' }}
+            ]
+        };
+        initChart('pdpPriorityChart', pdpPriorityOption);
+
+        // 3. Funnel Chart
+        const funnelOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c}%'
+            },
+            series: [{
+                type: 'funnel',
+                left: '10%',
+                top: 30,
+                bottom: 30,
+                width: '80%',
+                min: 0,
+                max: 100,
+                minSize: '15%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 4,
+                label: {
+                    show: true,
+                    position: 'inside',
+                    formatter: '{b}\n{c}%',
+                    color: '#fff',
+                    fontSize: 13,
+                    fontWeight: 600
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: { width: 1, type: 'solid' }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                emphasis: {
+                    label: { fontSize: 15 }
+                },
+                data: [
+                    {
+                        value: 100,
+                        name: '页面浏览',
+                        itemStyle: { color: fortuneRedColors.cerulean }
+                    },
+                    {
+                        value: 75,
+                        name: '产品详情页',
+                        itemStyle: { color: fortuneRedColors.jade }
+                    },
+                    {
+                        value: 50,
+                        name: '加入购物车',
+                        itemStyle: { color: fortuneRedColors.gold }
+                    },
+                    {
+                        value: 30,
+                        name: '开始结算',
+                        itemStyle: { color: fortuneRedColors.coral }
+                    },
+                    {
+                        value: 18,
+                        name: '完成购买',
+                        itemStyle: { color: fortuneRedColors.primary }
+                    }
+                ]
+            }],
+            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+        };
+        initChart('funnelChart', funnelOption);
+
+        // 4. Visual Strategy Radar Chart
+        const radarOption = {
+            tooltip: {},
+            legend: {
+                data: ['产品视觉特性', '设计转化策略'],
+                top: 'top'
+            },
+            radar: {
+                indicator: [
+                    { name: '造型吸引力', max: 100 },
+                    { name: '材质质感', max: 100 },
+                    { name: '色彩协调', max: 100 },
+                    { name: '交互体验', max: 100 },
+                    { name: '场景代入', max: 100 },
+                    { name: '品牌统一', max: 100 }
+                ],
+                radius: '65%',
+                axisName: {
+                    color: fortuneRedColors.grayDark,
+                    fontSize: 12
+                },
+                splitArea: {
+                    areaStyle: {
+                        color: ['rgba(168,213,186,0.05)', 'rgba(168,213,186,0.1)', 'rgba(168,213,186,0.15)', 'rgba(168,213,186,0.2)', 'rgba(168,213,186,0.25)']
+                    }
+                },
+                axisLine: { lineStyle: { color: fortuneRedColors.pinkLight } },
+                splitLine: { lineStyle: { color: fortuneRedColors.pinkLight } }
+            },
+            series: [{
+                type: 'radar',
+                data: [
+                    {
+                        value: [85, 92, 88, 78, 90, 95],
+                        name: '产品视觉特性',
+                        symbol: 'circle',
+                        symbolSize: 6,
+                        lineStyle: { color: fortuneRedColors.mint, width: 2 },
+                        areaStyle: { color: 'rgba(168,213,186,0.3)' },
+                        itemStyle: { color: fortuneRedColors.jade }
+                    },
+                    {
+                        value: [90, 88, 85, 95, 92, 90],
+                        name: '设计转化策略',
+                        symbol: 'circle',
+                        symbolSize: 6,
+                        lineStyle: { color: fortuneRedColors.primary, width: 2 },
+                        areaStyle: { color: 'rgba(215,91,112,0.2)' },
+                        itemStyle: { color: fortuneRedColors.primary }
+                    }
+                ]
+            }],
+            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+        };
+        initChart('radarChart', radarOption);
+
+        // 5. Keyword Heatmap
+        const keywordHeatOption = {
+            tooltip: {
+                position: 'top',
+                formatter: function(params) {
+                    return '<strong>' + params.data[0] + '</strong><br/>搜索热度: ' + params.data[2];
+                }
+            },
+            grid: {
+                left: '15%',
+                right: '5%',
+                top: '5%',
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['消毒器', '暖奶器', '温奶器', '便携', '静音', '智能', '速热', '车载', '宝宝', '母乳'],
+                axisLabel: { rotate: 30, fontSize: 11, color: '#666' },
+                axisLine: { lineStyle: { color: '#ddd' } },
+                splitArea: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: ['核心词', '长尾词', '场景词'],
+                axisLabel: { fontSize: 11, color: '#666' },
+                axisLine: { lineStyle: { color: '#ddd' } },
+                splitArea: { show: false }
+            },
+            visualMap: {
+                min: 0,
+                max: 100,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+                bottom: '0%',
+                inRange: {
+                    color: ['#e8f5e9', '#c8e6c9', '#a5d6a7', '#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c']
+                },
+                textStyle: { color: '#666' }
+            },
+            series: [{
+                name: '关键词热度',
+                type: 'heatmap',
+                data: [
+                    [0, 0, 95, '婴儿消毒器'],
+                    [1, 0, 88, '暖奶器推荐'],
+                    [2, 0, 85, '母乳温奶器'],
+                    [3, 0, 78, '温奶器便携'],
+                    [4, 0, 72, '消毒器小型'],
+                    [5, 0, 68, '宝宝喂养电器'],
+                    [6, 0, 65, '恒温奶瓶加热'],
+                    [7, 0, 55, '婴儿消毒柜'],
+                    [0, 1, 62, '温奶器车载'],
+                    [1, 1, 58, '母乳加热器'],
+                    [2, 1, 52, '奶瓶消毒锅'],
+                    [3, 1, 48, '暖奶器静音'],
+                    [4, 1, 45, '智能消毒器'],
+                    [5, 1, 42, '快速温奶器'],
+                    [6, 1, 38, '宝宝消毒器'],
+                    [7, 1, 35, '温奶器推荐'],
+                    [0, 2, 70, '夜间喂奶'],
+                    [1, 2, 65, '旅行温奶'],
+                    [2, 2, 58, '职场妈妈'],
+                    [3, 2, 52, '新生儿必备'],
+                    [4, 2, 48, '母乳喂养'],
+                    [5, 2, 42, '奶瓶清洁'],
+                    [6, 2, 38, '宝宝用品'],
+                    [7, 2, 35, '喂养工具']
+                ],
+                label: {
+                    show: true,
+                    formatter: function(params) {
+                        return params.data[3] || '';
+                    },
+                    fontSize: 9,
+                    color: '#333'
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.3)'
+                    }
+                }
+            }],
+            grid: { left: 100, right: 40, top: 40, bottom: 80 }
+        };
+        initChart('keywordHeatChart', keywordHeatOption);
+
+        // 6. Internal Link Network Chart
+        const internalLinkOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    if (params.dataType === 'edge') {
+                        return '从 ' + params.data.source + '<br/>到 ' + params.data.target + '<br/>锚文本: ' + params.data.label.formatter;
+                    }
+                    return params.data.name + '<br/>页面类型: ' + params.data.pageType;
+                }
+            },
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                symbolSize: 45,
+                roam: true,
+                draggable: true,
+                focusNodeAdjacency: true,
+                categories: [
+                    { name: '首页', itemStyle: { color: fortuneRedColors.primary } },
+                    { name: '产品页', itemStyle: { color: fortuneRedColors.secondary } },
+                    { name: '内容页', itemStyle: { color: fortuneRedColors.jade } },
+                    { name: '功能页', itemStyle: { color: fortuneRedColors.gold } }
+                ],
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [8, 10],
+                lineStyle: {
+                    color: fortuneRedColors.pinkLight,
+                    curveness: 0.3,
+                    width: 2
+                },
+                label: {
+                    show: true,
+                    position: 'bottom',
+                    formatter: '{b}',
+                    fontSize: 11,
+                    color: fortuneRedColors.grayDark
+                },
+                emphasis: {
+                    focusNodeAdjacency: true,
+                    lineStyle: { width: 3, color: fortuneRedColors.primary }
+                },
+                data: [
+                    { name: '首页', pageType: '首页/落地', symbol: '🏠' },
+                    { name: '产品目录', pageType: '产品列表', symbol: '🛍️' },
+                    { name: '消毒器详情', pageType: 'PDP', symbol: '💡' },
+                    { name: '暖奶器详情', pageType: 'PDP', symbol: '🍼' },
+                    { name: '品牌故事', pageType: '内容页', symbol: '💝' },
+                    { name: 'FAQ', pageType: '内容页', symbol: '❓' },
+                    { name: '质保服务', pageType: '功能页', symbol: '🛡️' },
+                    { name: '关于我们', pageType: '内容页', symbol: '👥' },
+                    { name: '购物车', pageType: '功能页', symbol: '🛒' }
+                ],
+                links: [
+                    { source: '首页', target: '产品目录', label: { formatter: '查看产品' } },
+                    { source: '首页', target: '品牌故事', label: { formatter: '品牌理念' } },
+                    { source: '首页', target: '质保服务', label: { formatter: '升级质保' } },
+                    { source: '产品目录', target: '消毒器详情', label: { formatter: '消毒器' } },
+                    { source: '产品目录', target: '暖奶器详情', label: { formatter: '暖奶器' } },
+                    { source: '消毒器详情', target: '质保服务', label: { formatter: '升级质保' } },
+                    { source: '暖奶器详情', target: '质保服务', label: { formatter: '升级质保' } },
+                    { source: '消毒器详情', target: 'FAQ', label: { formatter: '常见问题' } },
+                    { source: '暖奶器详情', target: 'FAQ', label: { formatter: '常见问题' } },
+                    { source: '消毒器详情', target: '品牌故事', label: { formatter: '品牌故事' } },
+                    { source: '暖奶器详情', target: '品牌故事', label: { formatter: '品牌故事' } },
+                    { source: '品牌故事', target: '关于我们', label: { formatter: '了解更多' } },
+                    { source: 'FAQ', target: '关于我们', label: { formatter: '联系我们' } },
+                    { source: '消毒器详情', target: '购物车', label: { formatter: '立即购买' } },
+                    { source: '暖奶器详情', target: '购物车', label: { formatter: '立即购买' } },
+                    { source: '产品目录', target: '购物车', label: { formatter: '查看购物车' } }
+                ]
+            }],
+            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+        };
+        initChart('internalLinkChart', internalLinkOption);
+
+        // 7. Conversion Flow Chart
+        const conversionFlowOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    if (params.dataType === 'node') {
+                        return '<strong>' + params.data.name + '</strong><br/>' +
+                               '转化率: ' + params.data.conversionRate + '<br/>' +
+                               '优化策略: ' + params.data.strategy;
+                    }
+                    return '转化率: ' + params.data.conversion;
+                }
+            },
+            series: [{
+                type: 'sankey',
+                layout: 'none',
+                emphasis: { focus: 'adjacency' },
+                nodeAlign: 'left',
+                nodeGap: 16,
+                nodeWidth: 24,
+                lineStyle: {
+                    color: 'gradient',
+                    curveness: 0.5,
+                    opacity: 0.6
+                },
+                itemStyle: {
+                    borderWidth: 0
+                },
+                label: {
+                    position: 'right',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: fortuneRedColors.grayDark
+                },
+                emphasis: {
+                    lineStyle: { opacity: 0.8 }
+                },
+                data: [
+                    { name: '首页浏览', conversionRate: '100%', strategy: 'SEO/广告引流', itemStyle: { color: fortuneRedColors.cerulean } },
+                    { name: '产品目录', conversionRate: '75%', strategy: '清晰导航/筛选', itemStyle: { color: fortuneRedColors.jade } },
+                    { name: 'PDP详情页', conversionRate: '50%', strategy: '信任构建/痛点解决', itemStyle: { color: fortuneRedColors.gold } },
+                    { name: '加入购物车', conversionRate: '30%', strategy: 'CTA优化/质保升级', itemStyle: { color: fortuneRedColors.coral } },
+                    { name: '开始结算', conversionRate: '22%', strategy: '简化流程/物流承诺', itemStyle: { color: fortuneRedColors.primary } },
+                    { name: '完成购买', conversionRate: '18%', strategy: '信任背书/促销引导', itemStyle: { color: fortuneRedColors.primaryDark } },
+                    { name: '放弃流失', conversionRate: '82%', strategy: '挽回策略/邮件提醒', itemStyle: { color: fortuneRedColors.graySoft } }
+                ],
+                links: [
+                    { source: '首页浏览', target: '产品目录', value: 75, conversion: '75%', lineStyle: { color: fortuneRedColors.jade, opacity: 0.6 } },
+                    { source: '首页浏览', target: '放弃流失', value: 25, conversion: '25%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } },
+                    { source: '产品目录', target: 'PDP详情页', value: 50, conversion: '67%', lineStyle: { color: fortuneRedColors.gold, opacity: 0.6 } },
+                    { source: '产品目录', target: '放弃流失', value: 25, conversion: '33%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } },
+                    { source: 'PDP详情页', target: '加入购物车', value: 30, conversion: '60%', lineStyle: { color: fortuneRedColors.coral, opacity: 0.7 } },
+                    { source: 'PDP详情页', target: '放弃流失', value: 20, conversion: '40%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } },
+                    { source: '加入购物车', target: '开始结算', value: 22, conversion: '73%', lineStyle: { color: fortuneRedColors.primary, opacity: 0.8 } },
+                    { source: '加入购物车', target: '放弃流失', value: 8, conversion: '27%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } },
+                    { source: '开始结算', target: '完成购买', value: 18, conversion: '82%', lineStyle: { color: fortuneRedColors.primaryDark, opacity: 0.9 } },
+                    { source: '开始结算', target: '放弃流失', value: 4, conversion: '18%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } }
+                ]
+            }],
+            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+        };
+        initChart('conversionFlowChart', conversionFlowOption);
+
+        // Window resize handler
+        window.addEventListener('resize', function() {
+            charts.forEach(function(chart) {
+                if (chart) chart.resize();
+            });
+        });
+
+        var charts = [
+            echarts.getInstanceByDom(document.getElementById('sitemapChart')),
+            echarts.getInstanceByDom(document.getElementById('pdpPriorityChart')),
+            echarts.getInstanceByDom(document.getElementById('funnelChart')),
+            echarts.getInstanceByDom(document.getElementById('radarChart')),
+            echarts.getInstanceByDom(document.getElementById('keywordHeatChart')),
+            echarts.getInstanceByDom(document.getElementById('internalLinkChart')),
+            echarts.getInstanceByDom(document.getElementById('conversionFlowChart'))
+        ];
+    } // end startInit
+    
+    // 启动加载
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        loadEChartsAndInit();
+    } else {
+        document.addEventListener('DOMContentLoaded', loadEChartsAndInit);
+    }
+    window.addEventListener('load', function() { if (typeof echarts !== 'undefined' && !window._chartsInitialized) { startInit(); window._chartsInitialized = true; } });
+    </script>
+</body>
+</html>
