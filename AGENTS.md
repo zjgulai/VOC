@@ -6,7 +6,7 @@ description: Momcozy喂养电器全链路E2E洞察项目工作目录。涵盖VOC
 # VOC - Momcozy喂养电器 E2E洞察项目
 
 **Generated:** 2026-05-20  
-**项目状态:** 活跃 - V5已完成，全站导航栏统一（2026-05-21），持续迭代中
+**项目状态:** 活跃 - V5已完成，全站ECharts规范化完成，腾讯云独立部署上线（2026-05-27）
 
 ## 概览
 
@@ -15,6 +15,7 @@ Momcozy喂养电器品牌营销/产品洞察工作区。核心产出是多版本
 ## 网站
 
 **GitHub Pages**: https://zjgulai.github.io/VOC/  
+**腾讯云独立部署**: https://report.lute-tlz-dddd.top （2026-05-27上线，Nginx静态托管）  
 **仓库**: https://github.com/zjgulai/VOC.git
 
 ## 目录结构
@@ -53,9 +54,12 @@ VOC/
 ### ECharts防溢出规范
 ```javascript
 grid: {left:80, right:40, top:60, bottom:80}
-axisLabel: {rotate:30, fontSize:11, overflow:'truncate'}
+axisLabel: {rotate:30, fontSize:11, overflow:'truncate', width:80}
 tooltip: {confine:true}
 // radar: radius:'65%'  pie: radius:['35%','65%']
+// pie: avoidLabelOverlap:true, legend:{type:'scroll',bottom:0}, label.show:false
+// radar trigger: 'item' (不是 'axis')
+// ECharts5 radar: axisName:{} (废弃字段 name:{})
 ```
 
 ### 新增图表必须
@@ -125,6 +129,8 @@ python3 script/merge_report.py
 ## 注意事项
 
 - **有 git 仓库** - 推送到 https://github.com/zjgulai/VOC.git，`docs/` 目录由 GitHub Pages 部署
+- **腾讯云部署** - `report.lute-tlz-dddd.top` 静态文件在 `/opt/voc-report/html/`，nginx 配置在 `/opt/ai-video/deploy/lighthouse/`；更新内容只需 `rsync docs/ ubuntu@101.34.52.232:/opt/voc-report/html/`，无需重启容器
+- **服务器 SSH** - `ssh -i /Users/lute/project/VOA/VOC/ai_video.pem ubuntu@101.34.52.232`
 - **本地预览** - `python3 -m http.server 8765` 启动后访问 `http://localhost:8765/docs/`
 - **导航栏规范** - 单行44px + sticky定位 + brand竖线分隔，与V5主报告对齐（见下方CSS）
 - **大文件处理** - V5报告9680行，修改前用 `grep -n` 定位目标行，分块操作避免覆盖

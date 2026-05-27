@@ -224,3 +224,25 @@
 14. **导航栏全站优化 - 已完成**（2026-05-21）：V5主报告 + docs/ 5页面导航栏统一对齐。旧：三行flex-wrap + 灰蓝链接 + static定位；新：单行44px sticky + 竖线分隔brand + 深色链接opacity 0.7。提交 `0258972 fix: 导航栏对齐V5样式`，已推送 GitHub Pages 生效。
 15. **项目文档更新 - 已完成**（2026-05-21）：更新根 AGENTS.md（网站URL/GitHub Pages/目录结构/nav规范/git状态修正）、html_report/AGENTS.md（nav结构说明）、MEMORY.md 纳入git版本控制。提交 `056e239 docs: 项目文档更新`。
 16. **Codex Review - 已完成**（2026-05-21）：审查 `e5c40e9..056e239` 9文件，CSS括号匹配、nav链接一致性、chart div/safeInit无回归，零 actionable findings。
+17. **全站 ECharts 3轮迭代规范化 - 已完成**（2026-05-27）：
+    - **第1轮** `64120b4`：stage1-competitor.html NPS图 formatter 多余 `)` 导致整页10个图表全白，已修复。
+    - **第2轮** `5439e11`：并行审计+修复 stage1/2/3/4/6/7 共6文件、54个图表，162行变更：
+      - 色卡统一：全站蓝色系（#1976d2/#3B82F6）→ Fortune Red体系（#D75B70主/#82AE8E绿/#D0B671金/#6A89AF蓝/#C1CEDE灰）
+      - 防溢出：所有 radar 补 `radius:'65%'`；grid.bottom/left 修正；axisLabel 加 overflow:truncate+width；pie 加 avoidLabelOverlap
+      - tooltip：全站 45+ 处补 `confine:true`；空 `tooltip:{}` 补 trigger+formatter；radar 修正 `trigger:'axis'→'item'`
+      - API规范：stage4/7 废弃字段 `name→axisName`；stage7 formatter `p.data[3]→p.data[2]`
+      - stage6 删4处无效 grid；合并重复 emphasis；删重复 grid 配置块
+    - **第3轮**：Playwright 全站验证 7页面 54/54 canvas 渲染，0 JS运行时错误。
+18. **腾讯云独立部署 - 已完成**（2026-05-27）：
+    - 域名：`report.lute-tlz-dddd.top` → DNS A记录 101.34.52.232
+    - 证书：扩展 Let's Encrypt SAN 加入 `report` 子域（certbot --expand）
+    - 静态文件：`docs/` rsync 到服务器 `/opt/voc-report/html/`（8.8MB，排除 mp4）
+    - Nginx：复用现有 `ai_video_nginx` 容器，`/opt/ai-video/deploy/lighthouse/nginx.conf` 新增 report server block，`docker-compose.prod.yml` 加 `/opt/voc-report/html:/var/www/voc-report:ro` 挂载，`--force-recreate` 重建容器（零停机）
+    - 验证：curl 200 + Playwright stage1 图表 10/10 canvas 渲染
+    - 更新指令：`rsync -avz --exclude="*.mp4" -e "ssh -i ai_video.pem" docs/ ubuntu@101.34.52.232:/opt/voc-report/html/`
+19. **Landing Page 新增报告入口卡片 - 已完成**（2026-05-27）：
+    - `https://lute-tlz-dddd.top/` 新增第3张卡片「E2E 洞察报告」，金色 `--gold-foil: #D8BE78`，href → `report.lute-tlz-dddd.top`
+    - 三卡片色系：视频红（`--fortune-red`）/ VOC绿（`--jade-accent`）/ 报告金（`--gold-foil`）
+    - 新增 `.card-icon.report`、`.card-subtitle.report`、`.card-cta.report`、`.card.report` hover 规则
+    - footer 同步加入 `report.lute` 链接
+    - 修改文件：`/opt/ai-video/deploy/lighthouse/landing/index.html`（nginx 直接 serve，无需重启容器）
