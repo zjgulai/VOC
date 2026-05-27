@@ -1055,7 +1055,7 @@
             const npsData = reportData.nps_dist;
             const total = npsData.promoter + npsData.passive + npsData.detractor;
             const option = {
-                tooltip: { trigger: 'item', formatter: p => `${p.data.name}: ${p.data.value} (${(p.data.value/total*100).toFixed(1)}%)`) },
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}: ${p.data.value} (${(p.data.value/total*100).toFixed(1)}%)` },
                 series: [{
                     type: 'pie',
                     radius: ['40%', '70%'],
