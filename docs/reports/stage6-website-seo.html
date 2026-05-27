@@ -1508,8 +1508,11 @@
             gold: '#D0B671',
             jade: '#82AE8E',
             cerulean: '#C1CEDE',
+            ceruleanLight: '#6A89AF',
             pink: '#E08090',
-            pinkLight: '#F6DFE2'
+            pinkLight: '#F6DFE2',
+            graySoft: '#9E9E9E',
+            grayDark: '#424242'
         };
 
         function initChart(domId, option) {
@@ -1525,6 +1528,7 @@
             tooltip: {
                 trigger: 'item',
                 triggerOn: 'mousemove',
+                confine: true,
                 formatter: function(params) {
                     return params.data.name + (params.data.url ? '<br/>URL: ' + params.data.url : '');
                 }
@@ -1606,7 +1610,7 @@
                 expandAndCollapse: true,
                 initialTreeDepth: 2
             }],
-            grid: { left: 20, right: 20, top: 30, bottom: 20 }
+            grid: { left: 80, right: 80, top: 40, bottom: 40 }
         };
         initChart('sitemapChart', sitemapOption);
 
@@ -1614,6 +1618,7 @@
         const pdpPriorityOption = {
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: function(params) {
                     return '<strong>' + params.data[3] + '</strong><br/>' +
                            '转化贡献度: ' + params.data[0] + '<br/>' +
@@ -1677,7 +1682,7 @@
                     }
                 }
             }],
-            grid: { left: 70, right: 40, top: 40, bottom: 60 },
+            grid: { left: 70, right: 40, top: 40, bottom: 80 },
             graphic: [
                 {
                     type: 'rect',
@@ -1698,6 +1703,7 @@
         const funnelOption = {
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: '{b}: {c}%'
             },
             series: [{
@@ -1735,7 +1741,7 @@
                     {
                         value: 100,
                         name: '页面浏览',
-                        itemStyle: { color: fortuneRedColors.cerulean }
+                        itemStyle: { color: fortuneRedColors.ceruleanLight }
                     },
                     {
                         value: 75,
@@ -1755,6 +1761,7 @@
                     {
                         value: 18,
                         name: '完成购买',
+                        label: { position: 'outside' },
                         itemStyle: { color: fortuneRedColors.primary }
                     }
                 ]
@@ -1765,7 +1772,7 @@
 
         // 4. Visual Strategy Radar Chart
         const radarOption = {
-            tooltip: {},
+            tooltip: { confine: true, trigger: 'item' },
             legend: {
                 data: ['产品视觉特性', '设计转化策略'],
                 top: 'top'
@@ -1814,8 +1821,7 @@
                         itemStyle: { color: fortuneRedColors.primary }
                     }
                 ]
-            }],
-            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+            }]
         };
         initChart('radarChart', radarOption);
 
@@ -1823,15 +1829,10 @@
         const keywordHeatOption = {
             tooltip: {
                 position: 'top',
+                confine: true,
                 formatter: function(params) {
                     return '<strong>' + params.data[0] + '</strong><br/>搜索热度: ' + params.data[2];
                 }
-            },
-            grid: {
-                left: '15%',
-                right: '5%',
-                top: '5%',
-                bottom: '15%'
             },
             xAxis: {
                 type: 'category',
@@ -1855,7 +1856,7 @@
                 left: 'center',
                 bottom: '0%',
                 inRange: {
-                    color: ['#e8f5e9', '#c8e6c9', '#a5d6a7', '#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c']
+                    color: ['#FCF6F7','#F6DFE2','#E08090','#D75B70','#A7293D']
                 },
                 textStyle: { color: '#666' }
             },
@@ -1893,7 +1894,7 @@
                     formatter: function(params) {
                         return params.data[3] || '';
                     },
-                    fontSize: 9,
+                    fontSize: 10,
                     color: '#333'
                 },
                 emphasis: {
@@ -1911,6 +1912,7 @@
         const internalLinkOption = {
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: function(params) {
                     if (params.dataType === 'edge') {
                         return '从 ' + params.data.source + '<br/>到 ' + params.data.target + '<br/>锚文本: ' + params.data.label.formatter;
@@ -1978,8 +1980,7 @@
                     { source: '暖奶器详情', target: '购物车', label: { formatter: '立即购买' } },
                     { source: '产品目录', target: '购物车', label: { formatter: '查看购物车' } }
                 ]
-            }],
-            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+            }]
         };
         initChart('internalLinkChart', internalLinkOption);
 
@@ -1987,6 +1988,7 @@
         const conversionFlowOption = {
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: function(params) {
                     if (params.dataType === 'node') {
                         return '<strong>' + params.data.name + '</strong><br/>' +
@@ -1999,7 +2001,7 @@
             series: [{
                 type: 'sankey',
                 layout: 'none',
-                emphasis: { focus: 'adjacency' },
+                emphasis: { focus: 'adjacency', lineStyle: { opacity: 0.8 } },
                 nodeAlign: 'left',
                 nodeGap: 16,
                 nodeWidth: 24,
@@ -2016,9 +2018,6 @@
                     fontSize: 12,
                     fontWeight: 600,
                     color: fortuneRedColors.grayDark
-                },
-                emphasis: {
-                    lineStyle: { opacity: 0.8 }
                 },
                 data: [
                     { name: '首页浏览', conversionRate: '100%', strategy: 'SEO/广告引流', itemStyle: { color: fortuneRedColors.cerulean } },
@@ -2041,8 +2040,7 @@
                     { source: '开始结算', target: '完成购买', value: 18, conversion: '82%', lineStyle: { color: fortuneRedColors.primaryDark, opacity: 0.9 } },
                     { source: '开始结算', target: '放弃流失', value: 4, conversion: '18%', lineStyle: { color: fortuneRedColors.graySoft, opacity: 0.3 } }
                 ]
-            }],
-            grid: { left: 10, right: 10, top: 10, bottom: 10 }
+            }]
         };
         initChart('conversionFlowChart', conversionFlowOption);
 

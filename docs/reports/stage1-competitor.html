@@ -48,7 +48,7 @@
         .nav-title {
             font-size: 18px;
             font-weight: 600;
-            color: #1565c0;
+            color: #D75B70;
         }
         
         .nav-links {
@@ -146,7 +146,7 @@
         }
         
         .section-number {
-            background: linear-gradient(135deg, #1976d2, #1565c0);
+            background: linear-gradient(135deg, #D75B70, #B0405A);
             color: #ffffff;
             width: 36px;
             height: 36px;
@@ -896,17 +896,17 @@
             const chart = echarts.init(document.getElementById('brandMentionChart'));
             const brands = reportData.brand_stats.filter(b => b.count > 0);
             const option = {
-                tooltip: { trigger: 'axis', backgroundColor: 'rgba(255, 255, 255, 0.95)', borderColor: '#1565c0' },
-                xAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: '#546e7a', rotate: 30 } },
+                tooltip: { trigger: 'axis', backgroundColor: 'rgba(255, 255, 255, 0.95)', borderColor: '#D75B70', confine: true },
+                xAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: '#546e7a', rotate: 30, overflow: 'truncate', width: 80 } },
                 yAxis: { type: 'value', name: '评论数', nameTextStyle: { color: '#546e7a' }, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [{
                     type: 'bar',
-                    data: brands.map(b => ({ value: b.count, itemStyle: { color: b.name === 'Momcozy' ? '#1976d2' : '#42a5f5' } })),
+                    data: brands.map(b => ({ value: b.count, itemStyle: { color: b.name === 'Momcozy' ? '#D75B70' : '#6A89AF' } })),
                     barWidth: '50%',
                     itemStyle: { borderRadius: [4, 4, 0, 0] },
-                    emphasis: { itemStyle: { color: '#1565c0' } }
+                    emphasis: { itemStyle: { color: '#B0405A' } }
                 }],
-                grid: { left: 50, right: 20, top: 20, bottom: 60 }
+                grid: { left: 50, right: 20, top: 20, bottom: 80 }
             };
             chart.setOption(option);
         }
@@ -916,17 +916,17 @@
             const chart = echarts.init(document.getElementById('brandEngagementChart'));
             const brands = reportData.brand_stats.filter(b => b.count > 5);
             const option = {
-                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>质量得分: ${p.data.value}` },
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>质量得分: ${p.data.value}`, confine: true },
                 xAxis: { type: 'value', name: '评论数', nameTextStyle: { color: '#546e7a' }, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 yAxis: { type: 'value', name: '质量得分', nameTextStyle: { color: '#546e7a' }, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [{
                     type: 'scatter',
                     data: brands.map(b => ({ name: b.name, value: [b.count, b.avg_quality, b.count] })),
                     symbolSize: d => Math.sqrt(d[2]) * 1.5,
-                    itemStyle: { color: '#1976d2', opacity: 0.8 },
+                    itemStyle: { color: '#D75B70', opacity: 0.8 },
                     label: { show: true, formatter: p => p.data.name, color: '#37474f', fontSize: 11 }
                 }],
-                grid: { left: 60, right: 30, top: 20, bottom: 40 }
+                grid: { left: 60, right: 30, top: 20, bottom: 60 }
             };
             chart.setOption(option);
         }
@@ -936,7 +936,7 @@
             const chart = echarts.init(document.getElementById('brandMetricsChart'));
             const brands = reportData.brand_stats.filter(b => b.count > 0);
             const option = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
                 legend: { data: ['平均评分', '质量得分', 'NPS'], textStyle: { color: '#546e7a' }, top: 10 },
                 xAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: '#546e7a', rotate: 30 } },
                 yAxis: [
@@ -944,11 +944,11 @@
                     { type: 'value', name: 'NPS', nameTextStyle: { color: '#546e7a' }, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } }
                 ],
                 series: [
-                    { name: '平均评分', type: 'bar', data: brands.map(b => ({ value: b.avg_rating * 20, itemStyle: { color: '#1976d2' } })), barWidth: '20%' },
-                    { name: '质量得分', type: 'bar', data: brands.map(b => ({ value: b.avg_quality, itemStyle: { color: '#2e7d32' } })), barWidth: '20%' },
-                    { name: 'NPS', type: 'line', yAxisIndex: 1, data: brands.map(b => ({ value: b.nps, itemStyle: { color: '#e65100' } })), smooth: true }
+                    { name: '平均评分', type: 'bar', data: brands.map(b => ({ value: b.avg_rating * 20, itemStyle: { color: '#D75B70' } })), barWidth: '20%' },
+                    { name: '质量得分', type: 'bar', data: brands.map(b => ({ value: b.avg_quality, itemStyle: { color: '#82AE8E' } })), barWidth: '20%' },
+                    { name: 'NPS', type: 'line', yAxisIndex: 1, data: brands.map(b => ({ value: b.nps, itemStyle: { color: '#D0B671' } })), smooth: true }
                 ],
-                grid: { left: 50, right: 30, top: 50, bottom: 60 }
+                grid: { left: 50, right: 30, top: 50, bottom: 80 }
             };
             chart.setOption(option);
         }
@@ -977,7 +977,7 @@
             const chart = echarts.init(document.getElementById('sentimentRadarChart'));
             const brands = reportData.brand_stats.filter(b => b.count > 10).slice(0, 5);
             const option = {
-                tooltip: {},
+                tooltip: {trigger:'item', confine:true},
                 legend: { data: brands.map(b => b.name), textStyle: { color: '#546e7a' }, bottom: 10 },
                 radar: {
                     indicator: [
@@ -986,6 +986,7 @@
                         { name: '情感', max: 1 },
                         { name: 'NPS', max: 100 }
                     ],
+                    radius: '65%',
                     axisName: { color: '#546e7a' }
                 },
                 series: [{
@@ -1055,13 +1056,13 @@
             const npsData = reportData.nps_dist;
             const total = npsData.promoter + npsData.passive + npsData.detractor;
             const option = {
-                tooltip: { trigger: 'item', formatter: p => `${p.data.name}: ${p.data.value} (${(p.data.value/total*100).toFixed(1)}%)` },
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}: ${p.data.value} (${(p.data.value/total*100).toFixed(1)}%)`, confine: true },
                 series: [{
                     type: 'pie',
                     radius: ['40%', '70%'],
                     avoidLabelOverlap: false,
                     itemStyle: { borderRadius: 10, borderColor: '#ffffff', borderWidth: 2 },
-                    label: { show: true, color: '#fff', formatter: '{b}\n{c}' },
+                    label: { show: true, color: '#fff', formatter: '{b}\n{c}', position: 'outside' },
                     data: [
                         { name: 'Promoter', value: npsData.promoter, itemStyle: { color: '#2e7d32' } },
                         { name: 'Passive', value: npsData.passive, itemStyle: { color: '#e65100' } },
@@ -1088,9 +1089,9 @@
             const topFeatures = reportData.positive_tags.slice(0, 12);
             const topNegFeatures = reportData.negative_tags.slice(0, 12);
             const option = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
                 legend: { data: ['Positive', 'Negative'], textStyle: { color: '#546e7a' }, top: 10 },
-                xAxis: { type: 'category', data: topFeatures.map(f => f.name), axisLabel: { color: '#b0bec5', rotate: 45 }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
+                xAxis: { type: 'category', data: topFeatures.map(f => f.name), axisLabel: { color: '#b0bec5', rotate: 45, overflow: 'truncate', width: 90 }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 yAxis: { type: 'value', name: '提及次数', axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [
                     { name: 'Positive', type: 'bar', data: topFeatures.map(f => ({ value: f.value, itemStyle: { color: '#2e7d32' } })), barWidth: '40%' },
@@ -1116,10 +1117,10 @@
                 });
             });
             const option = {
-                tooltip: { formatter: p => `${brands[p.data[1]].name}<br/>${features[p.data[0]]}: ${p.data[2]}` },
+                tooltip: { formatter: p => `${brands[p.data[1]].name}<br/>${features[p.data[0]]}: ${p.data[2]}`, confine: true },
                 xAxis: { type: 'category', data: features, axisLabel: { color: '#546e7a' } },
                 yAxis: { type: 'category', data: brands.map(b => b.name), axisLabel: { color: '#546e7a' } },
-                visualMap: { min: 50, max: 100, calculable: true, inRange: { color: ['#ef5350', '#ffb74d', '#66bb6a'] }, textStyle: { color: '#546e7a' } },
+                visualMap: { min: 50, max: 100, calculable: true, inRange: { color: ['#D75B70','#D0B671','#82AE8E'] }, textStyle: { color: '#546e7a' } },
                 series: [{ type: 'heatmap', data: data, label: { show: true, color: '#37474f' }, itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#ffffff' } }]
             };
             chart.setOption(option);
@@ -1130,14 +1131,14 @@
             const chart = echarts.init(document.getElementById('brandFeatureMatrix'));
             const brands = reportData.brand_stats.filter(b => b.count > 5);
             const option = {
-                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>提及数: ${p.data.value[0]}<br/>质量: ${p.data.value[1]}` },
+                tooltip: { trigger: 'item', formatter: p => `${p.data.name}<br/>提及数: ${p.data.value[0]}<br/>质量: ${p.data.value[1]}`, confine: true },
                 xAxis: { type: 'value', name: '提及量', axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 yAxis: { type: 'value', name: '满意度', axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [{
                     type: 'scatter',
                     data: brands.map(b => ({ name: b.name, value: [b.count, b.avg_quality] })),
                     symbolSize: d => Math.sqrt(d[0]) * 2,
-                    itemStyle: { color: '#1976d2', opacity: 0.7 },
+                    itemStyle: { color: '#D75B70', opacity: 0.7 },
                     label: { show: true, formatter: p => p.data.name, color: '#fff', position: 'right' }
                 }],
                 grid: { left: 60, right: 60, top: 30, bottom: 40 }
@@ -1158,14 +1159,14 @@
                 { name: '便携性', impact: 65, feasibility: 90 }
             ];
             const option = {
-                tooltip: { formatter: p => `${p.data.name}<br/>影响力: ${p.data.value[0]}<br/>可行性: ${p.data.value[1]}` },
+                tooltip: { formatter: p => `${p.data.name}<br/>影响力: ${p.data.value[0]}<br/>可行性: ${p.data.value[1]}`, confine: true },
                 xAxis: { type: 'value', name: '影响力', max: 100, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 yAxis: { type: 'value', name: '可行性', max: 100, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [{
                     type: 'scatter',
                     data: opportunities.map(o => ({ name: o.name, value: [o.impact, o.feasibility] })),
                     symbolSize: 20,
-                    itemStyle: { color: '#1976d2' },
+                    itemStyle: { color: '#D75B70' },
                     label: { show: true, formatter: p => p.data.name, color: '#37474f', fontSize: 11 }
                 }],
                 grid: { left: 60, right: 30, top: 30, bottom: 40 }
@@ -1178,7 +1179,7 @@
             const chart = echarts.init(document.getElementById('competitorWeaknessChart'));
             const competitors = reportData.brand_stats.filter(b => b.count > 20).slice(0, 4);
             const option = {
-                tooltip: {},
+                tooltip: {trigger:'item', confine:true},
                 legend: { data: competitors.map(b => b.name), textStyle: { color: '#546e7a' }, bottom: 10 },
                 radar: {
                     indicator: [
@@ -1188,6 +1189,7 @@
                         { name: 'Price', max: 50 },
                         { name: 'Experience', max: 50 }
                     ],
+                    radius: '65%',
                     axisName: { color: '#546e7a' }
                 },
                 series: [{
@@ -1205,18 +1207,18 @@
         function initLandscapeChart() {
             const chart = echarts.init(document.getElementById('landscapeChart'));
             const option = {
-                tooltip: { formatter: p => `${p.data.name}<br/>市场份额: ${p.data.value[0]}%<br/>增长率: ${p.data.value[1]}%` },
+                tooltip: { formatter: p => `${p.data.name}<br/>市场份额: ${p.data.value[0]}%<br/>增长率: ${p.data.value[1]}%`, confine: true },
                 xAxis: { type: 'value', name: '市场份额 %', max: 40, axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 yAxis: { type: 'value', name: '增长率 %', axisLabel: { color: '#546e7a' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
                 series: [{
                     type: 'scatter',
                     data: [
-                        { name: 'Momcozy', value: [35, 25], itemStyle: { color: '#1976d2' } },
-                        { name: "Dr. Brown's", value: [22, 8], itemStyle: { color: '#42a5f5' } },
-                        { name: 'Philips Avent', value: [18, 5], itemStyle: { color: '#42a5f5' } },
-                        { name: 'Tommee Tippee', value: [12, 3], itemStyle: { color: '#42a5f5' } },
-                        { name: 'Medela', value: [6, 2], itemStyle: { color: '#90a4ae' } },
-                        { name: 'Others', value: [7, 10], itemStyle: { color: '#607d8b' } }
+                        { name: 'Momcozy', value: [35, 25], itemStyle: { color: '#D75B70' } },
+                        { name: "Dr. Brown's", value: [22, 8], itemStyle: { color: '#6A89AF' } },
+                        { name: 'Philips Avent', value: [18, 5], itemStyle: { color: '#6A89AF' } },
+                        { name: 'Tommee Tippee', value: [12, 3], itemStyle: { color: '#6A89AF' } },
+                        { name: 'Medela', value: [6, 2], itemStyle: { color: '#C1CEDE' } },
+                        { name: 'Others', value: [7, 10], itemStyle: { color: '#C1CEDE' } }
                     ],
                     symbolSize: d => d[0] * 1.5,
                     label: { show: true, formatter: p => p.data.name, color: '#37474f', fontSize: 11 }
@@ -1230,7 +1232,7 @@
         function initFeatureRadarChart() {
             const chart = echarts.init(document.getElementById('featureRadarChart'));
             const option = {
-                tooltip: {},
+                tooltip: {trigger:'item', confine:true},
                 legend: { data: ['Momcozy', '竞品均值'], textStyle: { color: '#546e7a' }, bottom: 10 },
                 radar: {
                     indicator: [
@@ -1241,6 +1243,7 @@
                         { name: '性价比', max: 100 },
                         { name: '静音', max: 100 }
                     ],
+                    radius: '65%',
                     axisName: { color: '#546e7a' }
                 },
                 series: [{
@@ -1259,8 +1262,8 @@
             const chart = echarts.init(document.getElementById('brandCompareRadar'));
             const brands = reportData.brand_stats.filter(b => b.count > 10);
             const option = {
-                tooltip: {},
-                legend: { data: brands.map(b => b.name), textStyle: { color: '#546e7a' }, bottom: 10 },
+                tooltip: {trigger:'item', confine:true},
+                legend: { data: brands.map(b => b.name), textStyle: { color: '#546e7a' }, right: 0, top: 20, orient: 'vertical' },
                 radar: {
                     indicator: [
                         { name: '评分', max: 5 },
@@ -1269,6 +1272,7 @@
                         { name: 'NPS', max: 100 },
                         { name: '推荐率', max: 100 }
                     ],
+                    radius: '65%',
                     axisName: { color: '#546e7a' }
                 },
                 series: [{

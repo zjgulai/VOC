@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
         :root {
-            --primary-color: #3B82F6;
+            --primary-color: #D75B70;
             --secondary-color: #10B981;
             --accent-color: #F59E0B;
             --danger-color: #EF4444;
@@ -1094,13 +1094,13 @@
     <script>
         // Color palette
         const colors = {
-            primary: '#3B82F6',
-            secondary: '#10B981',
-            accent: '#F59E0B',
+            primary: '#D75B70',
+            secondary: '#82AE8E',
+            accent: '#D0B671',
             danger: '#EF4444',
             functional: '#EF4444',
             experiential: '#F59E0B',
-            emotional: '#3B82F6'
+            emotional: '#6A89AF'
         };
 
         // Chart 1: Pain Treemap
@@ -1142,6 +1142,7 @@
 
         painTreemap.setOption({
             tooltip: {
+                confine: true,
                 formatter: function(params) {
                     return params.name + '<br/>提及: ' + params.value + '次';
                 }
@@ -1179,6 +1180,7 @@
         painPie.setOption({
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: '{b}: {c}次 ({d}%)'
             },
             legend: {
@@ -1218,6 +1220,7 @@
             tooltip: {
                 trigger: 'axis',
                 axisPointer: { type: 'shadow' },
+                confine: true,
                 formatter: function(params) {
                     return params[0].name + '<br/>提及: ' + params[0].value + '次';
                 }
@@ -1246,13 +1249,13 @@
             series: [{
                 type: 'bar',
                 data: maslowData.map(d => d.count).reverse(),
-                itemStyle: {
-                    color: function(params) {
-                        const colors = ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B', '#EF4444'];
-                        return colors[params.dataIndex];
+                    itemStyle: {
+                        color: function(params) {
+                            const barColors = ['#82AE8E', '#6A89AF', '#C1CEDE', '#D0B671', '#D75B70'];
+                            return barColors[params.dataIndex];
+                        },
+                        borderRadius: [0, 8, 8, 0]
                     },
-                    borderRadius: [0, 8, 8, 0]
-                },
                 barWidth: '60%',
                 label: {
                     show: true,
@@ -1270,6 +1273,7 @@
         scenarioChart.setOption({
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: '{b}: {c}条 ({d}%)'
             },
             legend: {
@@ -1300,6 +1304,8 @@
         const contradictionChart = echarts.init(document.getElementById('chart-contradiction'));
         contradictionChart.setOption({
             tooltip: {
+                trigger: 'item',
+                confine: true,
                 formatter: function(params) {
                     return params.name + '<br/>用户诉求强度: ' + params.value;
                 }
@@ -1313,6 +1319,7 @@
                     { name: '安全性', max: 100 },
                     { name: '高性价比', max: 100 }
                 ],
+                radius: '65%',
                 shape: 'polygon',
                 splitNumber: 4,
                 axisName: { color: '#94A3B8' },
@@ -1326,16 +1333,16 @@
                     {
                         value: [85, 78, 45, 42, 92, 65],
                         name: '用户期望',
-                        areaStyle: { color: 'rgba(59, 130, 246, 0.3)' },
-                        lineStyle: { color: '#3B82F6' },
-                        itemStyle: { color: '#3B82F6' }
+                        areaStyle: { color: 'rgba(215,91,112,0.3)' },
+                        lineStyle: { color: '#D75B70' },
+                        itemStyle: { color: '#D75B70' }
                     },
                     {
                         value: [55, 60, 35, 50, 75, 70],
                         name: '当前产品',
-                        areaStyle: { color: 'rgba(245, 158, 11, 0.3)' },
-                        lineStyle: { color: '#F59E0B' },
-                        itemStyle: { color: '#F59E0B' }
+                        areaStyle: { color: 'rgba(208,182,113,0.3)' },
+                        lineStyle: { color: '#D0B671' },
+                        itemStyle: { color: '#D0B671' }
                     }
                 ]
             }]
@@ -1348,6 +1355,7 @@
         segmentChart.setOption({
             tooltip: {
                 trigger: 'item',
+                confine: true,
                 formatter: '{b}: {c}人 ({d}%)'
             },
             legend: {
@@ -1377,7 +1385,7 @@
                     name: item.name,
                     value: item.value,
                     itemStyle: {
-                        color: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'][index]
+                        color: ['#D75B70', '#82AE8E', '#D0B671', '#F37969', '#6A89AF', '#C1CEDE', '#B0C4DE', '#669C74'][index]
                     }
                 }))
             }]
@@ -1398,16 +1406,17 @@
         anxietyChart.setOption({
             tooltip: {
                 position: 'top',
+                confine: true,
                 formatter: function(params) {
-                    return params.seriesName + ' - ' + params.value[0] + '<br/>' + 
-                           params.axisValue + ': ' + params.value[params.dataIndex + 1];
+                    return params.name + ': ' + (params.value[2] !== undefined ? params.value[2] : params.value);
                 }
             },
             grid: {
                 left: '2%',
                 right: '8%',
                 bottom: '15%',
-                top: '5%'
+                top: '5%',
+                containLabel: true
             },
             xAxis: {
                 type: 'category',
@@ -1431,7 +1440,7 @@
                 left: 'center',
                 bottom: '0%',
                 inRange: {
-                    color: ['#1E293B', '#3B82F6', '#10B981', '#F59E0B', '#EF4444']
+                    color: ['#C1CEDE','#6A89AF','#82AE8E','#D0B671','#D75B70']
                 },
                 textStyle: { color: '#94A3B8' }
             },
@@ -1465,15 +1474,17 @@
 
         opportunityMatrix.setOption({
             tooltip: {
+                confine: true,
                 formatter: function(params) {
                     return params.name + '<br/>实现难度: ' + params.value[0] + '<br/>市场潜力: ' + params.value[1];
                 }
             },
             grid: {
                 left: '3%',
-                right: '8%',
+                right: '15%',
                 bottom: '3%',
-                top: '3%'
+                top: '3%',
+                containLabel: true
             },
             xAxis: {
                 type: 'value',
@@ -1510,7 +1521,7 @@
                 })),
                 itemStyle: {
                     color: function(params) {
-                        return ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6'][params.dataIndex];
+                        return ['#82AE8E', '#D75B70', '#D0B671', '#F37969', '#6A89AF'][params.dataIndex];
                     }
                 },
                 label: {
@@ -1530,7 +1541,7 @@
         const radarData = [{"name": "Extended Warranty Program", "name_cn": "延长质保计划", "difficulty": 2, "market_potential": 8, "user_value": 9, "business_value": 7, "priority": 1}, {"name": "Smart Temperature Control", "name_cn": "智能温控系统", "difficulty": 5, "market_potential": 9, "user_value": 9, "business_value": 8, "priority": 2}, {"name": "Travel-Optimized Design", "name_cn": "旅行优化设计", "difficulty": 3, "market_potential": 7, "user_value": 8, "business_value": 6, "priority": 3}, {"name": "Faster Heating Technology", "name_cn": "快速加热技术", "difficulty": 6, "market_potential": 8, "user_value": 8, "business_value": 7, "priority": 4}, {"name": "Premium Customer Service", "name_cn": "高端客服体验", "difficulty": 3, "market_potential": 6, "user_value": 7, "business_value": 8, "priority": 5}];
 
         opportunityRadar.setOption({
-            tooltip: {},
+            tooltip: {trigger:'item', confine:true},
             legend: {
                 orient: 'vertical',
                 right: '2%',
@@ -1548,6 +1559,7 @@
                     { name: '用户价值', max: 10 },
                     { name: '商业价值', max: 10 }
                 ],
+                radius: '65%',
                 shape: 'polygon',
                 splitNumber: 5,
                 axisName: { color: '#94A3B8' },

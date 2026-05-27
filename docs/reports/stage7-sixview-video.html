@@ -2415,12 +2415,12 @@ function initSixViewChart() {
     
     var option = {
         title: { text: '六视图角度拍摄规划', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
         grid: { left: 80, right: 40, top: 60, bottom: 80 },
         xAxis: {
             type: 'category',
             data: ['正面', '左侧', '底部', '右侧', '顶部', '背面'],
-            axisLabel: { rotate: 0, fontSize: 12 },
+            axisLabel: { rotate: 0, fontSize: 12, overflow: 'truncate', width: 60 },
             name: '拍摄角度'
         },
         yAxis: {
@@ -2441,7 +2441,7 @@ function initSixViewChart() {
                 name: '暖奶器',
                 type: 'bar',
                 data: [90, 85, 70, 80, 75, 60],
-                itemStyle: { color: '#A8D5BA', borderRadius: [4, 4, 0, 0] },
+                itemStyle: { color: '#D75B70', borderRadius: [4, 4, 0, 0] },
                 label: { show: true, position: 'top', fontSize: 11 }
             }
         ]
@@ -2455,8 +2455,8 @@ function initSellingPointsChart() {
     
     var option = {
         title: { text: '卖点图优先级矩阵', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'item', formatter: function(p) { return p.data[0] + '<br/>转化贡献度: ' + p.data[1] + '<br/>拍摄复杂度: ' + p.data[2]; } },
-        grid: { left: 80, right: 40, top: 60, bottom: 80 },
+        tooltip: { trigger: 'item', confine: true, formatter: function(p) { return p.data[0] + '<br/>转化贡献度: ' + p.data[1] + '<br/>拍摄复杂度: ' + p.data[2]; } },
+        grid: { left: 80, right: 80, top: 60, bottom: 80 },
         xAxis: { type: 'value', name: '拍摄复杂度 →', min: 0, max: 100, axisLabel: { fontSize: 11 } },
         yAxis: { type: 'value', name: '转化贡献度 →', min: 0, max: 100, axisLabel: { fontSize: 11 } },
         series: [{
@@ -2479,9 +2479,9 @@ function initSellingPointsChart() {
                     return '#82AE8E';
                 }
             },
-            label: {
+                label: {
                 show: true,
-                formatter: function(p) { return p.data[3] || p.data[2]; },
+                formatter: function(p) { return p.data[2]; },
                 position: 'right',
                 fontSize: 11
             }
@@ -2496,7 +2496,7 @@ function initDetailPriorityChart() {
     
     var option = {
         title: { text: '细节图拍摄优先级', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
         grid: { left: 100, right: 40, top: 60, bottom: 80 },
         xAxis: { type: 'value', name: '优先级评分', max: 100, axisLabel: { fontSize: 11 } },
         yAxis: {
@@ -2527,7 +2527,7 @@ function initEmotionSpectrumChart() {
     
     var option = {
         title: { text: '场景情绪光谱图', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'axis' },
+        tooltip: { trigger: 'item', confine: true },
         radar: {
             indicator: [
                 { name: '温馨感', max: 100 },
@@ -2537,7 +2537,7 @@ function initEmotionSpectrumChart() {
                 { name: '轻松感', max: 100 }
             ],
             radius: '65%',
-            name: { textStyle: { fontSize: 11, color: '#666' } }
+            axisName: { textStyle: { fontSize: 11, color: '#666' } }
         },
         series: [{
             type: 'radar',
@@ -2547,28 +2547,28 @@ function initEmotionSpectrumChart() {
                     name: '夜间喂奶',
                     lineStyle: { color: '#6A89AF' },
                     areaStyle: { color: 'rgba(106, 137, 175, 0.3)' },
-                    label: { show: true }
+                    label: { show: false }
                 },
                 {
                     value: [80, 70, 95, 65, 90],
                     name: '旅行便携',
                     lineStyle: { color: '#F37969' },
                     areaStyle: { color: 'rgba(243, 121, 105, 0.3)' },
-                    label: { show: true }
+                    label: { show: false }
                 },
                 {
                     value: [85, 95, 90, 85, 75],
                     name: '日常消毒',
                     lineStyle: { color: '#82AE8E' },
                     areaStyle: { color: 'rgba(130, 174, 142, 0.3)' },
-                    label: { show: true }
+                    label: { show: false }
                 },
                 {
                     value: [90, 88, 80, 90, 85],
                     name: '厨房台面',
                     lineStyle: { color: '#D0B671' },
                     areaStyle: { color: 'rgba(208, 182, 113, 0.3)' },
-                    label: { show: true }
+                    label: { show: false }
                 }
             ]
         }]
@@ -2582,13 +2582,13 @@ function initScenePlanningChart() {
     
     var option = {
         title: { text: '场景图拍摄规划', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
         legend: { data: ['拍摄数量', '预计时长'], top: 30 },
         grid: { left: 80, right: 40, top: 80, bottom: 60 },
         xAxis: {
             type: 'category',
             data: ['夜间喂奶', '旅行便携', '日常消毒', '厨房台面', '配件组合'],
-            axisLabel: { rotate: 15, fontSize: 11 }
+            axisLabel: { rotate: 30, fontSize: 11, overflow: 'truncate', width: 80 }
         },
         yAxis: [
             { type: 'value', name: '拍摄数量', axisLabel: { fontSize: 11 } },
@@ -2623,7 +2623,7 @@ function initQualityChecklistChart() {
     
     var option = {
         title: { text: '后期规范检查清单', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true },
         grid: { left: 150, right: 40, top: 60, bottom: 60 },
         xAxis: { type: 'value', max: 100, name: '完成度%', axisLabel: { fontSize: 11 } },
         yAxis: {
@@ -2637,7 +2637,7 @@ function initQualityChecklistChart() {
             itemStyle: {
                 color: function(p) {
                     if (p.data >= 95) return '#82AE8E';
-                    return '#F37969';
+                    return '#6A89AF';
                 },
                 borderRadius: [0, 4, 4, 0]
             },
@@ -2667,6 +2667,7 @@ function initVideoTimelineChart() {
     var option = {
         title: { text: '视频时间轴甘特图', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
         tooltip: {
+            confine: true,
             formatter: function(p) {
                 return p.data.name + '<br/>时长: ' + p.data.duration + '秒<br/>时间: ' + getTimeRange(p.data.value, p.data.duration);
             }
@@ -2738,13 +2739,13 @@ function initCameraDistributionChart() {
     
     var option = {
         title: { text: '分镜镜头角度分布', left: 'center', textStyle: { fontSize: 16, color: '#2D2D2D' } },
-        tooltip: { trigger: 'item', formatter: '{b}: {c}个 ({d}%)' },
-        legend: { orient: 'vertical', right: '5%', top: 'center' },
+        tooltip: { trigger: 'item', formatter: '{b}: {c}个 ({d}%)', confine: true },
+        legend: { bottom: 0, orient: 'horizontal' },
         series: [
             {
                 type: 'pie',
-                radius: ['40%', '70%'],
-                center: ['40%', '50%'],
+                radius: ['35%', '65%'],
+                center: ['50%', '45%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 6,

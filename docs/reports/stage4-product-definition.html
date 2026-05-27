@@ -1520,7 +1520,7 @@
                                '基础需求 ←→ 进阶需求: ' + params.data.value[1];
                     }
                 },
-                grid: { left: 80, right: 40, top: 80, bottom: 60 },
+                grid: { left: 80, right: 80, top: 80, bottom: 80 },
                 xAxis: {
                     type: 'value',
                     name: '功能导向 ←→ 体验导向',
@@ -1553,7 +1553,8 @@
                         position: 'right',
                         formatter: '{b}',
                         fontSize: 11,
-                        color: '#32465E'
+                        color: '#32465E',
+                        overflow: 'truncate'
                     }
                 }],
                 backgroundColor: '#ffffff'
@@ -1582,7 +1583,7 @@
                     ],
                     radius: '65%',
                     splitNumber: 5,
-                    name: { textStyle: { color: '#32465E', fontSize: 12 } },
+                    axisName: { textStyle: { color: '#32465E', fontSize: 12 } },
                     splitLine: { lineStyle: { color: '#E8EAED' } },
                     splitArea: { areaStyle: { color: ['#fff', '#F8F9FB'] } },
                     axisLine: { lineStyle: { color: '#E8EAED' } }
@@ -1621,7 +1622,7 @@
                     textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
                 },
                 tooltip: {
-                    trigger: 'item',
+                    trigger: 'axis',
                     confine: true,
                     formatter: '{b}: {c}次反馈'
                 },
@@ -1629,12 +1630,13 @@
                 xAxis: {
                     type: 'category',
                     data: ['一键启动', '自动检测', '智能运行', '完成提醒', '静音提醒', '便携携带', '温度准确', '易于清洁'],
-                    axisLabel: { rotate: 30, fontSize: 11, overflow: 'truncate', color: '#6A89AF' }
+                    axisLabel: { rotate: 30, fontSize: 11, overflow: 'truncate', width: 80, color: '#6A89AF' }
                 },
                 yAxis: {
                     type: 'value',
                     name: '正向反馈次数',
-                    axisLabel: { fontSize: 11, color: '#6A89AF' }
+                    axisLabel: { fontSize: 11, color: '#6A89AF' },
+                    splitLine: { lineStyle: { color: '#C1CEDE', type: 'dashed' } }
                 },
                 series: [{
                     type: 'bar',
@@ -1659,7 +1661,7 @@
                     left: 'center',
                     textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
                 },
-                tooltip: { confine: true },
+                tooltip: { trigger: 'axis', confine: true },
                 grid: { left: 100, right: 40, top: 60, bottom: 80 },
                 xAxis: {
                     type: 'value',
@@ -1668,7 +1670,7 @@
                 yAxis: {
                     type: 'category',
                     data: ['延迟', '配件破损', '烧焦', '气味/熔化', '功能失效', '错件漏件', '说明书不清', '按键/故障', '噪音大', '显示异常'].reverse(),
-                    axisLabel: { fontSize: 11, color: '#32465E' }
+                    axisLabel: { fontSize: 11, color: '#32465E', width: 90, overflow: 'truncate' }
                 },
                 series: [{
                     type: 'bar',
@@ -1693,20 +1695,21 @@
                     left: 'center',
                     textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
                 },
-                tooltip: { confine: true },
+                tooltip: { trigger: 'item', confine: true },
+                legend: { type: 'scroll', bottom: 0 },
                 series: [{
                     type: 'pie',
                     radius: ['35%', '65%'],
                     avoidLabelOverlap: true,
                     itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
                     label: {
-                        show: true,
+                        show: false,
                         formatter: '{b}\n{d}%',
                         fontSize: 11
                     },
                     data: [
                         { value: 2402, name: '总体正面', itemStyle: { color: '#D75B70' } },
-                        { value: 1105, name: '易用性', itemStyle: { color: '#E08090' } },
+                        { value: 1105, name: '易用性', itemStyle: { color: '#D0B671' } },
                         { value: 1105, name: '强烈推荐', itemStyle: { color: '#DA687A' } },
                         { value: 580, name: '性能满意', itemStyle: { color: '#EFBEC6' } },
                         { value: 419, name: '物超所值', itemStyle: { color: '#D0B671' } },
@@ -1735,7 +1738,7 @@
                                '改善难度: ' + params.data.value[0] + ' | 用户价值: ' + params.data.value[1];
                     }
                 },
-                grid: { left: 60, right: 40, top: 80, bottom: 60 },
+                grid: { left: 80, right: 40, top: 80, bottom: 60 },
                 xAxis: {
                     type: 'value',
                     name: '改善难度 →',
@@ -1784,20 +1787,21 @@
                     left: 'center',
                     textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
                 },
-                tooltip: { confine: true },
+                tooltip: { trigger: 'item', confine: true },
+                legend: { type: 'scroll', bottom: 0 },
                 series: [{
                     type: 'pie',
                     radius: ['35%', '65%'],
                     avoidLabelOverlap: true,
                     itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
-                    label: { show: true, formatter: '{b}\n{c}条', fontSize: 11 },
+                    label: { show: false, formatter: '{b}\n{c}条', fontSize: 11 },
                     data: [
                         { value: 7383, name: '未评分', itemStyle: { color: '#C1CEDE' } },
                         { value: 976, name: '1星', itemStyle: { color: '#CD374F' } },
                         { value: 470, name: '2星', itemStyle: { color: '#D04E59' } },
                         { value: 454, name: '3星', itemStyle: { color: '#D0B671' } },
                         { value: 1497, name: '4星', itemStyle: { color: '#82AE8E' } },
-                        { value: 8307, name: '5星', itemStyle: { color: '#517D5D' } }
+                        { value: 8307, name: '5星', itemStyle: { color: '#82AE8E' } }
                     ]
                 }],
                 backgroundColor: '#ffffff'
@@ -1812,7 +1816,7 @@
                     left: 'center',
                     textStyle: { fontSize: 16, fontWeight: 600, color: '#32465E' }
                 },
-                tooltip: { confine: true },
+                tooltip: { trigger: 'item', confine: true },
                 series: [{
                     type: 'pie',
                     radius: ['35%', '65%'],
@@ -1820,7 +1824,7 @@
                     itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
                     label: { show: true, formatter: '{b}\n{c}人', fontSize: 11 },
                     data: [
-                        { value: 7471, name: '推荐者', itemStyle: { color: '#517D5D' } },
+                        { value: 7471, name: '推荐者', itemStyle: { color: '#82AE8E' } },
                         { value: 8981, name: '被动者', itemStyle: { color: '#C1CEDE' } },
                         { value: 2646, name: '贬损者', itemStyle: { color: '#CD374F' } }
                     ]
